@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Contract Savings Loan Scheme - Interactive Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16233a;
+  --ink-2:#3c4a63;
+  --muted:#6b7a92;
+  --paper:#eef2f7;
+  --card:#ffffff;
+  --line:#dae2ec;
+  --new:#dd7d33;
+  --new-soft:#fbe9d7;
+  --recyc:#10897c;
+  --recyc-soft:#d7ede9;
+  --out:#b8395e;
+  --out-soft:#f8dde5;
+  --queue:#6a55c8;
+  --gold:#c08f2a;
+  --ok:#1a7f5a;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Sans 3",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.shell{max-width:1160px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- masthead ---------- */
+.masthead{padding:34px 0 8px}
+.eyebrow{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--recyc)}
+.eyebrow span{color:var(--muted);font-weight:600}
+.eyebrow{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
+.lang{margin-inline-start:auto;font-weight:700;color:var(--recyc);text-decoration:none;border:1.5px solid var(--line);border-radius:999px;padding:3px 13px;font-size:13px;background:#fff}
+.lang:hover{border-color:var(--recyc)}
+.masthead h1{font-family:var(--display);font-size:clamp(30px,5vw,50px);line-height:1.06;font-weight:700;letter-spacing:-.015em;margin:12px 0 0}
+.masthead h1 em{font-style:italic;color:var(--recyc)}
+.standfirst{font-size:18px;color:var(--ink-2);max-width:66ch;margin-top:14px}
+.rule{height:3px;background:linear-gradient(90deg,var(--new) 0%,var(--new) 22%,var(--recyc) 22%,var(--recyc) 100%);border-radius:2px;margin:22px 0 0}
+
+/* ---------- generic blocks ---------- */
+.block{margin-top:44px}
+.block-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.block-head h2{font-family:var(--display);font-size:26px;font-weight:600;letter-spacing:-.01em}
+.block-head p{font-size:15px;color:var(--muted);max-width:60ch}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+
+/* ---------- signature: the cycle ---------- */
+.cycle-wrap{background:linear-gradient(160deg,#fbfcfd 0%,#f3f7fa 100%);border:1px solid var(--line);border-radius:18px;padding:26px 24px 20px;margin-top:26px}
+.cycle-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:26px;align-items:center}
+.cycle-svg{width:100%;height:auto;display:block;overflow:visible}
+.flow-line{fill:none;stroke-linecap:round}
+.flow-dash{fill:none;stroke-linecap:round;stroke-dasharray:2 16;animation:march 2.4s linear infinite}
+@keyframes march{to{stroke-dashoffset:-18}}
+.node-box{fill:#fff;stroke:var(--line);stroke-width:1.5}
+.node-title{font-family:var(--display);font-weight:600;fill:var(--ink);font-size:15px}
+.node-sub{fill:var(--muted);font-size:11px;font-family:var(--body)}
+.node-amt{font-family:var(--body);font-weight:700;font-size:13px;fill:var(--ink);font-variant-numeric:tabular-nums}
+.node-amt.lg{font-size:15.5px}
+.flow-amt{font-size:12.5px;font-weight:700;font-family:var(--body);font-variant-numeric:tabular-nums;paint-order:stroke;stroke:#f6f9fb;stroke-width:5px;stroke-linejoin:round;stroke-linecap:round}
+.cost-box{fill:#fdf6f8;stroke:#e8c3ce;stroke-width:1.5}
+.cyc-cap{font-size:12px;color:var(--muted);text-align:center;margin-top:8px;line-height:1.45;max-width:60ch;margin-left:auto;margin-right:auto}
+.flow-label{font-size:11.5px;font-weight:700;font-family:var(--body);letter-spacing:.02em;paint-order:stroke;stroke:#f6f9fb;stroke-width:5px;stroke-linejoin:round;stroke-linecap:round}
+.cycle-read h3{font-family:var(--display);font-size:20px;font-weight:600;margin-bottom:6px}
+.bigpct{font-family:var(--display);font-size:clamp(52px,8vw,74px);font-weight:700;line-height:.92;color:var(--recyc);letter-spacing:-.03em}
+.bigpct small{font-size:.34em;font-weight:600;color:var(--muted);letter-spacing:0}
+.readout{font-size:15.5px;color:var(--ink-2);margin-top:10px}
+.split{height:26px;border-radius:6px;overflow:hidden;display:flex;margin-top:16px;border:1px solid var(--line)}
+.split i{display:block;height:100%;transition:width .35s ease}
+.split-key{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px;font-weight:600}
+.scrub{margin-top:20px}
+.scrub label{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.scrub label b{color:var(--ink);font-size:14px;letter-spacing:0;text-transform:none}
+input[type=range]{width:100%;accent-color:var(--recyc);height:22px}
+
+/* ---------- journey ---------- */
+.journey{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:6px}
+.stage{position:relative;padding:18px 16px 16px;border-top:4px solid var(--line);background:var(--card)}
+.stage:first-child{border-top-left-radius:0}
+.stage.s1{border-top-color:var(--new)}
+.stage.s2{border-top-color:var(--new)}
+.stage.s3{border-top-color:var(--out)}
+.stage.s4{border-top-color:var(--recyc)}
+.stage.s5{border-top-color:var(--recyc)}
+.stage-when{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.stage-amt{font-family:var(--display);font-size:24px;font-weight:700;margin:5px 0 4px;letter-spacing:-.02em}
+.stage.s1 .stage-amt,.stage.s2 .stage-amt{color:var(--new)}
+.stage.s3 .stage-amt{color:var(--out)}
+.stage.s4 .stage-amt,.stage.s5 .stage-amt{color:var(--recyc)}
+.stage p{font-size:13.5px;color:var(--ink-2);line-height:1.45}
+
+/* ---------- controls ---------- */
+.presets{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:6px}
+.pbtn{font-family:var(--body);border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 18px;font-size:14px;font-weight:600;cursor:pointer;transition:.15s}
+.pbtn:hover{border-color:var(--recyc);color:var(--recyc)}
+.pbtn.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.pbtn:focus-visible,.hb:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.preset-note{font-size:14px;color:var(--muted);margin:10px 0 0}
+.ctrl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px}
+.ctrl{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.ctrl h4{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+.ctrl.c1 h4{color:var(--new)}
+.ctrl.c2 h4{color:var(--queue)}
+.ctrl.c3 h4{color:var(--out)}
+.ctrl.c4 h4{color:var(--recyc)}
+.f{margin-bottom:12px}
+.f label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:4px}
+.f input[type=number]{width:100%;padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;font-size:15px;font-family:var(--body);font-variant-numeric:tabular-nums;background:#fcfdfe;color:var(--ink)}
+.f input[type=number]:focus{border-color:var(--recyc);background:#fff}
+.f .hint{font-size:11.5px;color:var(--muted);margin-top:3px;line-height:1.35}
+.hbs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.hb{font-family:var(--body);border:1.5px solid var(--line);background:var(--card);border-radius:8px;padding:6px 11px;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink)}
+.hb.on{background:var(--recyc);border-color:var(--recyc);color:#fff}
+.summary{background:#f4f8f7;border-left:3px solid var(--recyc);border-radius:0 8px 8px 0;padding:10px 12px;font-size:13px;color:var(--ink-2);margin-top:6px}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 16px 14px;border-top:3px solid var(--line)}
+.stat.tone-new{border-top-color:var(--new)}
+.stat.tone-rec{border-top-color:var(--recyc)}
+.stat.tone-out{border-top-color:var(--out)}
+.stat.tone-q{border-top-color:var(--queue)}
+.stat .k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.stat .v{font-family:var(--display);font-size:27px;font-weight:700;margin-top:5px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat .n{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+/* ---------- charts ---------- */
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.chart.full{grid-column:1/-1}
+.chart h3{font-family:var(--display);font-size:19px;font-weight:600;margin-bottom:3px}
+.chart .why{font-size:13.5px;color:var(--muted);margin-bottom:10px;max-width:74ch}
+.key{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--ink-2);margin-bottom:8px;font-weight:600}
+.key i,#tip i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.chart svg{display:block;width:100%;height:250px}
+.chart.tall svg{height:300px}
+.axis{font-size:10.5px;fill:var(--muted);font-family:var(--body)}
+.note{font-size:12.5px;color:var(--muted);margin-top:8px}
+#tip{position:absolute;display:none;background:var(--ink);color:#fff;font-size:13px;padding:10px 12px;border-radius:9px;pointer-events:none;z-index:80;max-width:280px;line-height:1.5;box-shadow:0 6px 20px rgba(22,35,58,.25)}
+
+/* ---------- runoff ---------- */
+.ro-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ro-card{background:linear-gradient(160deg,#f4faf8,#eaf4f1);border:1px solid #cfe4de;border-radius:14px;padding:20px}
+.ro-card h3{font-family:var(--display);font-size:20px;font-weight:600;margin-bottom:8px}
+.ro-num{font-family:var(--display);font-size:42px;font-weight:700;color:var(--recyc);letter-spacing:-.03em;line-height:1}
+.ro-card p{font-size:14.5px;color:var(--ink-2);margin-top:8px}
+
+/* ---------- table ---------- */
+.tbl-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.dl{font-family:var(--body);border:1.5px solid var(--line);background:var(--card);border-radius:8px;padding:8px 15px;font-size:14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.dl:hover{border-color:var(--recyc);color:var(--recyc)}
+.scroller{max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+thead th{position:sticky;top:0;background:#f2f6fa;text-align:right;padding:10px 12px;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);z-index:2;font-weight:700}
+thead th:first-child,tbody td:first-child{text-align:left}
+tbody td{padding:8px 12px;border-bottom:1px solid #eef2f7;text-align:right}
+tbody tr:hover td{background:#f7fafc}
+
+/* ---------- germany ---------- */
+.de{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:0 14px 14px 0;padding:22px 24px}
+.de h3{font-family:var(--display);font-size:21px;font-weight:600;margin-bottom:8px}
+.de p{font-size:15px;color:var(--ink-2);max-width:78ch;margin-bottom:10px}
+.de a{color:var(--recyc);font-weight:600}
+.de ul{margin:6px 0 10px 20px;font-size:14.5px;color:var(--ink-2)}
+.de li{margin-bottom:5px}
+
+.notes{columns:2;column-gap:34px;font-size:13.5px;color:var(--ink-2)}
+.notes li{margin:0 0 9px 18px;break-inside:avoid}
+footer{margin-top:52px;padding-top:22px;border-top:2px solid var(--line);font-size:13.5px;color:var(--muted)}
+footer b{color:var(--ink)}
+
+@media(max-width:960px){
+  .cycle-grid{grid-template-columns:1fr}
+  .ctrl-grid{grid-template-columns:1fr 1fr}
+  .charts{grid-template-columns:1fr}
+  .journey{grid-template-columns:1fr 1fr}
+  .ro-grid{grid-template-columns:1fr}
+  .notes{columns:1}
+}
+@media(max-width:620px){
+  .ctrl-grid{grid-template-columns:1fr}
+  .journey{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .flow-dash{animation:none}
+  html{scroll-behavior:auto}
+  .split i{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header class="masthead">
+  <div class="eyebrow">Prepared for the Berinoh committee <span>&middot; July 2026</span><a class="lang" href="he.html" hreflang="he">עברית</a></div>
+  <h1>The Contract Savings Loan Scheme:<br>how families fund <em>each other's</em> weddings</h1>
+  <p class="standfirst">Families pay in a small amount each month for years. In return they receive a large interest-free loan when a wedding comes, and they pay that loan back so the next family can be helped. This page lets you change every rule of the scheme and watch what happens over the next fifty years.</p>
+  <div class="rule"></div>
+</header>
+
+<section class="cycle-wrap">
+  <div class="cycle-grid">
+    <div>
+      <svg class="cycle-svg" viewBox="0 0 640 344" role="img" aria-labelledby="cycTitle">
+        <title id="cycTitle">Diagram of money circulating between families and the fund</title>
+        <defs>
+          <marker id="ah-new" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="26" refX="19" refY="13" orient="auto"><path d="M0,0 L19,13 L0,26 z" fill="#dd7d33"/></marker>
+          <marker id="ah-out" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="26" refX="19" refY="13" orient="auto"><path d="M0,0 L19,13 L0,26 z" fill="#b8395e"/></marker>
+          <marker id="ah-rec" markerUnits="userSpaceOnUse" markerWidth="20" markerHeight="26" refX="19" refY="13" orient="auto"><path d="M0,0 L19,13 L0,26 z" fill="#10897c"/></marker>
+          <marker id="ah-cost" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="18" refX="13" refY="9" orient="auto"><path d="M0,0 L13,9 L0,18 z" fill="#b8395e"/></marker>
+          <marker id="ah-join" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0,0 L9,6 L0,12 z" fill="#dd7d33" opacity=".6"/></marker>
+        </defs>
+
+        <!-- nodes -->
+        <rect class="node-box" x="16" y="126" width="136" height="72" rx="12"/>
+        <text class="node-title" x="84" y="150" text-anchor="middle">Saving families</text>
+        <text class="node-sub" x="84" y="167" text-anchor="middle">paying in monthly</text>
+        <text class="node-amt" id="cycFam" x="84" y="187" text-anchor="middle">&nbsp;</text>
+
+        <rect class="node-box" x="250" y="120" width="140" height="86" rx="12" style="stroke:#16233a;stroke-width:2"/>
+        <text class="node-title" x="320" y="146" text-anchor="middle">The fund</text>
+        <text class="node-sub" x="320" y="164" text-anchor="middle">balance carried forward</text>
+        <text class="node-amt lg" id="cycPot" x="320" y="189" text-anchor="middle">&nbsp;</text>
+
+        <rect class="node-box" x="488" y="126" width="136" height="72" rx="12"/>
+        <text class="node-title" x="556" y="150" text-anchor="middle">Wedding loans</text>
+        <text class="node-sub" x="556" y="167" text-anchor="middle">funded during the year</text>
+        <text class="node-amt" id="cycLoansN" x="556" y="187" text-anchor="middle">&nbsp;</text>
+
+        <!-- new money in -->
+        <path id="fNew" class="flow-line" d="M152 152 L244 152" stroke="#dd7d33" stroke-width="6" marker-end="url(#ah-new)"/>
+        <path class="flow-dash" d="M152 152 L214 152" stroke="#fff" stroke-width="2.2"/>
+        <text class="flow-label" x="199" y="104" text-anchor="middle" fill="#dd7d33">new money in</text>
+        <text class="flow-amt" id="fNewAmt" x="199" y="120" text-anchor="middle" fill="#dd7d33">&nbsp;</text>
+
+        <!-- loans out -->
+        <path id="fOut" class="flow-line" d="M390 152 L482 152" stroke="#b8395e" stroke-width="9" marker-end="url(#ah-out)"/>
+        <path class="flow-dash" d="M390 152 L452 152" stroke="#fff" stroke-width="2.2"/>
+        <text class="flow-label" x="437" y="104" text-anchor="middle" fill="#b8395e">loans out</text>
+        <text class="flow-amt" id="fOutAmt" x="437" y="120" text-anchor="middle" fill="#b8395e">&nbsp;</text>
+
+        <!-- repayments loop back -->
+        <path id="fRec" class="flow-line" d="M556 200 C556 285, 320 296, 320 211" stroke="#10897c" stroke-width="6" marker-end="url(#ah-rec)"/>
+        <path class="flow-dash" d="M556 200 C556 285, 320 296, 320 240" stroke="#fff" stroke-width="2.2"/>
+        <text class="flow-label" x="440" y="300" text-anchor="middle" fill="#10897c">loan repayments in</text>
+        <text class="flow-amt" id="fRecAmt" x="440" y="316" text-anchor="middle" fill="#10897c">&nbsp;</text>
+
+        <!-- costs and losses, shown only when switched on -->
+        <g id="gCost" style="display:none">
+          <path id="fCost" class="flow-line" d="M280 207 C280 246, 250 258, 188 258" stroke="#b8395e" stroke-width="4" marker-end="url(#ah-cost)"/>
+          <path class="flow-dash" d="M280 207 C280 246, 250 258, 208 258" stroke="#fff" stroke-width="2"/>
+          <rect class="cost-box" x="24" y="228" width="160" height="70" rx="11"/>
+          <text class="node-title" x="104" y="251" text-anchor="middle" style="font-size:14px">Costs and losses</text>
+          <text class="node-sub" x="104" y="268" text-anchor="middle">overheads and bad debts</text>
+          <text class="node-amt" id="cycCostAmt" x="104" y="288" text-anchor="middle" style="fill:#b8395e">&nbsp;</text>
+        </g>
+
+        <!-- families keep arriving, into the saving pool -->
+        <path class="flow-line" d="M210 50 C140 50, 84 66, 84 116" stroke="#dd7d33" stroke-width="2" stroke-dasharray="5 5" opacity=".5" marker-end="url(#ah-join)"/>
+        <text class="flow-label" x="222" y="46" text-anchor="start" fill="#dd7d33" opacity=".85">new families joining</text>
+      </svg>
+      <p class="cyc-cap" id="cycCap">&nbsp;</p>
+    </div>
+
+    <div class="cycle-read">
+      <h3>Where each pound of lending comes from</h3>
+      <div class="bigpct"><span id="cycPct">0</span><small>%</small></div>
+      <p class="readout" id="cycRead">&nbsp;</p>
+      <div class="split" aria-hidden="true">
+        <i id="splitNew" style="background:var(--new);width:100%"></i>
+        <i id="splitRec" style="background:var(--recyc);width:0%"></i>
+      </div>
+      <div class="split-key"><span style="color:var(--new)">New family money</span><span style="color:var(--recyc)">Repayments recycled</span></div>
+      <div class="scrub">
+        <label for="cycYear"><span>Drag through the years</span><b>Year <span id="cycYearOut">1</span></b></label>
+        <input type="range" id="cycYear" min="1" max="50" value="1" step="1">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <h2>One family's journey</h2>
+    <p>The same £4,800 does two jobs: half is the family's own savings, half is what keeps the fund alive for everyone else.</p>
+  </div>
+  <div class="journey" id="journey"></div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <h2>Test the scheme yourself</h2>
+    <p>Start with a ready-made scenario, then change anything you like. Every chart below updates as you type.</p>
+  </div>
+  <div class="presets">
+    <button class="pbtn" id="p-base" type="button">Base case</button>
+    <button class="pbtn" id="p-caut" type="button">Cautious</button>
+    <button class="pbtn" id="p-sev" type="button">Severe stress</button>
+    <button class="pbtn" id="p-ro" type="button">Run-off test</button>
+  </div>
+  <p class="preset-note" id="presetNote"></p>
+
+  <div class="ctrl-grid">
+    <div class="ctrl c1">
+      <h4>What families pay</h4>
+      <div class="f"><label for="contrib">Monthly payment per child (&pound;)</label><input type="number" id="contrib" value="40" step="5" min="1"></div>
+      <div class="f"><label for="capMonths">Months of paying in</label><input type="number" id="capMonths" value="120" step="6" min="12"></div>
+      <div class="f"><label for="savingsSharePct">Kept as the family's own savings (%)</label><input type="number" id="savingsSharePct" value="50" step="5" min="0" max="100"><div class="hint">The remainder is the community contribution that keeps the fund going.</div></div>
+      <div class="summary" id="sumDesign"></div>
+    </div>
+
+    <div class="ctrl c2">
+      <h4>The loan and the members</h4>
+      <div class="f"><label for="loan">Wedding loan (&pound;)</label><input type="number" id="loan" value="40000" step="1000" min="1000"></div>
+      <div class="f"><label for="repayRatePct">Repaid each month (% of the loan)</label><input type="number" id="repayRatePct" value="1" step="0.1" min="0.1"></div>
+      <div class="f"><label for="intakeBase">New children enrolled each year</label><input type="number" id="intakeBase" value="12000" step="500" min="12"></div>
+      <div class="f"><label for="intakeGrowthPct">Enrolment growth each year (%)</label><input type="number" id="intakeGrowthPct" value="0" step="0.5"><div class="hint">Use a negative number to model a shrinking community.</div></div>
+    </div>
+
+    <div class="ctrl c3">
+      <h4>What could go wrong</h4>
+      <div class="f"><label for="defaultAnnualPct">Loans that stop being repaid (% a year)</label><input type="number" id="defaultAnnualPct" value="0" step="0.5" min="0" max="60"></div>
+      <div class="f"><label for="recoveryPct">Of that, eventually recovered (%)</label><input type="number" id="recoveryPct" value="0" step="5" min="0" max="100"></div>
+      <div class="f"><label for="recoveryLagM">Recovery takes this long (months)</label><input type="number" id="recoveryLagM" value="12" step="6" min="0"></div>
+      <div class="f"><label for="exitAnnualPct">Waiting families who leave (% a year)</label><input type="number" id="exitAnnualPct" value="0" step="0.5" min="0" max="50"><div class="hint">Leavers get their own savings back. The community contribution stays.</div></div>
+    </div>
+
+    <div class="ctrl c4">
+      <h4>Running the fund</h4>
+      <div class="f"><label for="costPctInflow">Running costs (% of money received)</label><input type="number" id="costPctInflow" value="0" step="0.5" min="0" max="40"></div>
+      <div class="f"><label for="costPerMemberYear">Admin cost per member (&pound; a year)</label><input type="number" id="costPerMemberYear" value="0" step="1" min="0"></div>
+      <div class="f"><label for="reservePct">Cash reserve held back (% of savings owed)</label><input type="number" id="reservePct" value="0" step="1" min="0" max="50"><div class="hint">Money kept aside rather than lent, so families can be repaid on demand.</div></div>
+      <div class="f"><label for="runOffYear">Stop all new enrolment after year</label><input type="number" id="runOffYear" value="0" step="1" min="0"><div class="hint">0 means enrolment continues. Set 20 to test what happens if the scheme closes to newcomers.</div></div>
+      <div class="hbs" id="hbs"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-head"><h2>Where the scheme stands at the end of the period</h2></div>
+  <div class="stats" id="stats"></div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <h2>The picture that matters</h2>
+    <p>In the early years almost every loan is paid for by families still saving. As repayments build, the fund increasingly pays for itself.</p>
+  </div>
+  <div class="charts">
+    <div class="chart full tall" id="c-mix"></div>
+    <div class="chart full" id="c-self"></div>
+    <div class="chart" id="c-race"></div>
+    <div class="chart" id="c-wait"></div>
+    <div class="chart" id="c-queue"></div>
+    <div class="chart" id="c-cover"></div>
+    <div class="chart" id="c-cash"></div>
+    <div class="chart" id="c-loss"></div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <h2>What if nobody new ever joined again?</h2>
+    <p>This is the question a committee should always ask of a scheme like this. Set a run-off year in the controls above and these figures answer it.</p>
+  </div>
+  <div class="ro-grid" id="roGrid"></div>
+</section>
+
+<section class="block">
+  <div class="block-head"><h2>Year by year</h2></div>
+  <div class="tbl-head">
+    <p class="preset-note" style="margin:0">Every twelfth month of the run.</p>
+    <button class="dl" id="dlBtn" type="button">Download the monthly figures</button>
+  </div>
+  <div class="scroller"><table id="tbl"></table></div>
+</section>
+
+<section class="block">
+  <div class="de">
+    <h3>This is not a new idea. Germany has run it for a century.</h3>
+    <p>The closest established parallel is the German <strong>Bauspar</strong> system, run by institutions called Bausparkassen. Savers join a collective and commit to paying in a fixed monthly amount. Once they have accumulated a set share of their target sum, and have held those savings long enough, they acquire the right to a low-cost loan for the rest. The earliest savers help fund the loans of later savers, and while a member is saving they are a creditor to the collective, becoming a debtor once they draw their loan.</p>
+    <p>Two features of the German design map directly onto this scheme:</p>
+    <ul>
+      <li>Members must save first and are allocated their loan only when the collective can fund it, which is the same rationing our waiting list performs.</li>
+      <li>Allocation is decided by a valuation score built from how much a member saved and for how long, described as a time-by-money system. Our first-come-first-served list is a simpler version of the same fairness principle.</li>
+    </ul>
+    <p>The differences are that Bausparen funds housing rather than weddings and charges a low rate of interest, where this scheme is interest-free and the community contribution takes the place of that interest.</p>
+    <p>Further reading:
+      <a href="https://www.bausparkassen.de/" target="_blank" rel="noopener">Verband der Privaten Bausparkassen</a> &middot;
+      <a href="https://www.bausparkassen.de/wp-content/uploads/2025/03/Bausparen_in_Deutschland_English.pdf" target="_blank" rel="noopener">The Bauspar system in Germany (English, PDF)</a> &middot;
+      <a href="https://www.bafin.de/EN/verbraucherinnen-verbraucher/themen-finanzprodukte/kredite-immobilienfinanzierung/immobilienfinanzierung/bausparen/bausparen_en.html" target="_blank" rel="noopener">BaFin consumer guidance</a>
+    </p>
+    <p style="margin-bottom:0">Britain has its own precedent too. The first building societies, beginning with Ketley's in Birmingham in 1775, were terminating societies: members paid into a pot, and as each pot filled another member was housed, until everyone had been served and the society wound up. This scheme keeps that idea but is designed to renew itself rather than close.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-head"><h2>What this model assumes</h2></div>
+  <div class="panel">
+    <ul class="notes">
+      <li>Families pay in from the month they enrol and stop once they have reached the full paid-in target or have received their loan.</li>
+      <li>When a family reaches the front of the list, any shortfall against the full target is paid at that moment, and that money is available to help fund the same month's lending.</li>
+      <li>Loans are paid out whole. If the fund cannot afford a complete loan, that family waits until the following month.</li>
+      <li>Repayments begin the month after a loan is paid out. Because the family's own savings cover the closing instalments, cash repayments stop early and the fund keeps the community contribution.</li>
+      <li>Cash that is not lent stays in the fund and is available the following month. Nothing sits idle.</li>
+      <li>Families are served strictly in the order they enrolled.</li>
+      <li>Loans that stop being repaid are modelled as a steady annual rate applied to loans still in repayment, with any recovery arriving after the stated delay.</li>
+      <li>Running costs are taken out of money received before any lending decision is made.</li>
+      <li>The reserve is measured against the savings the fund would owe waiting families, and is never lent.</li>
+      <li>Results scale with size. Doubling enrolment doubles the money and leaves waiting times and percentages unchanged.</li>
+      <li>Every figure here follows from the rules you set on this page. Whether those rules and rates are realistic is the committee's judgement, not the model's.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p><b>The Contract Savings Loan Scheme &middot; interactive model.</b> Prepared for the Berinoh committee, July 2026.</p>
+  <p style="margin-top:6px">This model sets out the mechanics of the scheme as described. It is not a recommendation, a forecast, or a substitute for actuarial review. The figures move entirely with the assumptions entered above.</p>
+</footer>
+
+</div>
+<div id="tip" role="status"></div>
+<script>
+/* ============================================================
+   ENGINE  (validated: 85,834 loans at month 300 on the base case)
+   ============================================================ */
+function simulate(P){
+  var contrib=P.contrib, capM=P.capMonths, sShare=P.savingsSharePct/100;
+  var target=contrib*capM, savings=sShare*target, fee=target-savings;
+  var loan=P.loan, repay=P.repayRatePct/100*loan;
+  var cashTotal=Math.max(0,loan-savings);
+  var sched=[], rem=cashTotal;
+  while(rem>1e-9 && repay>0 && sched.length<3000){ var pmt=Math.min(repay,rem); sched.push(pmt); rem-=pmt; }
+  var K=sched.length, cumS=[0];
+  for(var k=0;k<K;k++) cumS.push(cumS[k]+sched[k]);
+  var hz=1-Math.pow(1-(P.defaultAnnualPct||0)/100,1/12);
+  var xz=1-Math.pow(1-(P.exitAnnualPct||0)/100,1/12);
+  var cInf=(P.costPctInflow||0)/100, cPer=(P.costPerMemberYear||0)/12;
+  var recP=(P.recoveryPct||0)/100, lag=Math.max(0,Math.round(P.recoveryLagM||0));
+  var resP=(P.reservePct||0)/100, H=P.horizon;
+  var surv=[1]; for(var a=1;a<=K;a++) surv.push(surv[a-1]*(1-hz));
+  var issued=new Float64Array(H+2), recArr=new Float64Array(H+lag+3), queue=[];
+  var cash=0, joined=0, cumLoans=0, cumLoss=0, cumCost=0;
+  var R={m:[],intake:[],contrib:[],topup:[],repay:[],recov:[],cost:[],refund:[],loans:[],
+         cumLoans:[],queue:[],paidIn:[],wait:[],cash:[],coverage:[],joinedCum:[],
+         newMoney:[],recycled:[],selfFund:[],outstanding:[],lending:[],cumLoss:[],cumCost:[]};
+  var servedWait=new Array(H+2).fill(null);
+
+  for(var m=1;m<=H;m++){
+    var stopped=(P.runOffYear>0 && m>P.runOffYear*12);
+    var inm=stopped?0:P.intakeBase*Math.pow(1+(P.intakeGrowthPct||0)/100,(m-1)/12);
+    if(inm>1e-12){ queue.push({j:m,n:inm}); joined+=inm; }
+    var refunds=0;
+    if(xz>0){
+      for(var qi=queue.length-1;qi>=0;qi--){
+        var q=queue[qi], paid=contrib*Math.min(Math.max(0,m-q.j),capM), go=q.n*xz;
+        refunds+=go*sShare*paid; q.n-=go;
+        if(q.n<=1e-9) queue.splice(qi,1);
+      }
+    }
+    var payers=0, paidIn=0;
+    for(var i=0;i<queue.length;i++){
+      var t=m-queue[i].j+1;
+      if(t<=capM) payers+=queue[i].n;
+      paidIn+=queue[i].n*contrib*Math.min(t,capM);
+    }
+    var C=contrib*payers, Rp=0, defOut=0, outstanding=0;
+    for(a=1;a<=K;a++){
+      var t2=m-a; if(t2<1) break;
+      var iss=issued[t2]; if(!iss) continue;
+      Rp+=sched[a-1]*iss*surv[a];
+      if(hz>0) defOut+=iss*surv[a-1]*hz*(cashTotal-cumS[a-1]);
+    }
+    for(t2=Math.max(1,m-K);t2<=m;t2++){
+      iss=issued[t2]; if(!iss) continue;
+      var age=m-t2;
+      for(a=age+1;a<=K;a++) outstanding+=sched[a-1]*iss*surv[a];
+    }
+    if(recP>0&&defOut>0) recArr[m+lag]+=recP*defOut;
+    cumLoss+=defOut*(1-recP);
+    var Rc=recArr[m];
+    var live=0; for(t2=Math.max(1,m-K+1);t2<=m;t2++) live+=issued[t2]*surv[Math.min(K,m-t2)];
+    var members=0; for(i=0;i<queue.length;i++) members+=queue[i].n;
+    var cost=cInf*(C+Rp+Rc)+cPer*(members+live);
+    cumCost+=cost;
+    var avail=cash+C+Rp+Rc-cost-refunds, floorCash=resP*paidIn;
+    var E=0, TU=0, sumWait=0, guard=0;
+    while(queue.length && guard++<400000){
+      var need=1, tu=0, ws=0;
+      for(i=0;i<queue.length && need>1e-12;i++){
+        var qq=queue[i], take=Math.min(need,qq.n), ten=m-qq.j+1;
+        tu+=take*Math.max(0,target-contrib*Math.min(ten,capM));
+        ws+=take*(m-qq.j); need-=take;
+      }
+      if(need>1e-12) break;
+      if(avail+tu-loan>=floorCash-1e-6){
+        avail+=tu-loan; TU+=tu; E++; sumWait+=ws; need=1;
+        while(need>1e-12 && queue.length){
+          qq=queue[0]; take=Math.min(need,qq.n); qq.n-=take; need-=take;
+          if(qq.n<=1e-9){ if(servedWait[qq.j]===null) servedWait[qq.j]=m-qq.j; queue.shift(); }
+        }
+      } else break;
+    }
+    issued[m]=E; cumLoans+=E; cash=avail;
+    var newM=C+TU, recy=Rp+Rc, qn=0;
+    for(i=0;i<queue.length;i++) qn+=queue[i].n;
+    R.m.push(m); R.intake.push(inm); R.contrib.push(C); R.topup.push(TU); R.repay.push(Rp);
+    R.recov.push(Rc); R.cost.push(cost); R.refund.push(refunds); R.loans.push(E);
+    R.cumLoans.push(cumLoans); R.queue.push(qn); R.paidIn.push(paidIn);
+    R.wait.push(E>0?sumWait/E:null); R.cash.push(cash);
+    R.coverage.push(joined>0?cumLoans/joined:0); R.joinedCum.push(joined);
+    R.newMoney.push(newM); R.recycled.push(recy);
+    R.selfFund.push((newM+recy)>0?recy/(newM+recy):0);
+    R.outstanding.push(outstanding); R.lending.push(E*loan);
+    R.cumLoss.push(cumLoss); R.cumCost.push(cumCost);
+  }
+  var pend=0; for(m=H+1;m<recArr.length;m++) pend+=recArr[m];
+  var ECR=0,ERec=0;
+  for(k=1;k<=K;k++){ ECR+=sched[k-1]*surv[k]; ERec+=surv[k-1]*hz*(cashTotal-cumS[k-1]); }
+  ERec*=recP;
+  var L=H-1;
+  R.d={target:target,savings:savings,fee:fee,repayMonthly:repay,cashTotal:cashTotal,
+    cashTermMonths:K,offsetMonths:repay>0?savings/repay:0,fullTermMonths:repay>0?loan/repay:0,
+    multiple:savings>0?loan/savings:0,expectedBack:ECR+ERec,
+    recycleShare:loan>0?(ECR+ERec)/loan:0,netPerLoan:loan-ECR-ERec,
+    outstanding:R.outstanding[L],pendingRec:pend,
+    refundLiability:sShare*R.paidIn[L],
+    netPosition:R.cash[L]+R.outstanding[L]+pend-sShare*R.paidIn[L]};
+  R.servedWait=servedWait;
+  return R;
+}
+
+/* ============================================================
+   STATE
+   ============================================================ */
+var DESIGN={contrib:40,capMonths:120,savingsSharePct:50,loan:40000,repayRatePct:1,
+            intakeBase:12000,intakeGrowthPct:0};
+var CLEAN={defaultAnnualPct:0,recoveryPct:0,recoveryLagM:12,exitAnnualPct:0,
+           costPctInflow:0,costPerMemberYear:0,reservePct:0,runOffYear:0};
+var PRESETS={
+  base:{note:"Fifty years, no losses and no costs. The pure mechanics of the rules as written.",
+        horizon:600,v:Object.assign({},DESIGN,CLEAN)},
+  caut:{note:"Fifty years with realistic friction: 2% of loans a year stop being repaid with half recovered, running costs of 3% plus \u00a36 per member, a 5% cash reserve, and 1% of waiting families leaving each year.",
+        horizon:600,v:Object.assign({},DESIGN,CLEAN,{defaultAnnualPct:2,recoveryPct:50,recoveryLagM:12,
+          costPctInflow:3,costPerMemberYear:6,reservePct:5,exitAnnualPct:1})},
+  sev:{note:"Fifty years under heavy strain: 5% of loans a year stop being repaid with only a quarter recovered after two years, costs of 6% plus \u00a312 per member, a 10% reserve, 3% of waiting families leaving, and enrolment shrinking 2% a year.",
+       horizon:600,v:Object.assign({},DESIGN,CLEAN,{defaultAnnualPct:5,recoveryPct:25,recoveryLagM:24,
+          costPctInflow:6,costPerMemberYear:12,reservePct:10,exitAnnualPct:3,intakeGrowthPct:-2})},
+  ro:{note:"Enrolment is closed to newcomers after year 20 and the fund runs on repayments alone, with cautious loss and cost assumptions applied throughout.",
+      horizon:900,v:Object.assign({},DESIGN,CLEAN,{runOffYear:20,defaultAnnualPct:2,recoveryPct:50,
+          costPctInflow:3,costPerMemberYear:6,reservePct:5})}
+};
+var IDS=['contrib','capMonths','savingsSharePct','loan','repayRatePct','intakeBase','intakeGrowthPct',
+         'defaultAnnualPct','recoveryPct','recoveryLagM','exitAnnualPct','costPctInflow',
+         'costPerMemberYear','reservePct','runOffYear'];
+var HORIZONS=[[300,"25 years"],[600,"50 years"],[900,"75 years"],[1200,"100 years"]];
+var state={horizon:600,preset:'base',scrubYear:1};
+var R=null,P=null;
+
+/* ============================================================
+   FORMATTING
+   ============================================================ */
+function ci(v){return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function gbp(v){var s=v<0?"-":"";v=Math.abs(v);
+  if(v>=1e9)return s+"\u00a3"+(v/1e9).toFixed(2)+"bn";
+  if(v>=1e6)return s+"\u00a3"+(v/1e6).toFixed(1)+"m";
+  if(v>=1e3)return s+"\u00a3"+(v/1e3).toFixed(0)+"k";
+  return s+"\u00a3"+ci(v);}
+function gbpFull(v){return (v<0?"-\u00a3":"\u00a3")+ci(Math.abs(v));}
+function shortN(v){if(v>=1e6)return (v/1e6).toFixed(1)+"m";if(v>=1e3)return (v/1e3).toFixed(0)+"k";return Math.round(v);}
+function pc(v,dp){return (v*100).toFixed(dp===undefined?1:dp)+"%";}
+function wy(mo){if(mo==null||!isFinite(mo))return "not yet";var t=Math.round(mo);
+  return Math.floor(t/12)+"y "+(t%12)+"m";}
+function yr(m){return "year "+Math.ceil(m/12);}
+
+/* ============================================================
+   READ INPUTS
+   ============================================================ */
+function num(id){var v=parseFloat(document.getElementById(id).value);return isFinite(v)?v:0;}
+function readP(){
+  return {contrib:Math.max(1,num('contrib')),capMonths:Math.max(1,Math.round(num('capMonths'))),
+    savingsSharePct:Math.min(100,Math.max(0,num('savingsSharePct'))),
+    loan:Math.max(100,num('loan')),repayRatePct:Math.max(0.05,num('repayRatePct')),
+    intakeBase:Math.max(0.1,num('intakeBase')/12),intakeGrowthPct:num('intakeGrowthPct'),
+    defaultAnnualPct:Math.max(0,num('defaultAnnualPct')),
+    recoveryPct:Math.min(100,Math.max(0,num('recoveryPct'))),
+    recoveryLagM:Math.max(0,num('recoveryLagM')),
+    exitAnnualPct:Math.min(90,Math.max(0,num('exitAnnualPct'))),
+    costPctInflow:Math.min(60,Math.max(0,num('costPctInflow'))),
+    costPerMemberYear:Math.max(0,num('costPerMemberYear')),
+    reservePct:Math.max(0,num('reservePct')),
+    runOffYear:Math.max(0,Math.round(num('runOffYear'))),
+    horizon:state.horizon};
+}
+function applyPreset(key){
+  var pr=PRESETS[key];
+  for(var k in pr.v) if(document.getElementById(k)) document.getElementById(k).value=pr.v[k];
+  state.horizon=pr.horizon; state.preset=key;
+  document.getElementById('presetNote').textContent=pr.note;
+  state.scrubYear=Math.min(state.scrubYear,pr.horizon/12);
+  syncChrome(); run();
+}
+function markCustom(){
+  if(state.preset!=='custom'){
+    state.preset='custom';
+    document.getElementById('presetNote').textContent="Your own settings.";
+    syncChrome();
+  }
+}
+function syncChrome(){
+  var map={base:'p-base',caut:'p-caut',sev:'p-sev',ro:'p-ro'};
+  for(var k in map) document.getElementById(map[k]).classList.toggle('on',state.preset===k);
+  var hb=document.getElementById('hbs');
+  hb.innerHTML=HORIZONS.map(function(h){
+    return '<button type="button" class="hb'+(h[0]===state.horizon?' on':'')+'" data-h="'+h[0]+'">'+h[1]+'</button>';
+  }).join('');
+  hb.querySelectorAll('.hb').forEach(function(b){
+    b.addEventListener('click',function(){
+      state.horizon=parseInt(b.dataset.h);
+      state.scrubYear=Math.min(state.scrubYear,state.horizon/12);
+      markCustom(); syncChrome(); run();
+    });
+  });
+}
+
+/* ============================================================
+   CHART RENDERER  (line, stacked area, 100% stacked area)
+   ============================================================ */
+var TIP=null;
+function niceTop(v){ if(v<=0)return 1;
+  var p=Math.pow(10,Math.floor(Math.log(v)/Math.LN10)), n=v/p;
+  var mm = n<=1?1 : n<=2?2 : n<=2.5?2.5 : n<=5?5 : 10;
+  return mm*p; }
+
+function drawChart(cfg){
+  var el=document.getElementById(cfg.el); if(!el) return;
+  var W=780,H=cfg.tall?300:250,pl=64,pr=16,pt=14,pb=32;
+  var iw=W-pl-pr, ih=H-pt-pb, xMax=cfg.xMax, S=cfg.series;
+  var n=xMax, stack=(cfg.type==='stack'||cfg.type==='stack100'), pct100=(cfg.type==='stack100');
+
+  var tops=[];
+  if(stack){
+    for(var i=0;i<n;i++){
+      var tot=0; for(var s=0;s<S.length;s++) tot+=(S[s].y[i]||0);
+      tops.push(tot);
+    }
+  }
+  var yMax=0;
+  if(pct100) yMax=1;
+  else if(stack) yMax=niceTop(Math.max.apply(null,tops.concat([0])));
+  else { S.forEach(function(sr){ sr.y.forEach(function(v){ if(v!=null&&isFinite(v)&&v>yMax) yMax=v; }); }); yMax=niceTop(yMax||1); }
+
+  function X(m){ return pl+(m/xMax)*iw; }
+  function Y(v){ return pt+ih-(v/yMax)*ih; }
+
+  var g='';
+  for(var k=0;k<=4;k++){
+    var yv=yMax*k/4, yy=Y(yv);
+    g+='<line x1="'+pl+'" y1="'+yy.toFixed(1)+'" x2="'+(W-pr)+'" y2="'+yy.toFixed(1)+'" stroke="#e6ecf3"/>';
+    g+='<text x="'+(pl-8)+'" y="'+(yy+3.6).toFixed(1)+'" text-anchor="end" class="axis">'+cfg.yFmt(yv)+'</text>';
+  }
+  var years=xMax/12, stp = years<=25?5 : years<=55?10 : 20;
+  for(var t=0;t<=years+.01;t+=stp){
+    var xx=X(t*12);
+    g+='<line x1="'+xx.toFixed(1)+'" y1="'+pt+'" x2="'+xx.toFixed(1)+'" y2="'+(pt+ih)+'" stroke="#f0f4f8"/>';
+    g+='<text x="'+xx.toFixed(1)+'" y="'+(H-10)+'" text-anchor="middle" class="axis">'+t+'</text>';
+  }
+  g+='<text x="'+(W-pr)+'" y="'+(H-10)+'" text-anchor="end" class="axis">years</text>';
+
+  if(stack){
+    var base=new Array(n).fill(0);
+    for(var s=0;s<S.length;s++){
+      var up='',dn='';
+      for(i=0;i<n;i++){
+        var raw=S[s].y[i]||0;
+        var denom = pct100 ? (tops[i]||1) : 1;
+        var lo=base[i], hi=base[i]+raw/denom;
+        up+=(i===0?'M':'L')+X(i+1).toFixed(1)+' '+Y(hi).toFixed(1);
+        base[i]=hi;
+      }
+      for(i=n-1;i>=0;i--){
+        var prev = base[i] - ((S[s].y[i]||0)/(pct100?(tops[i]||1):1));
+        dn+='L'+X(i+1).toFixed(1)+' '+Y(prev).toFixed(1);
+      }
+      g+='<path d="'+up+dn+'Z" fill="'+S[s].color+'" fill-opacity="'+(S[s].op||.85)+'" stroke="none"/>';
+    }
+    for(s=0;s<S.length;s++){}
+  } else {
+    S.forEach(function(sr){
+      var d='',pen=false;
+      for(var i=0;i<sr.y.length && i<n;i++){
+        var v=sr.y[i];
+        if(v==null||!isFinite(v)){pen=false;continue;}
+        d+=(pen?'L':'M')+X(i+1).toFixed(1)+' '+Y(v).toFixed(1); pen=true;
+      }
+      if(d) g+='<path d="'+d+'" fill="none" stroke="'+sr.color+'" stroke-width="'+(sr.w||2.4)+'"'+(sr.dash?' stroke-dasharray="6 5"':'')+' stroke-linejoin="round"/>';
+    });
+  }
+  if(cfg.markX){
+    var mx=X(cfg.markX);
+    g+='<line x1="'+mx.toFixed(1)+'" y1="'+pt+'" x2="'+mx.toFixed(1)+'" y2="'+(pt+ih)+'" stroke="'+(cfg.markColor||'#c08f2a')+'" stroke-width="1.6" stroke-dasharray="5 4"/>';
+    g+='<text x="'+(mx+6).toFixed(1)+'" y="'+(pt+13)+'" class="axis" style="fill:'+(cfg.markColor||'#c08f2a')+';font-weight:700">'+cfg.markLabel+'</text>';
+  }
+  g+='<line id="'+cfg.el+'-cx" x1="0" y1="'+pt+'" x2="0" y2="'+(pt+ih)+'" stroke="#94a3b8" stroke-width="1" style="display:none"/>';
+
+  var keyHtml='<div class="key">'+S.map(function(sr){
+    return '<span><i style="background:'+sr.color+(sr.dash?';opacity:.55':'')+'"></i>'+sr.label+'</span>';}).join('')+'</div>';
+
+  el.innerHTML='<h3>'+cfg.title+'</h3>'+(cfg.why?'<p class="why">'+cfg.why+'</p>':'')+keyHtml+
+    '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'+g+'</svg>'+
+    (cfg.note?'<p class="note">'+cfg.note+'</p>':'');
+
+  var svg=el.querySelector('svg'), cx=document.getElementById(cfg.el+'-cx');
+  svg.addEventListener('mousemove',function(ev){
+    var r=svg.getBoundingClientRect();
+    var mm=Math.round(((ev.clientX-r.left)*(W/r.width)-pl)/iw*xMax);
+    if(mm<1)mm=1; if(mm>xMax)mm=xMax;
+    var html='<b>Year '+(mm/12).toFixed(1)+'</b>';
+    var tot=0; if(pct100){ for(var s2=0;s2<S.length;s2++) tot+=(S[s2].y[mm-1]||0); }
+    S.forEach(function(sr){
+      var v=sr.y[mm-1];
+      if(v==null||!isFinite(v))return;
+      var shown = pct100 ? pc(tot>0?v/tot:0) : (cfg.yTip||cfg.yFmt)(v);
+      html+='<br><i style="background:'+sr.color+'"></i>'+sr.label+': '+shown;
+    });
+    TIP.innerHTML=html; TIP.style.display='block';
+    TIP.style.left=Math.min(ev.pageX+16,window.innerWidth-300)+'px';
+    TIP.style.top=(ev.pageY+14)+'px';
+    cx.setAttribute('x1',X(mm).toFixed(1)); cx.setAttribute('x2',X(mm).toFixed(1)); cx.style.display='block';
+  });
+  svg.addEventListener('mouseleave',function(){ TIP.style.display='none'; cx.style.display='none'; });
+}
+
+/* ============================================================
+   THE CYCLE (signature)
+   ============================================================ */
+function roll12(a){
+  var o=new Array(a.length), s=0;
+  for(var i=0;i<a.length;i++){ s+=a[i]||0; if(i>=12) s-=a[i-12]||0; o[i]=s; }
+  return o;
+}
+function yearAgg(y){
+  var a=(y-1)*12, b=Math.min(y*12,R.m.length);
+  var o={newMoney:0,recycled:0,lending:0,loans:0,cost:0};
+  for(var i=a;i<b;i++){
+    o.newMoney+=R.newMoney[i]; o.recycled+=R.recycled[i];
+    o.lending+=R.lending[i];   o.loans+=R.loans[i];  o.cost+=R.cost[i];
+  }
+  o.loss=R.cumLoss[b-1]-(a>0?R.cumLoss[a-1]:0);
+  o.cash=R.cash[b-1]; o.queue=R.queue[b-1];
+  return o;
+}
+function sizeArrow(id,w){
+  var mk=document.getElementById(id); if(!mk) return;
+  var aw=Math.max(12,w*1.55), ah=Math.max(14,w*2.05);
+  mk.setAttribute('markerWidth',aw.toFixed(1));
+  mk.setAttribute('markerHeight',ah.toFixed(1));
+  mk.setAttribute('refX',(aw-1).toFixed(1));
+  mk.setAttribute('refY',(ah/2).toFixed(1));
+  var pth=mk.firstElementChild;
+  if(pth) pth.setAttribute('d','M0,0 L'+aw.toFixed(1)+','+(ah/2).toFixed(1)+' L0,'+ah.toFixed(1)+' z');
+}
+function paintCycle(){
+  var maxY=Math.floor(P.horizon/12);
+  var sl=document.getElementById('cycYear');
+  sl.max=maxY; if(state.scrubYear>maxY) state.scrubYear=maxY;
+  sl.value=state.scrubYear;
+  document.getElementById('cycYearOut').textContent=state.scrubYear;
+
+  var Y=yearAgg(state.scrubYear), tot=Y.newMoney+Y.recycled;
+  var shareRec=tot>0?Y.recycled/tot:0, shareNew=1-shareRec;
+
+  document.getElementById('cycPct').textContent=Math.round(shareRec*100);
+  document.getElementById('splitNew').style.width=(shareNew*100).toFixed(1)+'%';
+  document.getElementById('splitRec').style.width=(shareRec*100).toFixed(1)+'%';
+
+  var wNew=3+shareNew*11, wRec=3+shareRec*11, wOut=(Y.lending>0?12:2.5);
+  document.getElementById('fNew').setAttribute('stroke-width',wNew.toFixed(1));
+  document.getElementById('fRec').setAttribute('stroke-width',wRec.toFixed(1));
+  document.getElementById('fOut').setAttribute('stroke-width',wOut.toFixed(1));
+  sizeArrow('ah-new',wNew); sizeArrow('ah-rec',wRec); sizeArrow('ah-out',wOut);
+
+  document.getElementById('fNewAmt').textContent=gbp(Y.newMoney);
+  document.getElementById('fRecAmt').textContent=gbp(Y.recycled);
+  document.getElementById('fOutAmt').textContent=gbp(Y.lending);
+  document.getElementById('cycPot').textContent=gbp(Y.cash);
+  document.getElementById('cycFam').textContent=ci(Y.queue)+' waiting';
+  document.getElementById('cycLoansN').textContent=ci(Y.loans)+(Y.loans===1?' wedding':' weddings');
+  document.getElementById('cycCap').textContent=
+    'Every amount here is a total for the whole of year '+state.scrubYear+
+    '. The fund balance and the number of families waiting are as they stood at the end of that year.';
+
+  var outgo=Y.cost+Y.loss, gc=document.getElementById('gCost');
+  if(outgo>0.5){
+    gc.style.display='';
+    document.getElementById('cycCostAmt').textContent=gbp(outgo);
+    var wCost=Math.max(2.5,Math.min(11,2.5+(Y.lending>0?outgo/Y.lending:0)*26));
+    document.getElementById('fCost').setAttribute('stroke-width',wCost.toFixed(1));
+    sizeArrow('ah-cost',wCost);
+  } else gc.style.display='none';
+
+  var msg;
+  if(Y.loans===0){
+    msg='In year '+state.scrubYear+' the fund could not afford a single loan, so every family waited.';
+  } else if(shareRec<0.25){
+    msg='In year '+state.scrubYear+' the fund is still almost entirely carried by families who are saving. '+
+        ci(Y.loans)+' weddings were funded over the year.';
+  } else if(shareRec<0.6){
+    msg='By year '+state.scrubYear+' repayments from families already helped are carrying a serious share of the load. '+
+        ci(Y.loans)+' weddings were funded over the year.';
+  } else {
+    msg='By year '+state.scrubYear+' the scheme largely funds itself. Most of the money going out was repaid by families helped before. '+
+        ci(Y.loans)+' weddings were funded over the year.';
+  }
+  document.getElementById('cycRead').textContent=msg;
+}
+
+/* ============================================================
+   JOURNEY
+   ============================================================ */
+function paintJourney(){
+  var d=R.d, yrsPay=(P.capMonths/12).toFixed(0);
+  var st=[
+    ['s1','From enrolment', gbpFull(P.contrib)+'/mo',
+      'A family pays a small amount every month for each child, for up to '+yrsPay+' years.'],
+    ['s2','By the time they are called', gbpFull(d.target),
+      'Paid in altogether. Half of it, '+gbpFull(d.savings)+', stays theirs. The other half is their contribution to the community.'],
+    ['s3','When the wedding comes', gbpFull(P.loan),
+      'Paid out in one interest-free sum, worth '+d.multiple.toFixed(1)+' times the family\u2019s own savings.'],
+    ['s4','Paying it back', gbpFull(d.repayMonthly)+'/mo',
+      'For '+d.cashTermMonths+' months. Their own savings then cover the last '+Math.round(d.offsetMonths)+' months, so nothing more is owed.'],
+    ['s5','What the fund keeps', gbpFull(d.fee),
+      'Left with the fund from every family that completes, which is what lets the next family be helped.']
+  ];
+  document.getElementById('journey').innerHTML=st.map(function(s){
+    return '<div class="stage '+s[0]+'"><div class="stage-when">'+s[1]+'</div>'+
+           '<div class="stage-amt">'+s[2]+'</div><p>'+s[3]+'</p></div>';
+  }).join('');
+}
+
+/* ============================================================
+   ANALYSIS
+   ============================================================ */
+function analyse(){
+  var A={},n=R.m.length;
+  A.cross50=null;
+  for(var i=12;i<n;i++){ if(R.a.selfFund[i]>=0.5){ A.cross50=R.m[i]; break; } }
+  A.peakWait=-1; A.peakM=null;
+  for(i=0;i<n;i++){ var w=R.wait[i]; if(w!=null&&w>A.peakWait){A.peakWait=w;A.peakM=R.m[i];} }
+  A.lastWait=null; for(i=n-1;i>=0;i--){ if(R.wait[i]!=null){A.lastWait=R.wait[i];break;} }
+  A.clear=null; for(i=0;i<n;i++){ if(R.queue[i]<1){A.clear=R.m[i];break;} }
+  A.dry=0; for(i=0;i<n;i++){ if(R.loans[i]===0&&R.queue[i]>=1) A.dry++; }
+  A.lastLend=0; for(i=0;i<n;i++){ if(R.loans[i]>0) A.lastLend=R.m[i]; }
+  if(P.runOffYear>0){
+    var stopIdx=Math.min(n,P.runOffYear*12)-1;
+    A.atStop=stopIdx>=0?R.cumLoans[stopIdx]:0;
+    A.afterStop=R.cumLoans[n-1]-A.atStop;
+    A.qAtStop=stopIdx>=0?R.queue[stopIdx]:0;
+  }
+  return A;
+}
+
+/* ============================================================
+   STATS + RUN-OFF
+   ============================================================ */
+function paintStats(A){
+  var L=P.horizon-1,d=R.d,yrs=(P.horizon/12).toFixed(0);
+  var cards=[
+    ['rec','Weddings funded',ci(R.cumLoans[L]),'over '+yrs+' years'],
+    ['rec','Funded by repayments',pc(R.a.selfFund[L]),'share of the final year\u2019s money that came back from earlier loans'],
+    ['new','Families served',pc(R.coverage[L]),ci(R.cumLoans[L])+' of '+ci(R.joinedCum[L])+' ever enrolled'],
+    ['q','Families still waiting',ci(R.queue[L]),'at the end of the period'],
+    ['q','Wait for those called now',wy(A.lastWait),'peak was '+wy(A.peakWait)+' in '+(A.peakM?yr(A.peakM):'n/a')],
+    ['rec','Comes back per loan',gbpFull(Math.round(d.expectedBack)),pc(d.recycleShare)+' of every '+gbpFull(P.loan)+' lent'],
+    ['out','New money each loan needs',gbpFull(Math.round(d.netPerLoan)),'the rest is recycled'],
+    ['rec','Still owed to the fund',gbp(d.outstanding),'repayments not yet due'],
+    ['new','Cash in the fund',gbp(R.cash[L]),'available to lend on'],
+    ['out','Lost to unpaid loans',gbp(R.cumLoss[L]),'after any recoveries'],
+    ['out','Spent on running the fund',gbp(R.cumCost[L]),'over '+yrs+' years'],
+    ['rec','Net position',gbp(d.netPosition),'cash plus money owed to the fund, less savings owed to waiting families']
+  ];
+  document.getElementById('stats').innerHTML=cards.map(function(c){
+    return '<div class="stat tone-'+c[0]+'"><div class="k">'+c[1]+'</div><div class="v">'+c[2]+'</div><div class="n">'+c[3]+'</div></div>';
+  }).join('');
+}
+
+function paintRunoff(A){
+  var el=document.getElementById('roGrid'),L=P.horizon-1;
+  if(P.runOffYear>0){
+    var lastY=(A.lastLend/12).toFixed(1), sinceClose=(A.lastLend/12-P.runOffYear).toFixed(1);
+    var stillGoing=(A.lastLend>=P.horizon), served=(R.queue[L]<1);
+    var head2,num2,body2;
+    if(served){
+      head2='Everyone was served';
+      num2='year '+lastY;
+      body2='was the last wedding funded, '+sinceClose+' years after enrolment closed. Every family that was still waiting when the doors shut was eventually helped, entirely out of repayments.';
+    } else if(stillGoing){
+      head2='Still going at the end of this run';
+      num2=pc(R.coverage[L],0);
+      body2='of everyone ever enrolled had been helped by year '+(P.horizon/12)+', and the fund was still paying out weddings '+sinceClose+
+            ' years after enrolment closed. '+ci(R.queue[L])+' families were still waiting. Lengthen the period above to see how much further it reaches.';
+    } else {
+      head2='When it ran out';
+      num2='year '+lastY;
+      body2='was the last wedding the fund could afford, '+sinceClose+' years after enrolment closed. '+
+            ci(R.queue[L])+' families were left unserved. Costs and unpaid loans eroded the pot faster than repayments could replenish it.';
+    }
+    el.innerHTML=
+      '<div class="ro-card"><h3>Enrolment closed after year '+P.runOffYear+'</h3>'+
+      '<div class="ro-num">'+ci(A.afterStop)+'</div>'+
+      '<p>further weddings were funded after the last new child was enrolled, on top of the '+ci(A.atStop)+
+      ' already funded by then. That money came from repayments, not from anyone new.</p></div>'+
+      '<div class="ro-card"><h3>'+head2+'</h3>'+
+      '<div class="ro-num">'+num2+'</div><p>'+body2+'</p></div>';
+  } else {
+    el.innerHTML=
+      '<div class="ro-card"><h3>Run-off is not switched on</h3>'+
+      '<div class="ro-num">'+pc(R.d.recycleShare)+'</div>'+
+      '<p>of every pound lent is expected to come back to the fund. That returning money is what makes a run-off survivable. Set a year in <em>Stop all new enrolment after year</em> above, or use the Run-off test, to see it play out.</p></div>'+
+      '<div class="ro-card"><h3>Why the risk falls over time</h3>'+
+      '<div class="ro-num">'+pc(R.a.selfFund[L])+'</div>'+
+      '<p>of the money arriving in the final year comes from repayments rather than from new families. The higher this gets, the less the scheme depends on continued enrolment.</p></div>';
+  }
+}
+
+/* ============================================================
+   CHARTS
+   ============================================================ */
+function paintCharts(A){
+  var H=P.horizon;
+  var mark = P.runOffYear>0 ? P.runOffYear*12 : null;
+
+  drawChart({el:'c-mix',type:'stack100',xMax:H,tall:true,
+    title:'Who is paying for each year\u2019s weddings',
+    why:'Every year the fund receives money from two places: families who are still saving, and families repaying loans they have already had. This shows how that balance shifts. The amber band shrinking is the whole story of the scheme.',
+    series:[{label:'New family money (savings and completions)',color:'#dd7d33',y:R.a.newMoney,op:.9},
+            {label:'Repayments coming back',color:'#10897c',y:R.a.recycled,op:.9}],
+    yFmt:function(v){return Math.round(v*100)+'%';},
+    markX:mark,markLabel:'enrolment closes',
+    note:A.cross50?('Repayments overtake new money in '+yr(A.cross50)+'.'):'Repayments do not overtake new money within this period.'});
+
+  drawChart({el:'c-self',type:'stack',xMax:H,
+    title:'The same picture in pounds a year',
+    why:'Both sources grow, but the repayment stream grows faster and eventually dwarfs the money coming from new savers. Each point is the total for the twelve months ending there.',
+    series:[{label:'New family money a year',color:'#dd7d33',y:R.a.newMoney,op:.85},
+            {label:'Repayments coming back a year',color:'#10897c',y:R.a.recycled,op:.85}],
+    yFmt:function(v){return '\u00a3'+shortN(v);},yTip:gbpFull,markX:mark,markLabel:'enrolment closes'});
+
+  drawChart({el:'c-race',type:'line',xMax:H,
+    title:'Weddings funded against children enrolled',
+    why:'While the blue line sits below the grey one the waiting list is still growing.',
+    series:[{label:'Weddings funded a year',color:'#6a55c8',y:R.a.loans},
+            {label:'Children enrolled a year',color:'#8fa0b6',y:R.a.intake,dash:true}],
+    yFmt:shortN,yTip:function(v){return ci(v)+' a year';},markX:mark,markLabel:'enrolment closes'});
+
+  drawChart({el:'c-wait',type:'line',xMax:H,
+    title:'How long families wait',
+    why:'The average wait of the families reaching the front of the list at that point.',
+    series:[{label:'Wait at the time of the wedding',color:'#b8395e',
+             y:R.wait.map(function(v){return v==null?null:v/12;})}],
+    yFmt:function(v){return v.toFixed(0)+'y';},yTip:function(v){return v.toFixed(1)+' years';},
+    markX:mark,markLabel:'enrolment closes'});
+
+  drawChart({el:'c-queue',type:'line',xMax:H,
+    title:'Families on the waiting list',
+    series:[{label:'Waiting',color:'#6a55c8',y:R.queue}],
+    yFmt:shortN,yTip:function(v){return ci(v)+' families';},markX:mark,markLabel:'enrolment closes',
+    note:A.clear?('The list clears in '+yr(A.clear)+'.'):'The list does not clear within this period.'});
+
+  drawChart({el:'c-cover',type:'line',xMax:H,
+    title:'Share of families who have been helped',
+    series:[{label:'Served, as a share of everyone enrolled',color:'#10897c',
+             y:R.coverage.map(function(v){return v*100;})}],
+    yFmt:function(v){return v.toFixed(0)+'%';},yTip:function(v){return v.toFixed(1)+'%';},
+    markX:mark,markLabel:'enrolment closes'});
+
+  drawChart({el:'c-cash',type:'line',xMax:H,
+    title:'Cash in the fund against savings it owes',
+    why:'The amber line is what the fund would have to hand back if every waiting family left at once.',
+    series:[{label:'Cash held',color:'#16233a',y:R.cash},
+            {label:'Savings owed to waiting families',color:'#dd7d33',y:R.paidIn.map(function(v){return v*P.savingsSharePct/100;}),dash:true}],
+    yFmt:function(v){return '\u00a3'+shortN(v);},yTip:gbpFull,markX:mark,markLabel:'enrolment closes'});
+
+  drawChart({el:'c-loss',type:'line',xMax:H,
+    title:'What the fund has spent and lost',
+    why:'Cumulative running costs and the value of loans that were never repaid.',
+    series:[{label:'Running costs',color:'#c08f2a',y:R.cumCost},
+            {label:'Lost to unpaid loans',color:'#b8395e',y:R.cumLoss}],
+    yFmt:function(v){return '\u00a3'+shortN(v);},yTip:gbpFull,markX:mark,markLabel:'enrolment closes',
+    note:(P.defaultAnnualPct===0&&P.costPctInflow===0&&P.costPerMemberYear===0)?
+      'Both are zero because no costs or bad debts are switched on. Try the Cautious or Severe stress scenarios.':''});
+}
+
+/* ============================================================
+   TABLE + CSV
+   ============================================================ */
+function lastWaitTo(i){ for(var k=i;k>=0;k--){ if(R.wait[k]!=null) return R.wait[k]; } return null; }
+function paintTable(){
+  var yrs=Math.floor(P.horizon/12);
+  var h='<thead><tr><th>Year</th><th>Enrolled</th><th>Weddings</th><th>Total funded</th>'+
+        '<th>Served</th><th>Waiting</th><th>Wait</th><th>Repayment share</th><th>Money in</th>'+
+        '<th>Loans out</th><th>Cash held</th></tr></thead><tbody>';
+  for(var y=1;y<=yrs;y++){
+    var a=(y-1)*12,b=y*12,inS=0,outS=0,lS=0,iS=0,sf=0;
+    for(var i=a;i<b;i++){ inS+=R.newMoney[i]+R.recycled[i]; outS+=R.lending[i];
+      lS+=R.loans[i]; iS+=R.intake[i]; sf+=R.selfFund[i]; }
+    var j=b-1;
+    h+='<tr><td>'+y+'</td><td>'+ci(iS)+'</td><td>'+ci(lS)+'</td><td>'+ci(R.cumLoans[j])+'</td>'+
+       '<td>'+pc(R.coverage[j])+'</td><td>'+ci(R.queue[j])+'</td><td>'+wy(lastWaitTo(j))+'</td>'+
+       '<td>'+pc(sf/12)+'</td><td>'+gbp(inS)+'</td><td>'+gbp(outS)+'</td><td>'+gbp(R.cash[j])+'</td></tr>';
+  }
+  document.getElementById('tbl').innerHTML=h+'</tbody>';
+}
+function downloadCSV(){
+  if(!R) return;
+  var rows=['month,children_enrolled,contributions,completion_topups,repayments,recoveries,'+
+            'running_costs,exit_refunds,weddings_funded,total_funded,families_waiting,'+
+            'savings_owed,avg_wait_months,cash_held,share_from_repayments,cum_costs,cum_losses'];
+  for(var i=0;i<R.m.length;i++){
+    rows.push([R.m[i],R.intake[i].toFixed(2),R.contrib[i].toFixed(2),R.topup[i].toFixed(2),
+      R.repay[i].toFixed(2),R.recov[i].toFixed(2),R.cost[i].toFixed(2),R.refund[i].toFixed(2),
+      R.loans[i],R.cumLoans[i],R.queue[i].toFixed(2),
+      (R.paidIn[i]*P.savingsSharePct/100).toFixed(2),
+      (R.wait[i]==null?'':R.wait[i].toFixed(3)),R.cash[i].toFixed(2),
+      R.selfFund[i].toFixed(5),R.cumCost[i].toFixed(2),R.cumLoss[i].toFixed(2)].join(','));
+  }
+  var blob=new Blob([rows.join('\n')],{type:'text/csv'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='contract_savings_loan_scheme_monthly.csv';
+  a.click();
+}
+
+/* ============================================================
+   RUN
+   ============================================================ */
+function run(){
+  P=readP(); R=simulate(P);
+  R.a={newMoney:roll12(R.newMoney),recycled:roll12(R.recycled),
+       lending:roll12(R.lending),loans:roll12(R.loans),intake:roll12(R.intake)};
+  R.a.selfFund=R.a.newMoney.map(function(v,i){
+    var t=v+R.a.recycled[i]; return t>0?R.a.recycled[i]/t:0;});
+  var A=analyse();
+  document.getElementById('sumDesign').innerHTML=
+    'Pays in <b>'+gbpFull(R.d.target)+'</b> in total. <b>'+gbpFull(R.d.savings)+
+    '</b> stays theirs, <b>'+gbpFull(R.d.fee)+'</b> keeps the fund going. The loan is <b>'+
+    R.d.multiple.toFixed(1)+' times</b> their own savings.';
+  paintJourney(); paintCycle(); paintStats(A); paintRunoff(A); paintCharts(A); paintTable();
+}
+var timer=null;
+function runSoon(){ clearTimeout(timer); timer=setTimeout(run,200); }
+
+/* ============================================================
+   WIRING
+   ============================================================ */
+document.addEventListener('DOMContentLoaded',function(){
+  TIP=document.getElementById('tip');
+  IDS.forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.addEventListener('input',function(){ markCustom(); runSoon(); });
+  });
+  document.getElementById('cycYear').addEventListener('input',function(e){
+    state.scrubYear=parseInt(e.target.value)||1; paintCycle();
+  });
+  document.getElementById('p-base').addEventListener('click',function(){applyPreset('base');});
+  document.getElementById('p-caut').addEventListener('click',function(){applyPreset('caut');});
+  document.getElementById('p-sev').addEventListener('click',function(){applyPreset('sev');});
+  document.getElementById('p-ro').addEventListener('click',function(){applyPreset('ro');});
+  document.getElementById('dlBtn').addEventListener('click',downloadCSV);
+  state.scrubYear=1;
+  applyPreset('base');
+});
+</script>
+</body>
+</html>
