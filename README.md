@@ -10,7 +10,7 @@ committee can change every rule and watch the consequence over fifty years or mo
   A family saves together and pays a small monthly fee. When a child marries, the
   fund lends what it can afford that year, on the wedding date, and the loan grows
   toward the full amount as the fund matures and reserves build.
-- **Model B, the Queue Scheme (Contract Savings Loan Scheme).** Per child, rationed
+- **Model B, Gemach Hamerkazi (the central fund).** Per child, rationed
   by time. A family saves for each child and joins a waiting list; when its turn
   comes it receives the full interest-free loan, and its repayments help the next
   family in line. Once mature it largely funds itself.
@@ -20,8 +20,8 @@ committee can change every rule and watch the consequence over fifty years or mo
 ```
 /                landing page and side-by-side comparison
 /model-a/        Gemach Hakehiloh simulator (English)
-/model-b/        Queue Scheme simulator (English)
-/model-b/he/     Queue Scheme simulator (Hebrew, right to left)
+/model-b/        Gemach Hamerkazi simulator (English)
+/model-b/he/     Gemach Hamerkazi simulator (Hebrew, right to left)
 /he.html         redirect stub -> /model-b/he/ (kept: an earlier reviewer holds this link)
 ```
 
@@ -31,8 +31,8 @@ committee can change every rule and watch the consequence over fifty years or mo
 index.html            Landing and comparison page. Markup only.
 he.html               Redirect stub to /model-b/he/. Do not delete.
 model-a/index.html    Model A page (English). Markup only.
-model-b/index.html    Model B page (English). Markup only.
-model-b/he/index.html Model B page (Hebrew, RTL). Markup only.
+model-b/index.html    Gemach Hamerkazi page (English). Markup only.
+model-b/he/index.html Gemach Hamerkazi page (Hebrew, RTL). Markup only.
 
 css/app.css           One stylesheet for every page, both directions.
 
@@ -40,7 +40,7 @@ js/engine-a.js        Model A simulation. No DOM, no language.
 js/engine-b.js        Model B simulation. No DOM, no language.
 js/seed-500.js        Household seed data for Model A.
 js/charts.js          SVG chart renderer.
-js/cycle.js           Model B money-cycle diagram.
+js/cycle.js           Gemach Hamerkazi money-cycle diagram.
 js/format.js          Number, currency and duration formatting.
 js/strings-a-en.js    Model A English runtime strings.
 js/strings-en.js      Model B English runtime strings.
@@ -50,7 +50,7 @@ js/app.js             Model B state, presets, wiring, rendering.
 js/compare.js         Landing page: runs both engines on shared inputs.
 
 tests/engine-a.test.js  Model A regression checks (49).
-tests/engine.test.js    Model B regression checks (25).
+tests/engine.test.js    Gemach Hamerkazi regression checks (25).
 CNAME                 Custom domain. Do not delete.
 ```
 
