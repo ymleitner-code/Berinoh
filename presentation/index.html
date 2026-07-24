@@ -32,7 +32,7 @@ body{font-family:var(--body);background:#0f1626;color:var(--ink);
 .slide{position:absolute;inset:0;display:none;
   grid-template-columns:minmax(0,1fr) clamp(300px,29vw,384px);grid-template-rows:auto minmax(0,1fr);
   column-gap:clamp(20px,2.6vw,40px);
-  padding:clamp(14px,2.6vw,38px) clamp(18px,3.2vw,52px) clamp(78px,9vh,94px);opacity:0;
+  padding:clamp(14px,2.6vw,38px) clamp(18px,3.2vw,52px) clamp(50px,6vh,64px);opacity:0;
   transition:opacity .5s ease}
 .slide.active{display:grid;opacity:1}
 .slide.enter{animation:rise .55s ease both}
@@ -81,13 +81,13 @@ body{font-family:var(--body);background:#0f1626;color:var(--ink);
 .chip.a{color:var(--a);border-color:#e6bccb} .chip.b{color:var(--b);border-color:#ccc2ef}
 
 /* ---- narration caption ---- */
-.caption{grid-column:2;grid-row:2;align-self:stretch;min-height:0;overflow:auto;
-  display:flex;flex-direction:column;justify-content:center;
-  background:var(--teal-soft);border:1px solid #bcdfd8;border-radius:16px;padding:clamp(16px,1.5vw,26px)}
+.caption{grid-column:2;grid-row:2;align-self:stretch;min-height:0;
+  display:flex;flex-direction:column;
+  background:var(--teal-soft);border:1px solid #bcdfd8;border-radius:16px;padding:clamp(16px,1.5vw,24px)}
 .caption .lbl{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--recyc);margin-bottom:11px;display:flex;align-items:center;gap:7px}
 .caption .lbl .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2.2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
-.caption p{font-size:clamp(16px,1.4vw,20px);line-height:1.5;color:var(--ink);font-weight:600;letter-spacing:-.003em}
+.caption p{font-size:clamp(15px,1.28vw,18px);line-height:1.46;color:var(--ink);font-weight:600;letter-spacing:-.003em;flex:1 1 auto;min-height:0;overflow:auto;margin:0}
 @media(max-width:920px){
   .slide{grid-template-columns:1fr;grid-template-rows:auto auto auto;row-gap:14px}
   .stage{grid-column:1;grid-row:2;grid-template-columns:1fr;overflow:visible}
@@ -98,23 +98,25 @@ body{font-family:var(--body);background:#0f1626;color:var(--ink);
 
 /* ---- control bar ---- */
 #bar{position:fixed;left:0;right:0;bottom:0;z-index:40;
-  background:linear-gradient(to top,rgba(15,22,38,.97),rgba(15,22,38,.92));
-  color:#eaf0f8;padding:10px clamp(12px,3vw,26px);
-  padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
-  display:flex;align-items:center;gap:14px}
-#prog{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.14)}
-#prog i{display:block;height:100%;width:0;background:linear-gradient(to right,var(--teal),var(--amber));transition:width .12s linear}
-.btn{appearance:none;border:0;background:rgba(255,255,255,.08);color:#eaf0f8;cursor:pointer;
-  width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
-  transition:background .14s}
-.btn:hover{background:rgba(255,255,255,.18)}
-.btn svg{width:19px;height:19px;fill:currentColor}
-.btn.play{width:48px;height:48px;background:#fff;color:#0f1626}
-.btn.play:hover{background:#dfe7f2}
-.btn.play svg{width:22px;height:22px}
-#bar .meta{font-size:12.5px;color:#aab6c9;min-width:118px}
-#bar .meta b{color:#fff;font-weight:700}
-#bar .grow{flex:1}
+  background:linear-gradient(to top,rgba(15,22,38,.97),rgba(15,22,38,.9));
+  color:#eaf0f8;padding:9px 20px;padding-bottom:calc(9px + env(safe-area-inset-bottom,0px));
+  display:flex;align-items:center;justify-content:center;gap:12px}
+/* player controls, shown inside the narration box */
+#controls{flex:0 0 auto;margin-top:14px;border-top:1px solid #bcdfd8;padding-top:12px}
+#controls #prog{position:static;height:5px;width:100%;background:#cfe6e0;border-radius:3px;overflow:hidden;margin:0 0 12px}
+#controls #prog i{display:block;height:100%;width:0;background:linear-gradient(to right,var(--teal),var(--amber));transition:width .12s linear}
+#controls .cbtns{display:flex;align-items:center;gap:8px}
+#controls .cb{appearance:none;border:1.5px solid #b6ddd5;background:#fff;color:var(--ink);width:38px;height:38px;
+  border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .14s,background .14s}
+#controls .cb:hover{border-color:var(--teal)}
+#controls .cb svg{width:17px;height:17px;fill:currentColor}
+#controls .cb.play{width:46px;height:46px;background:var(--ink);border-color:var(--ink);color:#fff}
+#controls .cb.play:hover{background:#000}
+#controls .cb.play svg{width:20px;height:20px}
+#controls .cmeta{font-size:13px;color:var(--muted);font-weight:700}
+#controls .cmeta b{color:var(--ink)}
+#controls .cb.pages{width:auto;height:36px;border-radius:999px;padding:0 15px;font-family:var(--body);font-weight:700;font-size:13px;margin-inline-start:auto;color:var(--ink-2)}
+#controls .cb.pages:hover{border-color:var(--teal);color:var(--ink)}
 .tbtn{appearance:none;border:1.5px solid rgba(255,255,255,.22);background:transparent;color:#dbe4f0;
   font-family:var(--body);font-weight:700;font-size:12.5px;border-radius:999px;padding:7px 13px;cursor:pointer}
 .tbtn:hover{border-color:#fff;color:#fff}
@@ -1494,16 +1496,20 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 </section>
 </div>
 
-<div id="bar">
+<div id="controls">
   <div id="prog"><i></i></div>
-  <button class="btn" id="prev" title="Back (left arrow)" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7V5z"/></svg></button>
-  <button class="btn play" id="play" title="Play or pause (space)" aria-label="Play or pause"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
-  <button class="btn" id="next" title="Skip (right arrow)" aria-label="Skip forward"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7V5z"/></svg></button>
-  <div class="meta"><b id="mpg">1</b> <span id="mtot">/ 25</span> <span class="hideSm" id="mact"></span></div>
-  <div class="grow"></div>
+  <div class="cbtns">
+    <button class="cb" id="prev" title="Back (left arrow)" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7V5z"/></svg></button>
+    <button class="cb play" id="play" title="Play or pause (space)" aria-label="Play or pause"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    <button class="cb" id="next" title="Skip (right arrow)" aria-label="Skip forward"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7V5z"/></svg></button>
+    <span class="cmeta"><b id="mpg">1</b> <span id="mtot">/ 25</span></span>
+    <button class="cb pages" id="menuBtn" aria-label="All pages">Pages</button>
+  </div>
+</div>
+
+<div id="bar">
   <a class="tbtn linkA" href="https://berinoh.provaris.co.uk/model-a/" target="_blank" rel="noopener">Gemach Hakehiloh &#8599;</a>
   <a class="tbtn linkB" href="https://berinoh.provaris.co.uk/model-b/" target="_blank" rel="noopener">Gemach Hamerkazi &#8599;</a>
-  <button class="tbtn" id="menuBtn">Pages</button>
 </div>
 
 <div id="menu"><div class="menu-card">
@@ -1561,9 +1567,11 @@ window.DECK_AUDIO = window.DECK_AUDIO || {};
     s.classList.add('active');
     void s.offsetWidth; s.classList.add('enter');
     var o = order(); var p = o.indexOf(i); if(p<0) p=0;
-    mpg.textContent = (p+1);
-    mtot.textContent = '/ ' + o.length;
-    mact.textContent = actName(s);
+    if(mpg) mpg.textContent = (p+1);
+    if(mtot) mtot.textContent = '/ ' + o.length;
+    if(mact) mact.textContent = actName(s);
+    var _cap = s.querySelector('.caption');
+    if(_cap){ var _c = document.getElementById('controls'); if(_c) _cap.appendChild(_c); }
     highlightMenu();
     applyCaps();
     startTiming();
