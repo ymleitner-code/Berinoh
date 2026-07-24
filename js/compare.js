@@ -69,7 +69,7 @@
       title: 'Share of families served over time',
       why: 'The one measure both schemes share. Model A serves nearly everyone who becomes due, on time. Model B serves whoever the queue has reached, in full but after a wait.',
       series: [{ label: 'Gemach Hakehiloh (Model A)', color: '#b8395e', y: covA },
-               { label: 'The Queue (Model B)', color: '#6a55c8', y: Rb.coverage.map(function (v) { return v * 100; }) }],
+               { label: 'Gemach Hamerkazi (Model B)', color: '#6a55c8', y: Rb.coverage.map(function (v) { return v * 100; }) }],
       yFmt: function (v) { return v.toFixed(0) + '%'; }, yTip: function (v) { return v.toFixed(1) + '%'; }
     });
   }
