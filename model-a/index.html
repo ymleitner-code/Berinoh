@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemach Hakehiloh - the community wedding fund, interactive model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<div class="shell">
+
+<header class="masthead">
+  <div class="eyebrow">Prepared for the Berinoh committee <span>&middot; July 2026</span></div>
+  <h1>Gemach Hakehiloh:<br>growing a wedding loan as the <em>community</em> grows</h1>
+  <p class="standfirst">Families save a small amount each month into a family pot and pay a small fee that builds the fund's reserves. When a wedding comes, the fund lends as much as it can afford that year while holding its capital and cash safety levels, and the loan grows toward the full amount as the fund matures. This page lets you change every rule of the scheme and watch what happens over the next fifty years or more.</p>
+  <div class="rule"></div>
+</header>
+
+<section class="block">
+  <div class="block-head">
+    <h2>One family's journey</h2>
+    <p>The same pot does two jobs: it is the family's own savings, and at the end it closes the tail of the family's last loan.</p>
+  </div>
+  <div class="journey" id="journey"></div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <h2>Test the scheme yourself</h2>
+    <p>Start with a ready-made scenario, then change anything you like. Every chart below updates as you type.</p>
+  </div>
+  <div class="presets">
+    <button class="pbtn" id="p-base" type="button">Base case</button>
+    <button class="pbtn" id="p-caut" type="button">Cautious</button>
+    <button class="pbtn" id="p-sev" type="button">Severe stress</button>
+    <button class="pbtn" id="p-ro" type="button">Run-off</button>
+  </div>
+  <p class="preset-note" id="presetNote"></p>
+
+  <div class="ctrl-grid">
+    <div class="ctrl c1">
+      <h4>WHAT FAMILIES PAY</h4>
+      <div class="f"><label for="save">Monthly saving into the pot (&pound;)</label><input type="number" id="save" value="135" step="5" min="0"></div>
+      <div class="f"><label for="fee">Monthly fee, never returned (&pound;)</label><input type="number" id="fee" value="15" step="1" min="0"><div class="hint">Eight parts of this build the fund's reserves, three cover running costs.</div></div>
+      <div class="f"><label for="potCap">Pot cap, lifetime (&pound;)</label><input type="number" id="potCap" value="40000" step="1000" min="0"><div class="hint">Saving stops once the pot reaches this.</div></div>
+    </div>
+    <div class="ctrl c2">
+      <h4>THE LOAN AND HOW IT GROWS</h4>
+      <div class="f"><label for="loanMax">Full loan, the ceiling (&pound;)</label><input type="number" id="loanMax" value="40000" step="1000" min="1000"></div>
+      <div class="f"><label for="amountRampStart">Starting loan (&pound;)</label><input type="number" id="amountRampStart" value="10000" step="1000" min="0"><div class="hint">The loan begins here and only ever rises.</div></div>
+      <div class="f"><label for="rampStep">Raised each year by (&pound;)</label><input type="number" id="rampStep" value="2500" step="500" min="500"><div class="hint">The step up, taken only in a year the fund can hold the higher level.</div></div>
+      <div class="f"><label for="repayRatePct">Repaid each month (% of the loan)</label><input type="number" id="repayRatePct" value="1" step="0.1" min="0.1"></div>
+      <div class="f"><label for="repayCap">Collective family cap (&pound; a month)</label><input type="number" id="repayCap" value="1200" step="100" min="50"></div>
+    </div>
+    <div class="ctrl c3">
+      <h4>STARTING UP AND RESERVES</h4>
+      <div class="f"><label for="lendingStartYears">Lending begins after (years)</label><input type="number" id="lendingStartYears" value="3" step="1" min="0"><div class="hint">Years of collecting before the first loan.</div></div>
+      <div class="f"><label for="setupCostTotal">Set-up costs (&pound; total)</label><input type="number" id="setupCostTotal" value="130000" step="10000" min="0"><div class="hint">Taken from the fees collected; the balance is the start-up capital.</div></div>
+      <div class="f"><label for="startupFundraising">Start-up fundraising (&pound; one-off)</label><input type="number" id="startupFundraising" value="50000" step="10000" min="0"><div class="hint">Founding money raised at the outset; adds to the start-up capital so the fund can open at its floor.</div></div>
+      <div class="f"><label for="capitalMinPct">Capital floor (% of member savings)</label><input type="number" id="capitalMinPct" value="8" step="0.5" min="0"></div>
+      <div class="f"><label for="liquidityMinPct">Liquidity reserve (% of member savings)</label><input type="number" id="liquidityMinPct" value="10" step="0.5" min="0"></div>
+      <div class="f"><label for="cashInterestPct">Interest on cash (% a year)</label><input type="number" id="cashInterestPct" value="0" step="0.5" min="0" max="10"></div>
+      <div class="f"><label for="fundraisingPerYear">Fundraising (&pound; a year)</label><input type="number" id="fundraisingPerYear" value="35000" step="5000" min="0"><div class="hint">Covers the capital shortfall the fee leaves.</div></div>
+      <div class="f"><label for="fixedOverheadPerYear">Fixed overhead (&pound; a year)</label><input type="number" id="fixedOverheadPerYear" value="0" step="10000" min="0"></div>
+    </div>
+    <div class="ctrl c4">
+      <h4>COMMUNITY AND RISK</h4>
+      <div class="f"><label for="marriageAge">Marriage age</label><input type="number" id="marriageAge" value="20" step="1" min="18" max="26"></div>
+      <div class="f"><label for="enrollAnnualPct">Pilot joiners (% of seed a year)</label><input type="number" id="enrollAnnualPct" value="2" step="0.5" min="0"><div class="hint">Established families joining in the early years, held to the 18-year wait.</div></div>
+      <div class="f"><label for="withdrawalAnnualPct">Member withdrawal (% a year)</label><input type="number" id="withdrawalAnnualPct" value="0" step="0.5" min="0" max="20"></div>
+      <div class="f"><label for="badDebtPct">Bad debt (% a year)</label><input type="number" id="badDebtPct" value="0" step="0.5" min="0" max="15"></div>
+      <div class="f"><label for="runOffYear">Close to newcomers after year</label><input type="number" id="runOffYear" value="0" step="1" min="0"><div class="hint">0 means the community keeps growing.</div></div>
+      <div class="hbs" id="hbs"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-head"><h2>Where the scheme stands at the end of the period</h2></div>
+  <div class="stats" id="stats"></div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <h2>The picture that matters</h2>
+    <p>The loan starts small and grows toward the full amount as the fund matures. Everything else here is what makes that possible or puts it at risk.</p>
+  </div>
+  <div class="charts">
+    <div class="chart full tall" id="c-amount"></div>
+    <div class="chart full" id="c-wed"></div>
+    <div class="chart" id="c-cap"></div>
+    <div class="chart" id="c-liq"></div>
+    <div class="chart" id="c-money"></div>
+    <div class="chart" id="c-mem"></div>
+    <div class="chart" id="c-cash"></div>
+    <div class="chart" id="c-cum"></div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="block-head">
+    <h2>What if the community stopped growing?</h2>
+    <p>A committee should always ask this. Close the scheme to newcomers in the controls above and these figures answer it.</p>
+  </div>
+  <div class="ro-grid" id="roGrid"></div>
+</section>
+
+<section class="block">
+  <div class="block-head"><h2>Year by year</h2></div>
+  <div class="tbl-head">
+    <p class="preset-note" style="margin:0">One row for each year of the run.</p>
+    <button class="dl" id="dlBtn" type="button">Download the monthly figures</button>
+  </div>
+  <div class="scroller"><table id="tbl"></table></div>
+</section>
+
+<section class="block">
+  <div class="block-head"><h2>What this model assumes</h2></div>
+  <div class="panel">
+    <ul class="notes">
+      <li>Families save from the month they enrol until their pot reaches its cap, and pay the fee for as long as they are members.</li>
+      <li>Of the fee, eight parts build the fund's reserves and three cover running costs.</li>
+      <li>A wedding is funded only if the family has been a member for eighteen years. The founding cohort, everyone on day one, is exempt.</li>
+      <li>The fund collects for a set number of years before it lends. Set-up costs come out of the fees collected in that time, and the balance is the fund's start-up capital.</li>
+      <li>The loan begins at the starting figure and is lifted one step a year, but only in a year the fund can hold the higher level, so it never falls.</li>
+      <li>Loans are repaid at one per cent of their own amount a month, and a family pays no more than the collective cap a month across all its loans.</li>
+      <li>The tail of a family's last loan is closed by its own pot rather than repaid in cash, and the fund keeps it.</li>
+      <li>Every female wedding starts a new saving household two years later, so the community grows by reproduction; established families also join for the first ten years.</li>
+      <li>Bad debt, withdrawals, overhead, fundraising and interest are steady expected amounts, not random draws, so the run is reproducible.</li>
+      <li>Growth is measured in units, one unit being one saving household. Whether the rates and thresholds set here are realistic is the committee's judgement, not the model's.</li>
+      <li>Every figure here follows from the rules set on this page.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p><b>Gemach Hakehiloh &middot; interactive model.</b> Prepared for the Berinoh committee, July 2026.</p>
+  <p style="margin-top:6px">This model sets out the mechanics of the scheme as described. It is not a recommendation, a forecast, or a substitute for actuarial review. The figures move entirely with the assumptions entered above.</p>
+</footer>
+
+</div>
+<div id="tip" role="status"></div>
+
+<script src="/js/format.js"></script>
+<script src="/js/strings-a-en.js"></script>
+<script src="/js/engine-a.js"></script>
+<script src="/js/charts.js"></script>
+<script src="/js/seed-500.js"></script>
+<script src="/js/app-a.js"></script>
+</body>
+</html>
