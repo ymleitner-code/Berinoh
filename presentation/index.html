@@ -89,10 +89,20 @@ body{font-family:var(--body);background:#0f1626;color:var(--ink);
 @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
 .caption p{font-size:clamp(15px,1.28vw,18px);line-height:1.46;color:var(--ink);font-weight:600;letter-spacing:-.003em;flex:1 1 auto;min-height:0;overflow:auto;margin:0}
 @media(max-width:920px){
-  .slide{grid-template-columns:1fr;grid-template-rows:auto auto auto;row-gap:14px}
-  .stage{grid-column:1;grid-row:2;grid-template-columns:1fr;overflow:visible}
-  .caption{grid-column:1;grid-row:3}
-  .slide.center .figure svg,.figure svg{max-height:40vh}
+  .slide{display:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
+    grid-template-columns:none;grid-template-rows:none;column-gap:0;padding:16px 16px 78px}
+  .slide.active{display:block}
+  .slide.enter{animation:none}
+  .rail{margin-bottom:14px;flex-wrap:wrap}
+  .stage{display:block;overflow:visible;padding:0;min-height:0}
+  .stage .figure{margin-bottom:16px}
+  .stage .figure svg,.slide.center .figure svg{max-height:44vh}
+  .copy,.slide.center .copy{max-width:none}
+  .caption{margin-top:18px;overflow:visible;align-self:auto}
+  .caption p{overflow:visible;min-height:0;flex:0 1 auto}
+  #controls{margin-top:16px}
+  .slide.wide .stage{overflow-x:auto}
+  .mtbl-wrap{max-height:64vh}
 }
 .caption p .said{color:var(--ink)} .caption p .rest{color:var(--muted)}
 
