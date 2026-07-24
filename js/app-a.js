@@ -8,7 +8,7 @@
 
   var DESIGN = {
     save:135, fee:15, potCap:40000, loanMax:40000, amountRampStart:10000, rampStep:2500,
-    repayRatePct:1, repayCap:1200, lendingStartYears:3, setupCostTotal:130000, startupFundraising:50000,
+    repayRatePct:1, repayCap:1200, repayFixed:0, lendingStartYears:3, setupCostTotal:130000, startupFundraising:50000,
     capitalMinPct:8, liquidityMinPct:10, cashInterestPct:0,
     fundraisingPerYear:35000, fixedOverheadPerYear:0, marriageAge:20, enrollAnnualPct:2,
     withdrawalAnnualPct:0, badDebtPct:0, runOffYear:0
@@ -20,7 +20,7 @@
     sev: { horizon:600, v:mix({ badDebtPct:4, withdrawalAnnualPct:3, fixedOverheadPerYear:150000, fundraisingPerYear:0 }) },
     ro:  { horizon:900, v:mix({ runOffYear:20 }) }
   };
-  var IDS = ['save','fee','potCap','loanMax','amountRampStart','rampStep','repayRatePct','repayCap',
+  var IDS = ['save','fee','potCap','loanMax','amountRampStart','rampStep','repayRatePct','repayFixed',
              'lendingStartYears','setupCostTotal','startupFundraising','capitalMinPct','liquidityMinPct','cashInterestPct','fundraisingPerYear','fixedOverheadPerYear',
              'marriageAge','enrollAnnualPct','withdrawalAnnualPct','badDebtPct','runOffYear'];
   var HORIZONS = [300,600,900,1200];
@@ -37,7 +37,7 @@
       save:Math.max(0,num('save')), fee:Math.max(0,num('fee')),
       potCap:Math.max(0,num('potCap')), loanMax:Math.max(1000,num('loanMax')),
       amountRampStart:Math.max(0,num('amountRampStart')), rampStep:Math.max(500,num('rampStep')),
-      repayRatePct:Math.max(0.1,num('repayRatePct')), repayCap:Math.max(50,num('repayCap')),
+      repayRatePct:Math.max(0.1,num('repayRatePct')), repayFixed:Math.max(0,num('repayFixed')), repayCap:1200,
       lendingStartYears:Math.max(0,num('lendingStartYears')),
       setupCostTotal:Math.max(0,num('setupCostTotal')),
       startupFundraising:Math.max(0,num('startupFundraising')),

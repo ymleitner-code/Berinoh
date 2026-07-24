@@ -33,10 +33,11 @@
   <div class="journey" id="journey"></div>
 </section>
 
-<section class="block">
+<div class="applayout">
+<aside class="app-controls">
   <div class="block-head">
     <h2>Test the scheme yourself</h2>
-    <p>Start with a ready-made scenario, then change anything you like. Every chart below updates as you type.</p>
+    <p>Change anything here; the charts update as you type.</p>
   </div>
   <div class="presets">
     <button class="pbtn" id="p-base" type="button">Base case</button>
@@ -58,8 +59,9 @@
       <div class="f"><label for="loanMax">Full loan, the ceiling (&pound;)</label><input type="number" id="loanMax" value="40000" step="1000" min="1000"></div>
       <div class="f"><label for="amountRampStart">Starting loan (&pound;)</label><input type="number" id="amountRampStart" value="10000" step="1000" min="0"><div class="hint">The loan begins here and only ever rises.</div></div>
       <div class="f"><label for="rampStep">Raised each year by (&pound;)</label><input type="number" id="rampStep" value="2500" step="500" min="500"><div class="hint">The step up, taken only in a year the fund can hold the higher level.</div></div>
-      <div class="f"><label for="repayRatePct">Repaid each month (% of the loan)</label><input type="number" id="repayRatePct" value="1" step="0.1" min="0.1"></div>
-      <div class="f"><label for="repayCap">Collective family cap (&pound; a month)</label><input type="number" id="repayCap" value="1200" step="100" min="50"></div>
+      <div class="f"><label for="repayRatePct">Repaid each month (% of the loan)</label><input type="number" id="repayRatePct" value="1" step="0.1" min="0.1"><div class="hint">Raise this above 1% to grow the loan faster; more comes back to lend.</div></div>
+      <div class="f"><label for="repayFixed">Or a fixed repayment (&pound; a month, 0 = use the %)</label><input type="number" id="repayFixed" value="0" step="50" min="0"><div class="hint">A flat amount per loan instead of a percentage.</div></div>
+      <div class="f"><label>Collective family cap</label><div class="locked-val">&pound;1,200 a month, fixed</div></div>
     </div>
     <div class="ctrl c3">
       <h4>STARTING UP AND RESERVES</h4>
@@ -82,7 +84,8 @@
       <div class="hbs" id="hbs"></div>
     </div>
   </div>
-</section>
+</aside>
+<div class="app-out">
 
 <section class="block">
   <div class="block-head"><h2>Where the scheme stands at the end of the period</h2></div>
@@ -122,6 +125,9 @@
   </div>
   <div class="scroller"><table id="tbl"></table></div>
 </section>
+
+</div><!-- app-out -->
+</div><!-- applayout -->
 
 <section class="block">
   <div class="block-head"><h2>What this model assumes</h2></div>

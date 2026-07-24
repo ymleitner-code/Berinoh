@@ -157,7 +157,7 @@
   /* ---- defaults ----------------------------------------------------------- */
   var DEFAULTS = {
     save: 135, fee: 15, feeCapitalParts: 8, feeOverheadParts: 3,
-    potCap: 40000, loanMax: 40000, repayRatePct: 1, repayCap: 1200,
+    potCap: 40000, loanMax: 40000, repayRatePct: 1, repayCap: 1200, repayFixed: 0,
     marriageAge: 20, marriageAgeSd: 1.25, memberYears: 18,
     capitalMinPct: 8, liquidityMinPct: 10,
     cashInterestPct: 0,        /* annual interest earned on cash in the bank, 0 to 10 */
@@ -353,7 +353,8 @@
             if (hz > 0) { var loss = ln.rem * hz; ln.rem -= loss; loansOut -= loss;
                           capital -= loss;                 /* equity absorbs the write-off */
                           cumLoss += loss; if (recP > 0) recArr[m + lag] += recP * loss; }
-            var inst = Math.min(repRate * ln.orig, ln.rem, budget);
+            var perLoan = (P.repayFixed > 0) ? P.repayFixed : repRate * ln.orig;
+            var inst = Math.min(perLoan, ln.rem, budget);
             if (inst > 1e-9) { cash += inst; ln.rem -= inst; loansOut -= inst; repayIn += inst; budget -= inst; }
           }
           /* 4. the tail of a family's borrowing is discharged by its pot, once it
