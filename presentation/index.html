@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Two ways to fund our community's weddings - Berinoh committee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* =============================================================================
+   Berinoh committee presentation. Self-contained, one file.
+   Design system shared with the simulators. No em dashes. No verdicts.
+   Voice-ready: drop per-page clips into window.DECK_AUDIO to add narration audio.
+   ============================================================================= */
+:root{
+  --ink:#16233a; --ink-2:#3c4a63; --muted:#6b7a92;
+  --paper:#eef2f7; --card:#fff; --line:#dae2ec; --line-2:#c6d2e0;
+  --amber:#dd7d33; --teal:#10897c; --a:#b8395e; --b:#6a55c8; --gold:#c08f2a;
+  --a-soft:#fbeef2; --b-soft:#efecfa; --teal-soft:#e4f3f1; --amber-soft:#fbeee1;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Sans 3",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--body);background:#0f1626;color:var(--ink);
+  -webkit-font-smoothing:antialiased;overflow:hidden}
+
+/* ---- deck frame ---- */
+#deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(120% 120% at 50% 0%,#f4f7fb 0%,var(--paper) 55%,#e6ebf3 100%)}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;
+  padding:clamp(16px,3vw,48px) clamp(18px,4vw,64px) clamp(80px,10vh,100px);opacity:0;
+  transition:opacity .5s ease}
+.slide.active{display:flex;opacity:1}
+.slide.enter{animation:rise .55s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.slide,.slide.enter{transition:none;animation:none}}
+
+/* ---- top rail ---- */
+.rail{display:flex;align-items:center;gap:12px;flex:0 0 auto;
+  font-size:15px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.rail .act{color:var(--teal)}
+.rail .sep{color:var(--line-2)}
+.rail .pg{color:var(--muted)}
+.rail .core{margin-inline-start:auto;display:none;align-items:center;gap:6px;color:var(--gold);
+  text-transform:none;letter-spacing:0;font-size:12.5px}
+.slide[data-core] .rail .core{display:inline-flex}
+.rail .core svg{width:15px;height:15px;fill:var(--gold)}
+
+/* ---- stage: figure + copy ---- */
+.stage{flex:1 1 auto;display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(20px,3.6vw,58px);
+  align-items:center;min-height:0;padding:clamp(6px,1.6vh,22px) 0}
+.slide.center .stage{grid-template-columns:1fr;max-width:1040px;margin:0 auto;text-align:center;justify-items:center}
+.figure{min-width:0;display:flex;align-items:center;justify-content:center}
+.slide.center .figure{width:100%}
+.slide.center .figure svg{max-height:22vh}
+.figure svg{width:100%;height:auto;max-height:45vh;overflow:visible;display:block}
+.copy{min-width:0;max-width:56ch}
+.slide.center .copy{max-width:74ch}
+.slide.center .copy h2{font-size:clamp(24px,3.4vw,42px)}
+.eyebrow{font-family:var(--body);font-size:13px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;margin-bottom:12px;display:inline-block}
+.eyebrow.a{color:var(--a)} .eyebrow.b{color:var(--b)} .eyebrow.t{color:var(--teal)} .eyebrow.g{color:var(--gold)}
+.copy h2{font-family:var(--display);font-weight:700;line-height:1.05;letter-spacing:-.015em;
+  font-size:clamp(27px,3.9vw,50px);color:var(--ink)}
+.copy h2 em{font-style:italic;color:var(--teal)}
+.copy .lead{font-size:clamp(16px,1.55vw,20px);color:var(--ink-2);margin-top:16px;line-height:1.5;max-width:60ch}
+.slide.center .copy .lead{margin-inline:auto}
+.points{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.points li{position:relative;padding-inline-start:20px;font-size:clamp(14.5px,1.32vw,17px);
+  color:var(--ink-2);line-height:1.45}
+.points li::before{content:"";position:absolute;inset-inline-start:0;top:.62em;width:8px;height:8px;
+  border-radius:50%;background:var(--teal)}
+.points li.a::before{background:var(--a)} .points li.b::before{background:var(--b)}
+.points li b{color:var(--ink);font-weight:700}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font-size:13px;font-weight:700;border-radius:999px;padding:5px 13px;border:1.5px solid var(--line-2);color:var(--ink-2);background:#fff}
+.chip.a{color:var(--a);border-color:#e6bccb} .chip.b{color:var(--b);border-color:#ccc2ef}
+
+/* ---- narration caption ---- */
+.caption{flex:0 0 auto;max-width:1240px;width:100%;margin:0 auto;
+  padding:clamp(10px,1.5vh,16px) 4px 2px;border-top:2px solid var(--line-2)}
+.caption .lbl{font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.caption .lbl .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.caption p{font-size:clamp(17px,1.72vw,22px);line-height:1.42;color:var(--ink);max-width:112ch;font-weight:600;letter-spacing:-.005em}
+.caption p .said{color:var(--ink)} .caption p .rest{color:var(--muted)}
+
+/* ---- control bar ---- */
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:linear-gradient(to top,rgba(15,22,38,.97),rgba(15,22,38,.92));
+  color:#eaf0f8;padding:10px clamp(12px,3vw,26px);
+  padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  display:flex;align-items:center;gap:14px}
+#prog{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.14)}
+#prog i{display:block;height:100%;width:0;background:linear-gradient(to right,var(--teal),var(--amber));transition:width .12s linear}
+.btn{appearance:none;border:0;background:rgba(255,255,255,.08);color:#eaf0f8;cursor:pointer;
+  width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  transition:background .14s}
+.btn:hover{background:rgba(255,255,255,.18)}
+.btn svg{width:19px;height:19px;fill:currentColor}
+.btn.play{width:48px;height:48px;background:#fff;color:#0f1626}
+.btn.play:hover{background:#dfe7f2}
+.btn.play svg{width:22px;height:22px}
+#bar .meta{font-size:12.5px;color:#aab6c9;min-width:118px}
+#bar .meta b{color:#fff;font-weight:700}
+#bar .grow{flex:1}
+.tbtn{appearance:none;border:1.5px solid rgba(255,255,255,.22);background:transparent;color:#dbe4f0;
+  font-family:var(--body);font-weight:700;font-size:12.5px;border-radius:999px;padding:7px 13px;cursor:pointer}
+.tbtn:hover{border-color:#fff;color:#fff}
+.tbtn.on{background:var(--gold);border-color:var(--gold);color:#231a05}
+@media(max-width:640px){#bar .hideSm{display:none}#bar .meta{min-width:0}}
+
+/* ---- page menu ---- */
+#menu{position:fixed;inset:0;z-index:60;background:rgba(15,22,38,.72);backdrop-filter:blur(3px);
+  display:none;align-items:center;justify-content:center;padding:20px}
+#menu.open{display:flex}
+.menu-card{background:var(--card);border-radius:16px;max-width:760px;width:100%;max-height:82vh;overflow:auto;
+  padding:24px 26px;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.menu-card h3{font-family:var(--display);font-size:22px;margin-bottom:4px}
+.menu-card .sub{font-size:13.5px;color:var(--muted);margin-bottom:16px}
+.mlist{list-style:none;display:flex;flex-direction:column;gap:2px}
+.mlist li{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:9px;cursor:pointer;font-size:14.5px}
+.mlist li:hover{background:var(--paper)}
+.mlist li .n{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:700;font-size:12.5px;width:22px}
+.mlist li .t{color:var(--ink);font-weight:600}
+.mlist li .ac{margin-inline-start:auto;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.mlist li.iscore .t::after{content:" \2605";color:var(--gold)}
+.mlist li.on{background:var(--ink);}
+.mlist li.on .t,.mlist li.on .n,.mlist li.on .ac{color:#fff}
+.mclose{float:right;border:0;background:var(--paper);border-radius:8px;width:34px;height:34px;cursor:pointer;font-size:18px;color:var(--ink-2)}
+
+/* generic svg helpers */
+svg .ink{fill:var(--ink)} svg .ink2{fill:var(--ink-2)} svg .mut{fill:var(--muted)}
+svg .fa{fill:var(--a)} svg .fb{fill:var(--b)} svg .ft{fill:var(--teal)} svg .fam{fill:var(--amber)}
+svg .card{fill:#fff;stroke:var(--line-2);stroke-width:1.5}
+svg .sa{stroke:var(--a)} svg .sb{stroke:var(--b)} svg .st{stroke:var(--teal)} svg .sam{stroke:var(--amber)}
+svg text{font-family:var(--body)}
+svg .h{font-family:var(--display);font-weight:700}
+svg .lblT{font-size:15.5px;font-weight:700;fill:var(--ink)}
+svg .lblS{font-size:14px;fill:var(--muted)}
+svg .figttl{font-family:var(--display);font-weight:700;font-size:21px}
+svg .figsub{font-size:15.5px;fill:var(--muted)}
+svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
+.dash{stroke-dasharray:3 7;stroke-linecap:round}
+.flow{fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* wide comparison-table layout */
+.slide.wide .stage{display:block;overflow:auto;align-self:start}
+.slide.wide .cmp-head{margin-bottom:6px}
+.slide.wide .cmp-head .lead{margin-top:8px}
+.cmp{width:100%;border-collapse:collapse;font-size:clamp(14px,1.42vw,18px);margin-top:8px}
+.cmp thead th{font-family:var(--display);font-weight:700;font-size:clamp(16px,1.7vw,22px);
+  padding:2px 16px 7px;text-align:start;border-bottom:2px solid var(--line-2)}
+.cmp thead th.h-dim{font-family:var(--body);font-size:12.5px;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);vertical-align:bottom}
+.cmp thead th.a{color:var(--a)} .cmp thead th.b{color:var(--b)}
+.cmp td{padding:6px 16px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.3;color:var(--ink-2)}
+.cmp td.dim{color:var(--ink);font-weight:700;width:20%}
+.cmp tbody tr:nth-child(even){background:#f6f8fb}
+.cmp .ca{border-inline-start:3px solid var(--a-soft)}
+.cmp .cb{border-inline-start:3px solid var(--b-soft)}
+
+/* narration hidden */
+.caption.hide{display:none}
+
+/* month-by-month table */
+.mtbl-wrap{overflow-y:auto;max-height:36vh;border:1px solid var(--line);border-radius:10px;margin-top:10px}
+.mtbl{width:100%;border-collapse:collapse;font-size:clamp(12.5px,1.12vw,15px);font-variant-numeric:tabular-nums}
+.mtbl thead th{position:sticky;top:0;z-index:1;background:var(--ink);color:#fff;font-family:var(--body);
+  font-weight:700;font-size:12.5px;padding:9px 12px;text-align:right;white-space:nowrap}
+.mtbl thead th:first-child,.mtbl thead th:nth-child(2){text-align:center}
+.mtbl td{padding:5px 12px;text-align:right;border-bottom:1px solid #eef2f7;color:var(--ink-2)}
+.mtbl td.mn{text-align:center;color:var(--muted);font-weight:700}
+.mtbl tr.yb td{border-top:2px solid var(--line-2)}
+.mtbl tbody tr:hover{background:#eef4fb}
+</style>
+</head>
+<body>
+
+<div id="deck">
+
+<!-- ============ PAGE 1 - COVER ============ -->
+<section class="slide center" data-actname="Opening" data-title="Cover and how this works" data-seconds="45">
+  <div class="rail"><span class="act">Berinoh committee</span><span class="sep">/</span><span class="pg">Page 1 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 640 300" role="img" aria-label="Two paths meeting under a wedding canopy">
+      <g fill="none" stroke-width="2.5" stroke-linecap="round">
+        <path d="M70 250 C 170 250 190 120 320 120" stroke="#b8395e" opacity=".85"/>
+        <path d="M570 250 C 470 250 450 120 320 120" stroke="#6a55c8" opacity=".85"/>
+        <path class="dash" d="M70 250 C 170 250 190 120 320 120" stroke="#b8395e" opacity=".35"/>
+      </g>
+      <circle cx="70" cy="250" r="8" class="fa"/><circle cx="570" cy="250" r="8" class="fb"/>
+      <!-- canopy -->
+      <g transform="translate(320 120)">
+        <line x1="-52" y1="-6" x2="52" y2="-6" stroke="#16233a" stroke-width="3" stroke-linecap="round"/>
+        <line x1="-46" y1="-6" x2="-46" y2="46" stroke="#16233a" stroke-width="2.5"/>
+        <line x1="46" y1="-6" x2="46" y2="46" stroke="#16233a" stroke-width="2.5"/>
+        <line x1="-18" y1="-6" x2="-18" y2="30" stroke="#16233a" stroke-width="2"/>
+        <line x1="18" y1="-6" x2="18" y2="30" stroke="#16233a" stroke-width="2"/>
+        <path d="M-56 -6 Q 0 -30 56 -6" fill="none" stroke="#c08f2a" stroke-width="3"/>
+        <circle cx="0" cy="-20" r="3.5" class="fam"/>
+      </g>
+      <text x="70" y="282" text-anchor="middle" class="lblT" fill="#b8395e">Gemach Hakehiloh</text>
+      <text x="570" y="282" text-anchor="middle" class="lblT" fill="#6a55c8">Gemach Hamerkazi</text>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow t">A community wedding fund</span>
+    <h2>Two ways to fund our community's <em>weddings</em></h2>
+    <p class="lead">Prepared for the Berinoh committee. It runs on its own. Play and pause as you like, step back or skip with the arrows, and open Pages to jump anywhere.</p>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Welcome. This is a short walk through two ways our community could fund its weddings, prepared for the committee. It runs on its own. Use play and pause whenever you like, step back or skip ahead with the arrows, and open Pages to jump anywhere.</p></div>
+</section>
+
+<!-- ============ PAGE 2 - THE QUESTION ============ -->
+<section class="slide" data-actname="Opening" data-title="The question the committee is weighing" data-seconds="120">
+  <div class="rail"><span class="act">Act 1 - Opening</span><span class="sep">/</span><span class="pg">Page 2 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 520 420" role="img" aria-label="A fixed wedding date with cost building behind it">
+      <!-- rising cost bars behind -->
+      <g>
+        <rect x="70" y="250" width="46" height="90" rx="4" fill="#f4d9c4"/>
+        <rect x="128" y="205" width="46" height="135" rx="4" fill="#eec19f"/>
+        <rect x="186" y="150" width="46" height="190" rx="4" fill="#e5a877"/>
+        <rect x="244" y="96" width="46" height="244" rx="4" fill="#dd7d33"/>
+      </g>
+      <text x="82" y="360" class="lblS">save</text><text x="256" y="360" class="lblS" fill="#b45f1a">the day</text>
+      <!-- calendar card fixed -->
+      <g transform="translate(300 70)">
+        <rect x="0" y="0" width="170" height="150" rx="12" class="card"/>
+        <rect x="0" y="0" width="170" height="38" rx="12" fill="#16233a"/>
+        <rect x="0" y="20" width="170" height="18" fill="#16233a"/>
+        <circle cx="34" cy="6" r="6" fill="#16233a"/><circle cx="136" cy="6" r="6" fill="#16233a"/>
+        <text x="85" y="25" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">THE WEDDING</text>
+        <text x="85" y="98" text-anchor="middle" class="big" font-size="52">18</text>
+        <text x="85" y="128" text-anchor="middle" class="lblS">a date that cannot move</text>
+      </g>
+      <path class="flow" d="M300 145 L 292 145" stroke="#16233a" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow t">The question</span>
+    <h2>A day that cannot move, a cost that cannot be halved</h2>
+    <p class="lead">When the wedding comes, the money has to be there. A community fund exists to carry that weight together.</p>
+    <ul class="points">
+      <li>The committee's question is not <b>whether</b> to help, but <b>how to share the load</b>.</li>
+      <li>Two honest designs are on the table, built on <b>opposite promises</b>.</li>
+      <li>They ask families to trust in <b>opposite ways</b>.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>A wedding has a date that cannot move, and a cost that cannot be halved. When the day comes, the money has to be there. A community fund exists to carry that weight together. The question in front of the committee is not whether to help, but how to share the load, and two honest designs are on the table. They are built on opposite promises, and they ask families to trust in opposite ways.</p></div>
+</section>
+
+<!-- ============ PAGE 3 - MEET THE TWO ============ -->
+<section class="slide" data-actname="A family's view" data-title="Meet the two schemes" data-seconds="90">
+  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 3 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 540 420" role="img" aria-label="Gemach Hakehiloh grows the amount; Gemach Hamerkazi makes you wait">
+      <!-- A: growing amount -->
+      <g transform="translate(30 40)">
+        <text x="0" y="0" class="lblT" fill="#b8395e">Gemach Hakehiloh</text>
+        <text x="0" y="18" class="lblS">grows the amount</text>
+        <g fill="none" stroke="#b8395e" stroke-width="2.5" stroke-linecap="round">
+          <path d="M8 150 L 44 150 L 44 120 L 80 120 L 80 84 L 116 84 L 116 44 L 152 44"/>
+        </g>
+        <circle cx="8" cy="150" r="5" class="fa"/><circle cx="152" cy="44" r="5" class="fa"/>
+        <text x="150" y="34" text-anchor="end" class="lblS" fill="#b8395e">full sum</text>
+        <text x="8" y="170" class="lblS">on the day, every time</text>
+      </g>
+      <line x1="270" y1="30" x2="270" y2="230" stroke="#dae2ec" stroke-width="1.5"/>
+      <!-- B: full amount, wait -->
+      <g transform="translate(310 40)">
+        <text x="0" y="0" class="lblT" fill="#6a55c8">Gemach Hamerkazi</text>
+        <text x="0" y="18" class="lblS">full amount, after a wait</text>
+        <g>
+          <circle cx="12" cy="70" r="7" class="fb" opacity=".35"/>
+          <circle cx="40" cy="70" r="7" class="fb" opacity=".5"/>
+          <circle cx="68" cy="70" r="7" class="fb" opacity=".7"/>
+          <circle cx="96" cy="70" r="7" class="fb"/>
+          <path class="flow" d="M112 70 L 150 70" stroke="#6a55c8" stroke-width="2.5"/>
+          <path d="M150 70 l -8 -5 v10 z" class="fb"/>
+        </g>
+        <text x="12" y="100" class="lblS">take your place in line</text>
+        <rect x="8" y="120" width="150" height="46" rx="8" fill="#efecfa" stroke="#ccc2ef"/>
+        <text x="83" y="150" text-anchor="middle" class="big" font-size="22" fill="#6a55c8">£40,000</text>
+        <text x="83" y="186" text-anchor="middle" class="lblS">the same for everyone</text>
+      </g>
+      <!-- both meet -->
+      <g transform="translate(270 300)">
+        <text x="0" y="0" text-anchor="middle" class="lblS">both paths end at the same chuppah</text>
+        <line x1="-30" y1="-40" x2="0" y2="-70" stroke="#16233a" stroke-width="2"/>
+        <line x1="30" y1="-40" x2="0" y2="-70" stroke="#16233a" stroke-width="2"/>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow t">In one breath each</span>
+    <h2>Gemach Hakehiloh, and Gemach Hamerkazi</h2>
+    <ul class="points">
+      <li class="a"><b>Gemach Hakehiloh.</b> A family saves together. When a child marries, the fund lends what it can afford that year, on the day, and the amount grows over time toward the full sum.</li>
+      <li class="b"><b>Gemach Hamerkazi.</b> You save for each child and take a place in line. When your turn comes, you receive the full loan.</li>
+      <li>One <b>grows the amount</b>. The other <b>makes you wait for it</b>.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Here are the two, in one breath each. The first, Gemach Hakehiloh, works per family. A family saves together, and when a child marries the fund lends what it can afford that year, on the day, with the amount growing over time toward the full sum. The second, Gemach Hamerkazi, is one pool the whole community shares. You save for each child and take a place in line, and when your turn comes you receive the full loan. One grows the amount. The other makes you wait for it.</p></div>
+</section>
+
+<!-- ============ PAGE 4 - INSIDE MODEL A ============ -->
+<section class="slide" data-actname="A family's view" data-title="A family inside Gemach Hakehiloh" data-seconds="90">
+  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 4 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 540 420" role="img" aria-label="One family pot feeds several weddings, the loan rising over the years">
+      <!-- pot -->
+      <g transform="translate(40 150)">
+        <path d="M0 0 h96 l-10 70 a38 20 0 0 1 -76 0 z" fill="#fbeef2" stroke="#b8395e" stroke-width="2"/>
+        <ellipse cx="48" cy="0" rx="48" ry="12" fill="#fff" stroke="#b8395e" stroke-width="2"/>
+        <text x="48" y="42" text-anchor="middle" class="lblT" fill="#b8395e">family pot</text>
+        <text x="48" y="105" text-anchor="middle" class="lblS">about £150 a month</text>
+      </g>
+      <!-- arrows to weddings -->
+      <g fill="none" stroke="#b8395e" stroke-width="2" stroke-linecap="round" opacity=".8">
+        <path d="M140 150 C 200 120 240 120 300 120"/>
+        <path d="M140 175 C 210 175 250 175 300 175"/>
+        <path d="M140 200 C 200 235 250 235 300 235"/>
+      </g>
+      <!-- staircase of loan sizes -->
+      <g transform="translate(300 70)">
+        <rect x="0" y="70" width="40" height="40" rx="4" fill="#e6bccb"/>
+        <rect x="52" y="46" width="40" height="64" rx="4" fill="#d98da6"/>
+        <rect x="104" y="20" width="40" height="90" rx="4" fill="#b8395e"/>
+        <text x="20" y="126" text-anchor="middle" class="lblS">£10k</text>
+        <text x="72" y="126" text-anchor="middle" class="lblS">rising</text>
+        <text x="124" y="126" text-anchor="middle" class="lblS" fill="#b8395e">£40k</text>
+        <text x="0" y="8" class="lblS">the loan climbs over the years</text>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow a">Inside Gemach Hakehiloh</span>
+    <h2>The day is always covered</h2>
+    <p class="lead">You pay about a hundred and fifty pounds a month as a family, and that is the same whether you have one child or ten.</p>
+    <ul class="points">
+      <li class="a">On each wedding date, <b>the money is there</b>.</li>
+      <li class="a">Early on the loan is smaller; it <b>climbs year by year</b> as the fund matures.</li>
+      <li class="a">A large family is <b>carried generously</b>; a small family is close to saving for itself.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Step inside Gemach Hakehiloh as a family. You pay about a hundred and fifty pounds a month, and that is the same whether you have one child or ten. On each wedding date, the money is there. In the early years the loan is smaller, and it climbs year by year as the fund matures. A large family is carried generously by the shared pot. A small family is close to simply saving for itself. The promise here is timing. The day is always covered.</p></div>
+</section>
+
+<!-- ============ PAGE 5 - INSIDE MODEL B ============ -->
+<section class="slide" data-actname="A family's view" data-title="A family inside Gemach Hamerkazi" data-seconds="90">
+  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 5 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 540 420" role="img" aria-label="A numbered ticket and a line advancing to the full sum">
+      <!-- ticket -->
+      <g transform="translate(40 60)">
+        <rect x="0" y="0" width="150" height="86" rx="10" fill="#efecfa" stroke="#6a55c8" stroke-width="2"/>
+        <line x1="108" y1="0" x2="108" y2="86" stroke="#6a55c8" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <text x="54" y="30" text-anchor="middle" class="lblS" fill="#6a55c8">YOUR PLACE</text>
+        <text x="54" y="66" text-anchor="middle" class="big" font-size="30" fill="#6a55c8">No.</text>
+        <text x="129" y="48" text-anchor="middle" class="h" font-size="24" fill="#6a55c8">✦</text>
+        <text x="0" y="110" class="lblS">save about £40 a month, for ten years</text>
+      </g>
+      <!-- queue advancing -->
+      <g transform="translate(40 210)">
+        <g fill="#6a55c8">
+          <circle cx="10" cy="10" r="9" opacity=".3"/><circle cx="44" cy="10" r="9" opacity=".45"/>
+          <circle cx="78" cy="10" r="9" opacity=".6"/><circle cx="112" cy="10" r="9" opacity=".8"/>
+          <circle cx="146" cy="10" r="9"/>
+        </g>
+        <path class="flow" d="M164 10 L 250 10" stroke="#6a55c8" stroke-width="2.5"/>
+        <path d="M250 10 l -9 -6 v12 z" class="fb"/>
+        <text x="0" y="40" class="lblS">wait your turn, first in first served</text>
+        <g transform="translate(268 -22)">
+          <rect x="0" y="0" width="150" height="64" rx="10" fill="#6a55c8"/>
+          <text x="75" y="30" text-anchor="middle" class="h" font-size="26" fill="#fff">£40,000</text>
+          <text x="75" y="52" text-anchor="middle" fill="#e7e2fa" font-size="11">the full loan</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow b">Inside Gemach Hamerkazi</span>
+    <h2>The amount is complete from the first turn</h2>
+    <p class="lead">Here you save for each child, about forty pounds a month for ten years, and take a numbered place in the line.</p>
+    <ul class="points">
+      <li class="b">When your turn comes, you receive the <b>full forty thousand pounds</b>, the same for everyone.</li>
+      <li class="b">The promise is the <b>amount</b>, not the timing.</li>
+      <li class="b">What you give in return is <b>patience</b>, because the line can be long.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Now step inside Gemach Hamerkazi. Here you save for each child, about forty pounds a month for ten years, and you take a numbered place in the line. When your turn comes, you receive the full forty thousand pounds, the same amount for everyone. The promise here is the amount. It is complete from the first turn. What you give in return is patience, because the line can be long.</p></div>
+</section>
+
+<!-- ============ PAGE 6 - THE SAME FAMILY, TWO SCHEMES (CORE) ============ -->
+<section class="slide" data-actname="A family's view" data-title="The same family, two schemes" data-seconds="90" data-core>
+  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 6 of 25</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 520 420" role="img" aria-label="A balance weighing certainty of timing against certainty of amount, with a cost by family size table">
+      <!-- balance -->
+      <g transform="translate(260 60)">
+        <line x1="-150" y1="20" x2="150" y2="20" stroke="#16233a" stroke-width="4" stroke-linecap="round"/>
+        <line x1="0" y1="20" x2="0" y2="92" stroke="#16233a" stroke-width="4"/>
+        <path d="M-28 92 h56 l-14 22 h-28 z" fill="#16233a"/>
+        <g transform="translate(-150 20)">
+          <line x1="0" y1="0" x2="-30" y2="34" stroke="#b8395e" stroke-width="1.5"/>
+          <line x1="0" y1="0" x2="30" y2="34" stroke="#b8395e" stroke-width="1.5"/>
+          <rect x="-46" y="34" width="92" height="46" rx="9" fill="#fbeef2" stroke="#b8395e" stroke-width="2"/>
+          <text x="0" y="55" text-anchor="middle" class="lblS" fill="#b8395e">certainty of</text>
+          <text x="0" y="72" text-anchor="middle" class="lblT" fill="#b8395e">timing</text>
+        </g>
+        <g transform="translate(150 20)">
+          <line x1="0" y1="0" x2="-30" y2="34" stroke="#6a55c8" stroke-width="1.5"/>
+          <line x1="0" y1="0" x2="30" y2="34" stroke="#6a55c8" stroke-width="1.5"/>
+          <rect x="-46" y="34" width="92" height="46" rx="9" fill="#efecfa" stroke="#6a55c8" stroke-width="2"/>
+          <text x="0" y="55" text-anchor="middle" class="lblS" fill="#6a55c8">certainty of</text>
+          <text x="0" y="72" text-anchor="middle" class="lblT" fill="#6a55c8">amount</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow t">The trade you will feel most</span>
+    <h2>Neither is better. They hand you a <em>different</em> certainty</h2>
+    <table style="border-collapse:collapse;margin-top:8px;font-size:15px;width:100%;max-width:440px">
+      <thead><tr>
+        <th style="text-align:left;padding:7px 8px;border-bottom:2px solid var(--line-2);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Never returned</th>
+        <th style="text-align:right;padding:7px 8px;border-bottom:2px solid var(--line-2);font-size:12px;color:var(--a)">1 child</th>
+        <th style="text-align:right;padding:7px 8px;border-bottom:2px solid var(--line-2);font-size:12px;color:var(--a)">4</th>
+        <th style="text-align:right;padding:7px 8px;border-bottom:2px solid var(--line-2);font-size:12px;color:var(--a)">10</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="padding:7px 8px;color:var(--ink-2)">Gemach Hakehiloh, flat fee</td><td style="text-align:right;padding:7px 8px">~£6k</td><td style="text-align:right;padding:7px 8px">~£6k</td><td style="text-align:right;padding:7px 8px">~£6k</td></tr>
+        <tr><td style="padding:7px 8px;color:var(--ink-2)">Gemach Hamerkazi, per child</td><td style="text-align:right;padding:7px 8px">£2.4k</td><td style="text-align:right;padding:7px 8px">£9.6k</td><td style="text-align:right;padding:7px 8px">£24k</td></tr>
+        <tr><td style="padding:6px 8px;font-weight:700">Cheaper for the family</td><td style="text-align:right;padding:6px 8px;color:var(--b);font-weight:700">Merkazi</td><td style="text-align:right;padding:6px 8px;color:var(--muted);font-weight:700">even</td><td style="text-align:right;padding:6px 8px;color:var(--a);font-weight:700">Kehiloh</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>This is the trade the committee will feel most. One fund is per family, the other per child. One gives you certainty of timing, the other certainty of amount. For a large family Gemach Hakehiloh is far cheaper, because the fee is flat. For a family with one child Gemach Hamerkazi can cost less, because you only pay for the one. Neither is better in the abstract. They simply hand the family a different kind of certainty, and a different bill.</p></div>
+</section>
+
+<!-- ============ PAGE 7 - MODEL A MECHANICS (CORE) ============ -->
+<section class="slide" data-actname="The mechanics" data-title="Gemach Hakehiloh, how the money moves" data-seconds="120" data-core>
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 7 of 25</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 560 400" role="img" aria-label="Families save into the fund, the fund lends at weddings, repayments return to the fund">
+      <!-- three nodes -->
+      <g>
+        <rect x="20" y="150" width="130" height="86" rx="12" class="card"/>
+        <text x="85" y="185" text-anchor="middle" class="lblT">Saving families</text>
+        <text x="85" y="206" text-anchor="middle" class="lblS">pot, up to £40k</text>
+        <text x="85" y="223" text-anchor="middle" class="lblS">+ a small fee</text>
+
+        <rect x="215" y="150" width="130" height="86" rx="12" fill="#fbeef2" stroke="#b8395e" stroke-width="2"/>
+        <text x="280" y="182" text-anchor="middle" class="lblT" fill="#b8395e">The fund</text>
+        <text x="280" y="203" text-anchor="middle" class="lblS">reserves + cash</text>
+        <text x="280" y="220" text-anchor="middle" class="lblS">holds its floors</text>
+
+        <rect x="410" y="150" width="130" height="86" rx="12" class="card"/>
+        <text x="475" y="185" text-anchor="middle" class="lblT">Wedding loans</text>
+        <text x="475" y="206" text-anchor="middle" class="lblS">on the day</text>
+        <text x="475" y="223" text-anchor="middle" class="lblS">the year's amount</text>
+      </g>
+      <!-- forward arrows -->
+      <g fill="none" stroke="#b8395e" stroke-width="2.5">
+        <path d="M150 178 L 205 178"/><path d="M205 178 l -9 -6 v12 z" class="fb" transform="translate(9 0)"/>
+        <path d="M345 178 L 400 178"/>
+      </g>
+      <path d="M404 178 l -10 -6 v12 z" fill="#b8395e"/>
+      <path d="M200 178 l -10 -6 v12 z" fill="#b8395e"/>
+      <!-- fee split up -->
+      <path class="flow dash" d="M85 150 L 85 96 L 250 96 L 250 148" stroke="#c08f2a" stroke-width="2"/>
+      <text x="150" y="88" class="lblS" fill="#c08f2a">most of the fee builds reserves (8 parts of 11)</text>
+      <!-- repayment arc back -->
+      <path class="flow" d="M475 236 C 475 320 280 330 280 260" stroke="#10897c" stroke-width="2.5"/>
+      <path d="M280 262 l -6 10 h12 z" fill="#10897c"/>
+      <text x="360" y="322" text-anchor="middle" class="lblS" fill="#10897c">repayments, 1% a month, back to the fund</text>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow a">Gemach Hakehiloh, the working parts</span>
+    <h2>The pot, the fee, the gate, the repayment</h2>
+    <ul class="points">
+      <li class="a">A family saves into a <b>pot, capped at £40,000</b>, and pays a small monthly fee that is <b>never returned</b>.</li>
+      <li class="a">Most of the fee <b>builds reserves</b>; a smaller part covers running costs.</li>
+      <li class="a">Borrowing opens after <b>eighteen years</b> of membership; founding families are let in from the start.</li>
+      <li class="a">Loans repay at <b>1% a month</b>, a rate the committee can raise to grow the loan sooner; still capped near <b>£1,200</b> across a family, and the family's own pot closes the tail of its last loan.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>How Gemach Hakehiloh actually moves its money. A family saves into a pot, up to a cap of forty thousand pounds. Alongside it they pay a small monthly fee that is never returned; most of that fee builds the fund's reserves, and a smaller part covers running costs. After eighteen years of membership a family can borrow, though the founding families are let in from the start. Each loan is repaid at one per cent a month, and that rate is a choice the committee can raise: a higher repayment brings the money back faster and lets the loan climb to its full size sooner. Either way, no family pays more than about twelve hundred pounds a month across all its loans at once. At the very end, a family's own pot closes the tail of its last loan.</p></div>
+</section>
+
+<!-- ============ PAGE 8 - MODEL A BALANCE SHEET ============ -->
+<section class="slide" data-actname="The mechanics" data-title="Gemach Hakehiloh, the balance sheet it must hold" data-seconds="120">
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 8 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 540 400" role="img" aria-label="Two safety floors, capital at eight per cent and cash at ten per cent of members savings">
+      <!-- savings bar -->
+      <g transform="translate(70 40)">
+        <text x="0" y="-8" class="lblS">members' savings = the measure</text>
+        <rect x="0" y="0" width="120" height="300" rx="8" fill="#eef2f7" stroke="#dae2ec"/>
+        <!-- capital block 8% at bottom -->
+        <rect x="0" y="276" width="120" height="24" rx="0" fill="#b8395e" opacity=".85"/>
+        <line x1="-10" y1="276" x2="200" y2="276" stroke="#b8395e" stroke-width="2" stroke-dasharray="5 5"/>
+        <text x="210" y="280" class="lblT" fill="#b8395e">capital floor 8%</text>
+        <!-- cash 10% -->
+        <line x1="-10" y1="270" x2="200" y2="270" stroke="#10897c" stroke-width="2" stroke-dasharray="5 5"/>
+        <text x="210" y="262" class="lblT" fill="#10897c">cash reserve 10%</text>
+        <text x="60" y="160" text-anchor="middle" class="lblS" transform="rotate(-90 60 160)">headroom becomes larger loans</text>
+      </g>
+      <!-- timeline strip -->
+      <g transform="translate(70 360)">
+        <line x1="0" y1="0" x2="400" y2="0" stroke="#c6d2e0" stroke-width="2"/>
+        <circle cx="0" cy="0" r="5" class="mut"/><text x="0" y="22" text-anchor="middle" class="lblS">year 0</text>
+        <circle cx="120" cy="0" r="5" class="fa"/><text x="120" y="22" text-anchor="middle" class="lblS" fill="#b8395e">year 3: lending begins</text>
+        <rect x="0" y="-14" width="120" height="10" rx="5" fill="#e6bccb"/>
+        <text x="60" y="-20" text-anchor="middle" class="lblS">collects first</text>
+        <text x="300" y="4" class="lblS">start-up capital ~£150k, then ~£35k/yr fundraising</text>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow a">A regulated fund, not just a pot</span>
+    <h2>Two floors it must hold at all times</h2>
+    <ul class="points">
+      <li class="a"><b>Capital at 8%</b> and <b>cash at 10%</b> of members' savings, because it sits in a credit union frame.</li>
+      <li class="a">It <b>collects for about three years</b> before it lends anything.</li>
+      <li class="a">It opens with a <b>modest start-up capital</b>, in the order of £150,000, once set-up costs are met.</li>
+      <li class="a"><b>Fundraising</b>, around £35,000 a year, keeps it at its floor in the early years.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Because Gemach Hakehiloh sits inside a credit union frame, it has to hold two safety levels at all times: capital at eight per cent of members' savings, and cash at ten per cent. It does not lend on day one. It collects for about three years first, and opens its lending with a modest start-up capital once the set-up costs are met, in the order of a hundred and fifty thousand pounds. Fundraising, in the region of thirty five thousand pounds a year, is what keeps it at its floor in the early years. These two lines are what make it a regulated fund rather than simply a pot of money.</p></div>
+</section>
+
+<!-- ============ PAGE 9 - MODEL B MECHANICS (CORE) ============ -->
+<section class="slide" data-actname="The mechanics" data-title="Gemach Hamerkazi, how the money moves" data-seconds="120" data-core>
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 9 of 25</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 540 400" role="img" aria-label="Four thousand eight hundred splits in two, then a loan of forty thousand repaid over time">
+      <!-- 4800 bar split -->
+      <g transform="translate(30 40)">
+        <text x="0" y="-8" class="lblS">£40 a month for 120 months = £4,800</text>
+        <rect x="0" y="0" width="220" height="40" rx="6" fill="#efecfa" stroke="#6a55c8"/>
+        <line x1="110" y1="0" x2="110" y2="40" stroke="#6a55c8" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <text x="55" y="25" text-anchor="middle" class="lblT" fill="#6a55c8">£2,400 yours</text>
+        <text x="165" y="25" text-anchor="middle" class="lblT" fill="#6a55c8">£2,400 given</text>
+        <text x="55" y="58" text-anchor="middle" class="lblS">savings, returned</text>
+        <text x="165" y="58" text-anchor="middle" class="lblS">builds the fund</text>
+      </g>
+      <!-- arrow to loan -->
+      <path class="flow" d="M260 60 L 320 60" stroke="#6a55c8" stroke-width="2.5"/>
+      <path d="M322 60 l -10 -6 v12 z" fill="#6a55c8"/>
+      <g transform="translate(330 30)">
+        <rect x="0" y="0" width="170" height="64" rx="10" fill="#6a55c8"/>
+        <text x="85" y="30" text-anchor="middle" class="h" font-size="26" fill="#fff">£40,000</text>
+        <text x="85" y="52" text-anchor="middle" fill="#e7e2fa" font-size="11">about 16 times your savings</text>
+      </g>
+      <!-- repayment -->
+      <g transform="translate(30 180)">
+        <text x="0" y="0" class="lblS">repay £400 a month</text>
+        <g fill="#c9bff0">
+          <rect x="0" y="12" width="14" height="34" rx="2"/><rect x="20" y="12" width="14" height="34" rx="2"/>
+          <rect x="40" y="12" width="14" height="34" rx="2"/><rect x="60" y="12" width="14" height="34" rx="2"/>
+          <rect x="80" y="12" width="14" height="34" rx="2"/><rect x="100" y="12" width="14" height="34" rx="2"/>
+          <rect x="120" y="12" width="14" height="34" rx="2"/><rect x="140" y="12" width="14" height="34" rx="2"/>
+        </g>
+        <rect x="160" y="12" width="30" height="34" rx="2" fill="#6a55c8"/>
+        <text x="235" y="34" class="lblS" fill="#6a55c8">your own savings settle the final months</text>
+      </g>
+      <!-- queue -->
+      <g transform="translate(30 270)">
+        <text x="0" y="0" class="lblS">served strictly in the order you joined</text>
+        <g fill="#6a55c8">
+          <circle cx="10" cy="22" r="8"/><circle cx="40" cy="22" r="8" opacity=".8"/><circle cx="70" cy="22" r="8" opacity=".6"/>
+          <circle cx="100" cy="22" r="8" opacity=".45"/><circle cx="130" cy="22" r="8" opacity=".3"/>
+        </g>
+        <text x="10" y="46" class="lblS">1st</text><text x="128" y="46" class="lblS">later</text>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow b">Gemach Hamerkazi, the working parts</span>
+    <h2>Half yours, half given; then the full loan</h2>
+    <ul class="points">
+      <li class="b"><b>£4,800</b> in over ten years splits in half: <b>£2,400 stays yours</b>, £2,400 is a contribution that builds the fund.</li>
+      <li class="b">In return, a loan of <b>£40,000</b>, about sixteen times your savings.</li>
+      <li class="b">Repaid at <b>£400 a month</b>; your own savings settle the final few months.</li>
+      <li class="b">Served strictly <b>first in, first served</b>.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>How Gemach Hamerkazi moves its money. Forty pounds a month for a hundred and twenty months comes to four thousand eight hundred pounds. That splits in half. One half stays yours, your savings. The other half is a contribution that builds the fund and is not returned. In exchange you receive a loan of forty thousand pounds, about sixteen times what you saved. You repay it at four hundred pounds a month, and your own savings quietly settle the final few months. Families are served strictly in the order they joined, first in, first served.</p></div>
+</section>
+
+<!-- ============ PAGE 10 - GEMACH HAMERKAZI, HOW THE FUND TURNS ============ -->
+<section class="slide" data-actname="The mechanics" data-title="Gemach Hamerkazi, how the fund turns" data-seconds="120" data-core>
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 10 of 25</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 560 400" role="img" aria-label="A steady intake fills the fund until a member is called forward to top up and borrow, and the monthly money in comes from new joiners and, more and more over time, from loan repayments">
+      <!-- TOP: how a turn comes round -->
+      <text x="20" y="14" class="figsub">a steady, equal intake each month is the engine</text>
+      <g transform="translate(0 24)">
+        <rect x="20" y="0" width="84" height="44" rx="9" fill="#efecfa" stroke="#6a55c8" stroke-width="1.5"/>
+        <text x="62" y="21" text-anchor="middle" class="h" font-size="16" fill="#6a55c8">1,000</text>
+        <text x="62" y="36" text-anchor="middle" class="lblS">units pay in</text>
+        <path class="flow" d="M108 22 L 136 22" stroke="#6a55c8" stroke-width="2"/><path d="M138 22 l -9 -5 v10 z" fill="#6a55c8"/>
+        <rect x="142" y="0" width="66" height="44" rx="9" fill="#fff" stroke="#6a55c8" stroke-width="1.5"/>
+        <rect x="142" y="23" width="66" height="21" fill="#6a55c8" opacity=".3"/>
+        <text x="175" y="15" text-anchor="middle" class="lblS">pool fills</text>
+        <path class="flow" d="M212 22 L 240 22" stroke="#6a55c8" stroke-width="2"/><path d="M242 22 l -9 -5 v10 z" fill="#6a55c8"/>
+        <circle cx="268" cy="19" r="13" fill="#6a55c8"/>
+        <text x="268" y="50" text-anchor="middle" class="lblS">next in line,</text>
+        <text x="268" y="64" text-anchor="middle" class="lblS">tops up</text>
+        <path class="flow" d="M286 22 L 316 22" stroke="#6a55c8" stroke-width="2"/><path d="M318 22 l -9 -5 v10 z" fill="#6a55c8"/>
+        <rect x="322" y="0" width="128" height="44" rx="9" fill="#6a55c8"/>
+        <text x="386" y="28" text-anchor="middle" class="h" font-size="17" fill="#fff">borrows £40k</text>
+      </g>
+      <line x1="20" y1="112" x2="500" y2="112" stroke="#eef2f7" stroke-width="1.5"/>
+      <!-- BOTTOM: two-source monthly inflow over the years -->
+      <text x="20" y="134" class="figsub">the money in each month, and where it comes from</text>
+      <line x1="40" y1="342" x2="470" y2="342" stroke="#c6d2e0" stroke-width="1.5"/>
+      <g>
+        <rect x="44" y="283" width="32" height="59" fill="#dd7d33"/><rect x="44" y="276" width="32" height="7" fill="#10897c"/>
+        <rect x="90" y="276" width="32" height="66" fill="#dd7d33"/><rect x="90" y="250" width="32" height="26" fill="#10897c"/>
+        <rect x="136" y="277" width="32" height="65" fill="#dd7d33"/><rect x="136" y="230" width="32" height="47" fill="#10897c"/>
+        <rect x="182" y="283" width="32" height="59" fill="#dd7d33"/><rect x="182" y="220" width="32" height="63" fill="#10897c"/>
+        <rect x="228" y="289" width="32" height="53" fill="#dd7d33"/><rect x="228" y="210" width="32" height="79" fill="#10897c"/>
+        <rect x="274" y="300" width="32" height="42" fill="#dd7d33"/><rect x="274" y="202" width="32" height="98" fill="#10897c"/>
+        <rect x="320" y="313" width="32" height="29" fill="#dd7d33"/><rect x="320" y="196" width="32" height="117" fill="#10897c"/>
+        <rect x="366" y="322" width="32" height="20" fill="#dd7d33"/><rect x="366" y="192" width="32" height="130" fill="#10897c"/>
+      </g>
+      <line x1="174" y1="184" x2="174" y2="348" stroke="#16233a" stroke-width="1.2" stroke-dasharray="3 4"/>
+      <text x="174" y="366" text-anchor="middle" class="lblS">repayments take over, around year 11</text>
+      <g class="lblS" text-anchor="middle" fill="#6b7a92">
+        <text x="60" y="358">yr 1</text><text x="106" y="358">5</text><text x="152" y="358">10</text><text x="198" y="358">12</text><text x="244" y="358">15</text><text x="290" y="358">20</text><text x="336" y="358">30</text><text x="382" y="358">40</text>
+      </g>
+      <g transform="translate(410 196)">
+        <rect x="0" y="0" width="14" height="14" rx="3" fill="#dd7d33"/><text x="20" y="12" class="lblS">new joiners</text>
+        <rect x="0" y="24" width="14" height="14" rx="3" fill="#10897c"/><text x="20" y="36" class="lblS">loan repayments</text>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow b">Gemach Hamerkazi, the working system</span>
+    <h2>Fresh money is always waiting</h2>
+    <ul class="points">
+      <li class="b">It works only if a <b>steady, equal number join every month</b>. That intake is the engine.</li>
+      <li class="b">With, say, <b>1,000 units</b> paying in, the moment the pool holds a full loan the <b>next in line is called forward</b>, tops up, and borrows £40,000.</li>
+      <li class="b">The <b>next month</b> it happens again, because money is already arriving from <b>two sources</b>: new joiners, and earlier borrowers repaying. Early on it is mostly joiners; over the years <b>repayments take over</b>.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Here is what makes Gemach Hamerkazi turn. It needs a steady, equal number of families joining every month; that regular intake is the engine. Picture a thousand units paying in. The moment the pool holds enough for a full loan, the next family in line is called forward, tops up, and borrows the forty thousand. And the next month it can happen again, because the money is already arriving from two places: new joiners, and earlier borrowers now repaying. Early on it is almost all joiners. Over the years, the repayments grow and take over, and the fund begins to carry itself.</p></div>
+</section>
+
+<!-- ============ MERKAZI 25-YEAR MONTHLY TABLE ============ -->
+<section class="slide wide" data-actname="The mechanics" data-title="Gemach Hamerkazi, 25 years month by month" data-seconds="95">
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 11 of 25</span></div>
+  <div class="stage">
+    <div class="cmp-head">
+      <span class="eyebrow b">Gemach Hamerkazi, the numbers underneath</span>
+      <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(23px,2.7vw,37px);line-height:1.05;color:var(--ink);margin-top:6px">Twenty-five years, month by month</h2>
+      <p style="font-size:14.5px;color:var(--muted);margin-top:6px;max-width:80ch">Base case, a thousand new units a month. Scroll to watch the new money give way to loan repayments while the wait lengthens.</p>
+    </div>
+    <div class="mtbl-wrap">
+      <table class="mtbl">
+        <thead><tr><th>Year</th><th>Month</th><th>New money in</th><th>Loans (no.)</th><th>Amount lent</th><th>Repayments in</th><th>Avg wait</th></tr></thead>
+        <tbody>
+<tr class="yb"><td class="mn">1</td><td class="mn">1</td><td>£45k</td><td>1</td><td>£40k</td><td>£0</td><td>0m</td></tr>
+<tr><td class="mn">1</td><td class="mn">2</td><td>£89k</td><td>2</td><td>£80k</td><td>£400</td><td>1m</td></tr>
+<tr><td class="mn">1</td><td class="mn">3</td><td>£134k</td><td>3</td><td>£120k</td><td>£1k</td><td>2m</td></tr>
+<tr><td class="mn">1</td><td class="mn">4</td><td>£183k</td><td>5</td><td>£200k</td><td>£2k</td><td>3m</td></tr>
+<tr><td class="mn">1</td><td class="mn">5</td><td>£227k</td><td>6</td><td>£240k</td><td>£4k</td><td>4m</td></tr>
+<tr><td class="mn">1</td><td class="mn">6</td><td>£271k</td><td>7</td><td>£280k</td><td>£7k</td><td>5m</td></tr>
+<tr><td class="mn">1</td><td class="mn">7</td><td>£315k</td><td>8</td><td>£320k</td><td>£10k</td><td>6m</td></tr>
+<tr><td class="mn">1</td><td class="mn">8</td><td>£359k</td><td>9</td><td>£360k</td><td>£13k</td><td>7m</td></tr>
+<tr><td class="mn">1</td><td class="mn">9</td><td>£407k</td><td>11</td><td>£440k</td><td>£16k</td><td>8m</td></tr>
+<tr><td class="mn">1</td><td class="mn">10</td><td>£446k</td><td>11</td><td>£440k</td><td>£21k</td><td>9m</td></tr>
+<tr><td class="mn">1</td><td class="mn">11</td><td>£494k</td><td>13</td><td>£520k</td><td>£25k</td><td>10m</td></tr>
+<tr><td class="mn">1</td><td class="mn">12</td><td>£542k</td><td>15</td><td>£600k</td><td>£30k</td><td>11m</td></tr>
+<tr class="yb"><td class="mn">2</td><td class="mn">1</td><td>£581k</td><td>15</td><td>£600k</td><td>£36k</td><td>1y 0m</td></tr>
+<tr><td class="mn">2</td><td class="mn">2</td><td>£628k</td><td>17</td><td>£680k</td><td>£42k</td><td>1y 1m</td></tr>
+<tr><td class="mn">2</td><td class="mn">3</td><td>£671k</td><td>18</td><td>£720k</td><td>£49k</td><td>1y 2m</td></tr>
+<tr><td class="mn">2</td><td class="mn">4</td><td>£713k</td><td>19</td><td>£760k</td><td>£56k</td><td>1y 3m</td></tr>
+<tr><td class="mn">2</td><td class="mn">5</td><td>£760k</td><td>21</td><td>£840k</td><td>£64k</td><td>1y 4m</td></tr>
+<tr><td class="mn">2</td><td class="mn">6</td><td>£798k</td><td>21</td><td>£840k</td><td>£72k</td><td>1y 5m</td></tr>
+<tr><td class="mn">2</td><td class="mn">7</td><td>£849k</td><td>24</td><td>£960k</td><td>£81k</td><td>1y 6m</td></tr>
+<tr><td class="mn">2</td><td class="mn">8</td><td>£887k</td><td>24</td><td>£960k</td><td>£90k</td><td>1y 7m</td></tr>
+<tr><td class="mn">2</td><td class="mn">9</td><td>£933k</td><td>26</td><td>£1.04m</td><td>£100k</td><td>1y 8m</td></tr>
+<tr><td class="mn">2</td><td class="mn">10</td><td>£975k</td><td>27</td><td>£1.08m</td><td>£110k</td><td>1y 9m</td></tr>
+<tr><td class="mn">2</td><td class="mn">11</td><td>£1.02m</td><td>29</td><td>£1.16m</td><td>£121k</td><td>1y 10m</td></tr>
+<tr><td class="mn">2</td><td class="mn">12</td><td>£1.06m</td><td>29</td><td>£1.16m</td><td>£133k</td><td>1y 11m</td></tr>
+<tr class="yb"><td class="mn">3</td><td class="mn">1</td><td>£1.11m</td><td>32</td><td>£1.28m</td><td>£144k</td><td>2y 0m</td></tr>
+<tr><td class="mn">3</td><td class="mn">2</td><td>£1.14m</td><td>32</td><td>£1.28m</td><td>£157k</td><td>2y 1m</td></tr>
+<tr><td class="mn">3</td><td class="mn">3</td><td>£1.19m</td><td>34</td><td>£1.36m</td><td>£170k</td><td>2y 2m</td></tr>
+<tr><td class="mn">3</td><td class="mn">4</td><td>£1.23m</td><td>36</td><td>£1.44m</td><td>£184k</td><td>2y 3m</td></tr>
+<tr><td class="mn">3</td><td class="mn">5</td><td>£1.27m</td><td>36</td><td>£1.44m</td><td>£198k</td><td>2y 4m</td></tr>
+<tr><td class="mn">3</td><td class="mn">6</td><td>£1.32m</td><td>39</td><td>£1.56m</td><td>£212k</td><td>2y 5m</td></tr>
+<tr><td class="mn">3</td><td class="mn">7</td><td>£1.36m</td><td>39</td><td>£1.56m</td><td>£228k</td><td>2y 6m</td></tr>
+<tr><td class="mn">3</td><td class="mn">8</td><td>£1.40m</td><td>41</td><td>£1.64m</td><td>£244k</td><td>2y 7m</td></tr>
+<tr><td class="mn">3</td><td class="mn">9</td><td>£1.44m</td><td>43</td><td>£1.72m</td><td>£260k</td><td>2y 8m</td></tr>
+<tr><td class="mn">3</td><td class="mn">10</td><td>£1.48m</td><td>44</td><td>£1.76m</td><td>£277k</td><td>2y 9m</td></tr>
+<tr><td class="mn">3</td><td class="mn">11</td><td>£1.52m</td><td>45</td><td>£1.80m</td><td>£295k</td><td>2y 10m</td></tr>
+<tr><td class="mn">3</td><td class="mn">12</td><td>£1.57m</td><td>47</td><td>£1.88m</td><td>£313k</td><td>2y 11m</td></tr>
+<tr class="yb"><td class="mn">4</td><td class="mn">1</td><td>£1.61m</td><td>49</td><td>£1.96m</td><td>£332k</td><td>3y 0m</td></tr>
+<tr><td class="mn">4</td><td class="mn">2</td><td>£1.65m</td><td>50</td><td>£2.00m</td><td>£351k</td><td>3y 1m</td></tr>
+<tr><td class="mn">4</td><td class="mn">3</td><td>£1.69m</td><td>51</td><td>£2.04m</td><td>£371k</td><td>3y 2m</td></tr>
+<tr><td class="mn">4</td><td class="mn">4</td><td>£1.73m</td><td>54</td><td>£2.16m</td><td>£392k</td><td>3y 2m</td></tr>
+<tr><td class="mn">4</td><td class="mn">5</td><td>£1.77m</td><td>54</td><td>£2.16m</td><td>£413k</td><td>3y 3m</td></tr>
+<tr><td class="mn">4</td><td class="mn">6</td><td>£1.81m</td><td>56</td><td>£2.24m</td><td>£435k</td><td>3y 4m</td></tr>
+<tr><td class="mn">4</td><td class="mn">7</td><td>£1.86m</td><td>58</td><td>£2.32m</td><td>£457k</td><td>3y 5m</td></tr>
+<tr><td class="mn">4</td><td class="mn">8</td><td>£1.90m</td><td>60</td><td>£2.40m</td><td>£480k</td><td>3y 6m</td></tr>
+<tr><td class="mn">4</td><td class="mn">9</td><td>£1.94m</td><td>61</td><td>£2.44m</td><td>£504k</td><td>3y 7m</td></tr>
+<tr><td class="mn">4</td><td class="mn">10</td><td>£1.97m</td><td>62</td><td>£2.48m</td><td>£529k</td><td>3y 8m</td></tr>
+<tr><td class="mn">4</td><td class="mn">11</td><td>£2.01m</td><td>64</td><td>£2.56m</td><td>£554k</td><td>3y 9m</td></tr>
+<tr><td class="mn">4</td><td class="mn">12</td><td>£2.05m</td><td>66</td><td>£2.64m</td><td>£579k</td><td>3y 10m</td></tr>
+<tr class="yb"><td class="mn">5</td><td class="mn">1</td><td>£2.10m</td><td>68</td><td>£2.72m</td><td>£606k</td><td>3y 11m</td></tr>
+<tr><td class="mn">5</td><td class="mn">2</td><td>£2.13m</td><td>69</td><td>£2.76m</td><td>£633k</td><td>4y 0m</td></tr>
+<tr><td class="mn">5</td><td class="mn">3</td><td>£2.17m</td><td>71</td><td>£2.84m</td><td>£660k</td><td>4y 1m</td></tr>
+<tr><td class="mn">5</td><td class="mn">4</td><td>£2.21m</td><td>72</td><td>£2.88m</td><td>£689k</td><td>4y 2m</td></tr>
+<tr><td class="mn">5</td><td class="mn">5</td><td>£2.25m</td><td>74</td><td>£2.96m</td><td>£718k</td><td>4y 3m</td></tr>
+<tr><td class="mn">5</td><td class="mn">6</td><td>£2.29m</td><td>76</td><td>£3.04m</td><td>£747k</td><td>4y 4m</td></tr>
+<tr><td class="mn">5</td><td class="mn">7</td><td>£2.33m</td><td>78</td><td>£3.12m</td><td>£778k</td><td>4y 5m</td></tr>
+<tr><td class="mn">5</td><td class="mn">8</td><td>£2.37m</td><td>79</td><td>£3.16m</td><td>£809k</td><td>4y 5m</td></tr>
+<tr><td class="mn">5</td><td class="mn">9</td><td>£2.41m</td><td>82</td><td>£3.28m</td><td>£840k</td><td>4y 6m</td></tr>
+<tr><td class="mn">5</td><td class="mn">10</td><td>£2.44m</td><td>82</td><td>£3.28m</td><td>£873k</td><td>4y 7m</td></tr>
+<tr><td class="mn">5</td><td class="mn">11</td><td>£2.48m</td><td>85</td><td>£3.40m</td><td>£906k</td><td>4y 8m</td></tr>
+<tr><td class="mn">5</td><td class="mn">12</td><td>£2.52m</td><td>87</td><td>£3.48m</td><td>£940k</td><td>4y 9m</td></tr>
+<tr class="yb"><td class="mn">6</td><td class="mn">1</td><td>£2.56m</td><td>88</td><td>£3.52m</td><td>£975k</td><td>4y 10m</td></tr>
+<tr><td class="mn">6</td><td class="mn">2</td><td>£2.60m</td><td>90</td><td>£3.60m</td><td>£1.01m</td><td>4y 11m</td></tr>
+<tr><td class="mn">6</td><td class="mn">3</td><td>£2.63m</td><td>92</td><td>£3.68m</td><td>£1.05m</td><td>5y 0m</td></tr>
+<tr><td class="mn">6</td><td class="mn">4</td><td>£2.67m</td><td>94</td><td>£3.76m</td><td>£1.08m</td><td>5y 1m</td></tr>
+<tr><td class="mn">6</td><td class="mn">5</td><td>£2.71m</td><td>96</td><td>£3.84m</td><td>£1.12m</td><td>5y 2m</td></tr>
+<tr><td class="mn">6</td><td class="mn">6</td><td>£2.74m</td><td>97</td><td>£3.88m</td><td>£1.16m</td><td>5y 3m</td></tr>
+<tr><td class="mn">6</td><td class="mn">7</td><td>£2.78m</td><td>100</td><td>£4.00m</td><td>£1.20m</td><td>5y 3m</td></tr>
+<tr><td class="mn">6</td><td class="mn">8</td><td>£2.82m</td><td>101</td><td>£4.04m</td><td>£1.24m</td><td>5y 4m</td></tr>
+<tr><td class="mn">6</td><td class="mn">9</td><td>£2.85m</td><td>103</td><td>£4.12m</td><td>£1.28m</td><td>5y 5m</td></tr>
+<tr><td class="mn">6</td><td class="mn">10</td><td>£2.89m</td><td>106</td><td>£4.24m</td><td>£1.32m</td><td>5y 6m</td></tr>
+<tr><td class="mn">6</td><td class="mn">11</td><td>£2.93m</td><td>107</td><td>£4.28m</td><td>£1.36m</td><td>5y 7m</td></tr>
+<tr><td class="mn">6</td><td class="mn">12</td><td>£2.96m</td><td>109</td><td>£4.36m</td><td>£1.40m</td><td>5y 8m</td></tr>
+<tr class="yb"><td class="mn">7</td><td class="mn">1</td><td>£3.00m</td><td>111</td><td>£4.44m</td><td>£1.45m</td><td>5y 9m</td></tr>
+<tr><td class="mn">7</td><td class="mn">2</td><td>£3.03m</td><td>113</td><td>£4.52m</td><td>£1.49m</td><td>5y 10m</td></tr>
+<tr><td class="mn">7</td><td class="mn">3</td><td>£3.07m</td><td>115</td><td>£4.60m</td><td>£1.54m</td><td>5y 11m</td></tr>
+<tr><td class="mn">7</td><td class="mn">4</td><td>£3.11m</td><td>118</td><td>£4.72m</td><td>£1.58m</td><td>5y 11m</td></tr>
+<tr><td class="mn">7</td><td class="mn">5</td><td>£3.14m</td><td>119</td><td>£4.76m</td><td>£1.63m</td><td>6y 0m</td></tr>
+<tr><td class="mn">7</td><td class="mn">6</td><td>£3.17m</td><td>121</td><td>£4.84m</td><td>£1.68m</td><td>6y 1m</td></tr>
+<tr><td class="mn">7</td><td class="mn">7</td><td>£3.21m</td><td>124</td><td>£4.96m</td><td>£1.73m</td><td>6y 2m</td></tr>
+<tr><td class="mn">7</td><td class="mn">8</td><td>£3.24m</td><td>125</td><td>£5.00m</td><td>£1.78m</td><td>6y 3m</td></tr>
+<tr><td class="mn">7</td><td class="mn">9</td><td>£3.28m</td><td>128</td><td>£5.12m</td><td>£1.83m</td><td>6y 4m</td></tr>
+<tr><td class="mn">7</td><td class="mn">10</td><td>£3.31m</td><td>129</td><td>£5.16m</td><td>£1.88m</td><td>6y 5m</td></tr>
+<tr><td class="mn">7</td><td class="mn">11</td><td>£3.34m</td><td>132</td><td>£5.28m</td><td>£1.93m</td><td>6y 6m</td></tr>
+<tr><td class="mn">7</td><td class="mn">12</td><td>£3.38m</td><td>134</td><td>£5.36m</td><td>£1.98m</td><td>6y 6m</td></tr>
+<tr class="yb"><td class="mn">8</td><td class="mn">1</td><td>£3.42m</td><td>137</td><td>£5.48m</td><td>£2.04m</td><td>6y 7m</td></tr>
+<tr><td class="mn">8</td><td class="mn">2</td><td>£3.45m</td><td>138</td><td>£5.52m</td><td>£2.09m</td><td>6y 8m</td></tr>
+<tr><td class="mn">8</td><td class="mn">3</td><td>£3.48m</td><td>141</td><td>£5.64m</td><td>£2.15m</td><td>6y 9m</td></tr>
+<tr><td class="mn">8</td><td class="mn">4</td><td>£3.51m</td><td>142</td><td>£5.68m</td><td>£2.20m</td><td>6y 10m</td></tr>
+<tr><td class="mn">8</td><td class="mn">5</td><td>£3.54m</td><td>145</td><td>£5.80m</td><td>£2.26m</td><td>6y 11m</td></tr>
+<tr><td class="mn">8</td><td class="mn">6</td><td>£3.58m</td><td>148</td><td>£5.92m</td><td>£2.32m</td><td>7y 0m</td></tr>
+<tr><td class="mn">8</td><td class="mn">7</td><td>£3.61m</td><td>149</td><td>£5.96m</td><td>£2.38m</td><td>7y 0m</td></tr>
+<tr><td class="mn">8</td><td class="mn">8</td><td>£3.64m</td><td>152</td><td>£6.08m</td><td>£2.44m</td><td>7y 1m</td></tr>
+<tr><td class="mn">8</td><td class="mn">9</td><td>£3.67m</td><td>155</td><td>£6.20m</td><td>£2.50m</td><td>7y 2m</td></tr>
+<tr><td class="mn">8</td><td class="mn">10</td><td>£3.70m</td><td>156</td><td>£6.24m</td><td>£2.56m</td><td>7y 3m</td></tr>
+<tr><td class="mn">8</td><td class="mn">11</td><td>£3.74m</td><td>159</td><td>£6.36m</td><td>£2.62m</td><td>7y 4m</td></tr>
+<tr><td class="mn">8</td><td class="mn">12</td><td>£3.76m</td><td>161</td><td>£6.44m</td><td>£2.68m</td><td>7y 5m</td></tr>
+<tr class="yb"><td class="mn">9</td><td class="mn">1</td><td>£3.80m</td><td>164</td><td>£6.56m</td><td>£2.75m</td><td>7y 6m</td></tr>
+<tr><td class="mn">9</td><td class="mn">2</td><td>£3.83m</td><td>166</td><td>£6.64m</td><td>£2.81m</td><td>7y 6m</td></tr>
+<tr><td class="mn">9</td><td class="mn">3</td><td>£3.86m</td><td>168</td><td>£6.72m</td><td>£2.88m</td><td>7y 7m</td></tr>
+<tr><td class="mn">9</td><td class="mn">4</td><td>£3.89m</td><td>171</td><td>£6.84m</td><td>£2.94m</td><td>7y 8m</td></tr>
+<tr><td class="mn">9</td><td class="mn">5</td><td>£3.92m</td><td>173</td><td>£6.92m</td><td>£3.01m</td><td>7y 9m</td></tr>
+<tr><td class="mn">9</td><td class="mn">6</td><td>£3.95m</td><td>176</td><td>£7.04m</td><td>£3.07m</td><td>7y 10m</td></tr>
+<tr><td class="mn">9</td><td class="mn">7</td><td>£3.98m</td><td>178</td><td>£7.12m</td><td>£3.14m</td><td>7y 11m</td></tr>
+<tr><td class="mn">9</td><td class="mn">8</td><td>£4.01m</td><td>180</td><td>£7.20m</td><td>£3.21m</td><td>7y 11m</td></tr>
+<tr><td class="mn">9</td><td class="mn">9</td><td>£4.04m</td><td>183</td><td>£7.32m</td><td>£3.27m</td><td>8y 0m</td></tr>
+<tr><td class="mn">9</td><td class="mn">10</td><td>£4.07m</td><td>185</td><td>£7.40m</td><td>£3.34m</td><td>8y 1m</td></tr>
+<tr><td class="mn">9</td><td class="mn">11</td><td>£4.09m</td><td>188</td><td>£7.52m</td><td>£3.41m</td><td>8y 2m</td></tr>
+<tr><td class="mn">9</td><td class="mn">12</td><td>£4.12m</td><td>190</td><td>£7.60m</td><td>£3.48m</td><td>8y 3m</td></tr>
+<tr class="yb"><td class="mn">10</td><td class="mn">1</td><td>£4.15m</td><td>192</td><td>£7.68m</td><td>£3.55m</td><td>8y 3m</td></tr>
+<tr><td class="mn">10</td><td class="mn">2</td><td>£4.18m</td><td>195</td><td>£7.80m</td><td>£3.62m</td><td>8y 4m</td></tr>
+<tr><td class="mn">10</td><td class="mn">3</td><td>£4.21m</td><td>198</td><td>£7.92m</td><td>£3.69m</td><td>8y 5m</td></tr>
+<tr><td class="mn">10</td><td class="mn">4</td><td>£4.23m</td><td>199</td><td>£7.96m</td><td>£3.76m</td><td>8y 6m</td></tr>
+<tr><td class="mn">10</td><td class="mn">5</td><td>£4.26m</td><td>203</td><td>£8.12m</td><td>£3.83m</td><td>8y 7m</td></tr>
+<tr><td class="mn">10</td><td class="mn">6</td><td>£4.29m</td><td>204</td><td>£8.16m</td><td>£3.90m</td><td>8y 7m</td></tr>
+<tr><td class="mn">10</td><td class="mn">7</td><td>£4.32m</td><td>208</td><td>£8.32m</td><td>£3.97m</td><td>8y 8m</td></tr>
+<tr><td class="mn">10</td><td class="mn">8</td><td>£4.34m</td><td>209</td><td>£8.36m</td><td>£4.05m</td><td>8y 9m</td></tr>
+<tr><td class="mn">10</td><td class="mn">9</td><td>£4.37m</td><td>213</td><td>£8.52m</td><td>£4.12m</td><td>8y 10m</td></tr>
+<tr><td class="mn">10</td><td class="mn">10</td><td>£4.39m</td><td>214</td><td>£8.56m</td><td>£4.19m</td><td>8y 11m</td></tr>
+<tr><td class="mn">10</td><td class="mn">11</td><td>£4.42m</td><td>217</td><td>£8.68m</td><td>£4.27m</td><td>8y 11m</td></tr>
+<tr><td class="mn">10</td><td class="mn">12</td><td>£4.45m</td><td>220</td><td>£8.80m</td><td>£4.34m</td><td>9y 0m</td></tr>
+<tr class="yb"><td class="mn">11</td><td class="mn">1</td><td>£4.47m</td><td>222</td><td>£8.88m</td><td>£4.42m</td><td>9y 1m</td></tr>
+<tr><td class="mn">11</td><td class="mn">2</td><td>£4.49m</td><td>225</td><td>£9.00m</td><td>£4.49m</td><td>9y 2m</td></tr>
+<tr><td class="mn">11</td><td class="mn">3</td><td>£4.52m</td><td>227</td><td>£9.08m</td><td>£4.57m</td><td>9y 2m</td></tr>
+<tr><td class="mn">11</td><td class="mn">4</td><td>£4.55m</td><td>230</td><td>£9.20m</td><td>£4.64m</td><td>9y 3m</td></tr>
+<tr><td class="mn">11</td><td class="mn">5</td><td>£4.57m</td><td>232</td><td>£9.28m</td><td>£4.72m</td><td>9y 4m</td></tr>
+<tr><td class="mn">11</td><td class="mn">6</td><td>£4.59m</td><td>235</td><td>£9.40m</td><td>£4.80m</td><td>9y 5m</td></tr>
+<tr><td class="mn">11</td><td class="mn">7</td><td>£4.62m</td><td>237</td><td>£9.48m</td><td>£4.87m</td><td>9y 6m</td></tr>
+<tr><td class="mn">11</td><td class="mn">8</td><td>£4.65m</td><td>240</td><td>£9.60m</td><td>£4.95m</td><td>9y 6m</td></tr>
+<tr><td class="mn">11</td><td class="mn">9</td><td>£4.67m</td><td>243</td><td>£9.72m</td><td>£5.03m</td><td>9y 7m</td></tr>
+<tr><td class="mn">11</td><td class="mn">10</td><td>£4.69m</td><td>245</td><td>£9.80m</td><td>£5.11m</td><td>9y 8m</td></tr>
+<tr><td class="mn">11</td><td class="mn">11</td><td>£4.71m</td><td>247</td><td>£9.88m</td><td>£5.19m</td><td>9y 9m</td></tr>
+<tr><td class="mn">11</td><td class="mn">12</td><td>£4.74m</td><td>250</td><td>£10.00m</td><td>£5.27m</td><td>9y 9m</td></tr>
+<tr class="yb"><td class="mn">12</td><td class="mn">1</td><td>£4.76m</td><td>253</td><td>£10.12m</td><td>£5.35m</td><td>9y 10m</td></tr>
+<tr><td class="mn">12</td><td class="mn">2</td><td>£4.78m</td><td>255</td><td>£10.20m</td><td>£5.43m</td><td>9y 11m</td></tr>
+<tr><td class="mn">12</td><td class="mn">3</td><td>£4.80m</td><td>258</td><td>£10.32m</td><td>£5.51m</td><td>9y 12m</td></tr>
+<tr><td class="mn">12</td><td class="mn">4</td><td>£4.80m</td><td>260</td><td>£10.40m</td><td>£5.59m</td><td>10y 0m</td></tr>
+<tr><td class="mn">12</td><td class="mn">5</td><td>£4.80m</td><td>261</td><td>£10.44m</td><td>£5.67m</td><td>10y 1m</td></tr>
+<tr><td class="mn">12</td><td class="mn">6</td><td>£4.80m</td><td>264</td><td>£10.56m</td><td>£5.75m</td><td>10y 2m</td></tr>
+<tr><td class="mn">12</td><td class="mn">7</td><td>£4.80m</td><td>266</td><td>£10.64m</td><td>£5.84m</td><td>10y 3m</td></tr>
+<tr><td class="mn">12</td><td class="mn">8</td><td>£4.80m</td><td>268</td><td>£10.72m</td><td>£5.92m</td><td>10y 3m</td></tr>
+<tr><td class="mn">12</td><td class="mn">9</td><td>£4.80m</td><td>270</td><td>£10.80m</td><td>£6.00m</td><td>10y 4m</td></tr>
+<tr><td class="mn">12</td><td class="mn">10</td><td>£4.80m</td><td>272</td><td>£10.88m</td><td>£6.08m</td><td>10y 5m</td></tr>
+<tr><td class="mn">12</td><td class="mn">11</td><td>£4.80m</td><td>274</td><td>£10.96m</td><td>£6.16m</td><td>10y 5m</td></tr>
+<tr><td class="mn">12</td><td class="mn">12</td><td>£4.80m</td><td>276</td><td>£11.04m</td><td>£6.25m</td><td>10y 6m</td></tr>
+<tr class="yb"><td class="mn">13</td><td class="mn">1</td><td>£4.80m</td><td>279</td><td>£11.16m</td><td>£6.33m</td><td>10y 7m</td></tr>
+<tr><td class="mn">13</td><td class="mn">2</td><td>£4.80m</td><td>280</td><td>£11.20m</td><td>£6.41m</td><td>10y 8m</td></tr>
+<tr><td class="mn">13</td><td class="mn">3</td><td>£4.80m</td><td>282</td><td>£11.28m</td><td>£6.50m</td><td>10y 8m</td></tr>
+<tr><td class="mn">13</td><td class="mn">4</td><td>£4.80m</td><td>285</td><td>£11.40m</td><td>£6.58m</td><td>10y 9m</td></tr>
+<tr><td class="mn">13</td><td class="mn">5</td><td>£4.80m</td><td>286</td><td>£11.44m</td><td>£6.66m</td><td>10y 10m</td></tr>
+<tr><td class="mn">13</td><td class="mn">6</td><td>£4.80m</td><td>289</td><td>£11.56m</td><td>£6.75m</td><td>10y 10m</td></tr>
+<tr><td class="mn">13</td><td class="mn">7</td><td>£4.80m</td><td>291</td><td>£11.64m</td><td>£6.83m</td><td>10y 11m</td></tr>
+<tr><td class="mn">13</td><td class="mn">8</td><td>£4.80m</td><td>293</td><td>£11.72m</td><td>£6.91m</td><td>11y 0m</td></tr>
+<tr><td class="mn">13</td><td class="mn">9</td><td>£4.80m</td><td>295</td><td>£11.80m</td><td>£7.00m</td><td>11y 1m</td></tr>
+<tr><td class="mn">13</td><td class="mn">10</td><td>£4.80m</td><td>297</td><td>£11.88m</td><td>£7.08m</td><td>11y 1m</td></tr>
+<tr><td class="mn">13</td><td class="mn">11</td><td>£4.80m</td><td>299</td><td>£11.96m</td><td>£7.17m</td><td>11y 2m</td></tr>
+<tr><td class="mn">13</td><td class="mn">12</td><td>£4.80m</td><td>301</td><td>£12.04m</td><td>£7.25m</td><td>11y 3m</td></tr>
+<tr class="yb"><td class="mn">14</td><td class="mn">1</td><td>£4.80m</td><td>304</td><td>£12.16m</td><td>£7.34m</td><td>11y 3m</td></tr>
+<tr><td class="mn">14</td><td class="mn">2</td><td>£4.80m</td><td>305</td><td>£12.20m</td><td>£7.42m</td><td>11y 4m</td></tr>
+<tr><td class="mn">14</td><td class="mn">3</td><td>£4.80m</td><td>308</td><td>£12.32m</td><td>£7.50m</td><td>11y 5m</td></tr>
+<tr><td class="mn">14</td><td class="mn">4</td><td>£4.80m</td><td>309</td><td>£12.36m</td><td>£7.59m</td><td>11y 5m</td></tr>
+<tr><td class="mn">14</td><td class="mn">5</td><td>£4.80m</td><td>312</td><td>£12.48m</td><td>£7.67m</td><td>11y 6m</td></tr>
+<tr><td class="mn">14</td><td class="mn">6</td><td>£4.80m</td><td>314</td><td>£12.56m</td><td>£7.76m</td><td>11y 7m</td></tr>
+<tr><td class="mn">14</td><td class="mn">7</td><td>£4.80m</td><td>316</td><td>£12.64m</td><td>£7.84m</td><td>11y 8m</td></tr>
+<tr><td class="mn">14</td><td class="mn">8</td><td>£4.80m</td><td>319</td><td>£12.76m</td><td>£7.93m</td><td>11y 8m</td></tr>
+<tr><td class="mn">14</td><td class="mn">9</td><td>£4.80m</td><td>320</td><td>£12.80m</td><td>£8.01m</td><td>11y 9m</td></tr>
+<tr><td class="mn">14</td><td class="mn">10</td><td>£4.80m</td><td>322</td><td>£12.88m</td><td>£8.10m</td><td>11y 10m</td></tr>
+<tr><td class="mn">14</td><td class="mn">11</td><td>£4.80m</td><td>325</td><td>£13.00m</td><td>£8.18m</td><td>11y 10m</td></tr>
+<tr><td class="mn">14</td><td class="mn">12</td><td>£4.80m</td><td>327</td><td>£13.08m</td><td>£8.27m</td><td>11y 11m</td></tr>
+<tr class="yb"><td class="mn">15</td><td class="mn">1</td><td>£4.80m</td><td>329</td><td>£13.16m</td><td>£8.36m</td><td>11y 12m</td></tr>
+<tr><td class="mn">15</td><td class="mn">2</td><td>£4.80m</td><td>331</td><td>£13.24m</td><td>£8.44m</td><td>12y 0m</td></tr>
+<tr><td class="mn">15</td><td class="mn">3</td><td>£4.80m</td><td>333</td><td>£13.32m</td><td>£8.53m</td><td>12y 1m</td></tr>
+<tr><td class="mn">15</td><td class="mn">4</td><td>£4.80m</td><td>335</td><td>£13.40m</td><td>£8.61m</td><td>12y 2m</td></tr>
+<tr><td class="mn">15</td><td class="mn">5</td><td>£4.80m</td><td>338</td><td>£13.52m</td><td>£8.70m</td><td>12y 2m</td></tr>
+<tr><td class="mn">15</td><td class="mn">6</td><td>£4.80m</td><td>339</td><td>£13.56m</td><td>£8.78m</td><td>12y 3m</td></tr>
+<tr><td class="mn">15</td><td class="mn">7</td><td>£4.80m</td><td>342</td><td>£13.68m</td><td>£8.87m</td><td>12y 4m</td></tr>
+<tr><td class="mn">15</td><td class="mn">8</td><td>£4.80m</td><td>344</td><td>£13.76m</td><td>£8.95m</td><td>12y 4m</td></tr>
+<tr><td class="mn">15</td><td class="mn">9</td><td>£4.80m</td><td>346</td><td>£13.84m</td><td>£9.04m</td><td>12y 5m</td></tr>
+<tr><td class="mn">15</td><td class="mn">10</td><td>£4.80m</td><td>348</td><td>£13.92m</td><td>£9.13m</td><td>12y 6m</td></tr>
+<tr><td class="mn">15</td><td class="mn">11</td><td>£4.80m</td><td>350</td><td>£14.00m</td><td>£9.21m</td><td>12y 6m</td></tr>
+<tr><td class="mn">15</td><td class="mn">12</td><td>£4.80m</td><td>353</td><td>£14.12m</td><td>£9.30m</td><td>12y 7m</td></tr>
+<tr class="yb"><td class="mn">16</td><td class="mn">1</td><td>£4.80m</td><td>354</td><td>£14.16m</td><td>£9.38m</td><td>12y 8m</td></tr>
+<tr><td class="mn">16</td><td class="mn">2</td><td>£4.80m</td><td>357</td><td>£14.28m</td><td>£9.47m</td><td>12y 8m</td></tr>
+<tr><td class="mn">16</td><td class="mn">3</td><td>£4.80m</td><td>359</td><td>£14.36m</td><td>£9.55m</td><td>12y 9m</td></tr>
+<tr><td class="mn">16</td><td class="mn">4</td><td>£4.80m</td><td>361</td><td>£14.44m</td><td>£9.64m</td><td>12y 9m</td></tr>
+<tr><td class="mn">16</td><td class="mn">5</td><td>£4.80m</td><td>363</td><td>£14.52m</td><td>£9.73m</td><td>12y 10m</td></tr>
+<tr><td class="mn">16</td><td class="mn">6</td><td>£4.80m</td><td>365</td><td>£14.60m</td><td>£9.81m</td><td>12y 11m</td></tr>
+<tr><td class="mn">16</td><td class="mn">7</td><td>£4.80m</td><td>368</td><td>£14.72m</td><td>£9.90m</td><td>12y 11m</td></tr>
+<tr><td class="mn">16</td><td class="mn">8</td><td>£4.80m</td><td>369</td><td>£14.76m</td><td>£9.98m</td><td>13y 0m</td></tr>
+<tr><td class="mn">16</td><td class="mn">9</td><td>£4.80m</td><td>372</td><td>£14.88m</td><td>£10.07m</td><td>13y 1m</td></tr>
+<tr><td class="mn">16</td><td class="mn">10</td><td>£4.80m</td><td>374</td><td>£14.96m</td><td>£10.15m</td><td>13y 1m</td></tr>
+<tr><td class="mn">16</td><td class="mn">11</td><td>£4.80m</td><td>376</td><td>£15.04m</td><td>£10.24m</td><td>13y 2m</td></tr>
+<tr><td class="mn">16</td><td class="mn">12</td><td>£4.80m</td><td>378</td><td>£15.12m</td><td>£10.32m</td><td>13y 2m</td></tr>
+<tr class="yb"><td class="mn">17</td><td class="mn">1</td><td>£4.80m</td><td>380</td><td>£15.20m</td><td>£10.41m</td><td>13y 3m</td></tr>
+<tr><td class="mn">17</td><td class="mn">2</td><td>£4.80m</td><td>382</td><td>£15.28m</td><td>£10.49m</td><td>13y 4m</td></tr>
+<tr><td class="mn">17</td><td class="mn">3</td><td>£4.80m</td><td>384</td><td>£15.36m</td><td>£10.58m</td><td>13y 4m</td></tr>
+<tr><td class="mn">17</td><td class="mn">4</td><td>£4.80m</td><td>387</td><td>£15.48m</td><td>£10.66m</td><td>13y 5m</td></tr>
+<tr><td class="mn">17</td><td class="mn">5</td><td>£4.80m</td><td>389</td><td>£15.56m</td><td>£10.74m</td><td>13y 6m</td></tr>
+<tr><td class="mn">17</td><td class="mn">6</td><td>£4.80m</td><td>390</td><td>£15.60m</td><td>£10.83m</td><td>13y 6m</td></tr>
+<tr><td class="mn">17</td><td class="mn">7</td><td>£4.80m</td><td>393</td><td>£15.72m</td><td>£10.91m</td><td>13y 7m</td></tr>
+<tr><td class="mn">17</td><td class="mn">8</td><td>£4.80m</td><td>395</td><td>£15.80m</td><td>£11.00m</td><td>13y 7m</td></tr>
+<tr><td class="mn">17</td><td class="mn">9</td><td>£4.80m</td><td>397</td><td>£15.88m</td><td>£11.08m</td><td>13y 8m</td></tr>
+<tr><td class="mn">17</td><td class="mn">10</td><td>£4.80m</td><td>399</td><td>£15.96m</td><td>£11.16m</td><td>13y 9m</td></tr>
+<tr><td class="mn">17</td><td class="mn">11</td><td>£4.80m</td><td>401</td><td>£16.04m</td><td>£11.25m</td><td>13y 9m</td></tr>
+<tr><td class="mn">17</td><td class="mn">12</td><td>£4.80m</td><td>404</td><td>£16.16m</td><td>£11.33m</td><td>13y 10m</td></tr>
+<tr class="yb"><td class="mn">18</td><td class="mn">1</td><td>£4.80m</td><td>405</td><td>£16.20m</td><td>£11.42m</td><td>13y 10m</td></tr>
+<tr><td class="mn">18</td><td class="mn">2</td><td>£4.80m</td><td>407</td><td>£16.28m</td><td>£11.50m</td><td>13y 11m</td></tr>
+<tr><td class="mn">18</td><td class="mn">3</td><td>£4.80m</td><td>410</td><td>£16.40m</td><td>£11.58m</td><td>13y 12m</td></tr>
+<tr><td class="mn">18</td><td class="mn">4</td><td>£4.80m</td><td>412</td><td>£16.48m</td><td>£11.66m</td><td>14y 0m</td></tr>
+<tr><td class="mn">18</td><td class="mn">5</td><td>£4.80m</td><td>413</td><td>£16.52m</td><td>£11.75m</td><td>14y 1m</td></tr>
+<tr><td class="mn">18</td><td class="mn">6</td><td>£4.80m</td><td>416</td><td>£16.64m</td><td>£11.83m</td><td>14y 1m</td></tr>
+<tr><td class="mn">18</td><td class="mn">7</td><td>£4.80m</td><td>418</td><td>£16.72m</td><td>£11.91m</td><td>14y 2m</td></tr>
+<tr><td class="mn">18</td><td class="mn">8</td><td>£4.80m</td><td>420</td><td>£16.80m</td><td>£11.99m</td><td>14y 2m</td></tr>
+<tr><td class="mn">18</td><td class="mn">9</td><td>£4.80m</td><td>422</td><td>£16.88m</td><td>£12.08m</td><td>14y 3m</td></tr>
+<tr><td class="mn">18</td><td class="mn">10</td><td>£4.80m</td><td>424</td><td>£16.96m</td><td>£12.16m</td><td>14y 4m</td></tr>
+<tr><td class="mn">18</td><td class="mn">11</td><td>£4.80m</td><td>426</td><td>£17.04m</td><td>£12.24m</td><td>14y 4m</td></tr>
+<tr><td class="mn">18</td><td class="mn">12</td><td>£4.80m</td><td>428</td><td>£17.12m</td><td>£12.32m</td><td>14y 5m</td></tr>
+<tr class="yb"><td class="mn">19</td><td class="mn">1</td><td>£4.80m</td><td>430</td><td>£17.20m</td><td>£12.40m</td><td>14y 5m</td></tr>
+<tr><td class="mn">19</td><td class="mn">2</td><td>£4.80m</td><td>432</td><td>£17.28m</td><td>£12.48m</td><td>14y 6m</td></tr>
+<tr><td class="mn">19</td><td class="mn">3</td><td>£4.80m</td><td>434</td><td>£17.36m</td><td>£12.56m</td><td>14y 7m</td></tr>
+<tr><td class="mn">19</td><td class="mn">4</td><td>£4.80m</td><td>436</td><td>£17.44m</td><td>£12.65m</td><td>14y 7m</td></tr>
+<tr><td class="mn">19</td><td class="mn">5</td><td>£4.80m</td><td>438</td><td>£17.52m</td><td>£12.73m</td><td>14y 8m</td></tr>
+<tr><td class="mn">19</td><td class="mn">6</td><td>£4.80m</td><td>440</td><td>£17.60m</td><td>£12.81m</td><td>14y 8m</td></tr>
+<tr><td class="mn">19</td><td class="mn">7</td><td>£4.80m</td><td>442</td><td>£17.68m</td><td>£12.89m</td><td>14y 9m</td></tr>
+<tr><td class="mn">19</td><td class="mn">8</td><td>£4.80m</td><td>445</td><td>£17.80m</td><td>£12.97m</td><td>14y 9m</td></tr>
+<tr><td class="mn">19</td><td class="mn">9</td><td>£4.80m</td><td>446</td><td>£17.84m</td><td>£13.05m</td><td>14y 10m</td></tr>
+<tr><td class="mn">19</td><td class="mn">10</td><td>£4.80m</td><td>448</td><td>£17.92m</td><td>£13.13m</td><td>14y 10m</td></tr>
+<tr><td class="mn">19</td><td class="mn">11</td><td>£4.80m</td><td>450</td><td>£18.00m</td><td>£13.20m</td><td>14y 11m</td></tr>
+<tr><td class="mn">19</td><td class="mn">12</td><td>£4.80m</td><td>452</td><td>£18.08m</td><td>£13.28m</td><td>14y 12m</td></tr>
+<tr class="yb"><td class="mn">20</td><td class="mn">1</td><td>£4.80m</td><td>454</td><td>£18.16m</td><td>£13.36m</td><td>15y 0m</td></tr>
+<tr><td class="mn">20</td><td class="mn">2</td><td>£4.80m</td><td>456</td><td>£18.24m</td><td>£13.44m</td><td>15y 1m</td></tr>
+<tr><td class="mn">20</td><td class="mn">3</td><td>£4.80m</td><td>458</td><td>£18.32m</td><td>£13.52m</td><td>15y 1m</td></tr>
+<tr><td class="mn">20</td><td class="mn">4</td><td>£4.80m</td><td>460</td><td>£18.40m</td><td>£13.60m</td><td>15y 2m</td></tr>
+<tr><td class="mn">20</td><td class="mn">5</td><td>£4.80m</td><td>462</td><td>£18.48m</td><td>£13.68m</td><td>15y 2m</td></tr>
+<tr><td class="mn">20</td><td class="mn">6</td><td>£4.80m</td><td>464</td><td>£18.56m</td><td>£13.75m</td><td>15y 3m</td></tr>
+<tr><td class="mn">20</td><td class="mn">7</td><td>£4.80m</td><td>466</td><td>£18.64m</td><td>£13.83m</td><td>15y 3m</td></tr>
+<tr><td class="mn">20</td><td class="mn">8</td><td>£4.80m</td><td>468</td><td>£18.72m</td><td>£13.91m</td><td>15y 4m</td></tr>
+<tr><td class="mn">20</td><td class="mn">9</td><td>£4.80m</td><td>469</td><td>£18.76m</td><td>£13.99m</td><td>15y 4m</td></tr>
+<tr><td class="mn">20</td><td class="mn">10</td><td>£4.80m</td><td>472</td><td>£18.88m</td><td>£14.07m</td><td>15y 5m</td></tr>
+<tr><td class="mn">20</td><td class="mn">11</td><td>£4.80m</td><td>474</td><td>£18.96m</td><td>£14.15m</td><td>15y 5m</td></tr>
+<tr><td class="mn">20</td><td class="mn">12</td><td>£4.80m</td><td>475</td><td>£19.00m</td><td>£14.22m</td><td>15y 6m</td></tr>
+<tr class="yb"><td class="mn">21</td><td class="mn">1</td><td>£4.80m</td><td>478</td><td>£19.12m</td><td>£14.30m</td><td>15y 6m</td></tr>
+<tr><td class="mn">21</td><td class="mn">2</td><td>£4.80m</td><td>479</td><td>£19.16m</td><td>£14.38m</td><td>15y 7m</td></tr>
+<tr><td class="mn">21</td><td class="mn">3</td><td>£4.80m</td><td>482</td><td>£19.28m</td><td>£14.46m</td><td>15y 8m</td></tr>
+<tr><td class="mn">21</td><td class="mn">4</td><td>£4.80m</td><td>483</td><td>£19.32m</td><td>£14.54m</td><td>15y 8m</td></tr>
+<tr><td class="mn">21</td><td class="mn">5</td><td>£4.80m</td><td>486</td><td>£19.44m</td><td>£14.61m</td><td>15y 9m</td></tr>
+<tr><td class="mn">21</td><td class="mn">6</td><td>£4.80m</td><td>487</td><td>£19.48m</td><td>£14.69m</td><td>15y 9m</td></tr>
+<tr><td class="mn">21</td><td class="mn">7</td><td>£4.80m</td><td>489</td><td>£19.56m</td><td>£14.77m</td><td>15y 10m</td></tr>
+<tr><td class="mn">21</td><td class="mn">8</td><td>£4.80m</td><td>491</td><td>£19.64m</td><td>£14.85m</td><td>15y 10m</td></tr>
+<tr><td class="mn">21</td><td class="mn">9</td><td>£4.80m</td><td>493</td><td>£19.72m</td><td>£14.93m</td><td>15y 11m</td></tr>
+<tr><td class="mn">21</td><td class="mn">10</td><td>£4.80m</td><td>496</td><td>£19.84m</td><td>£15.00m</td><td>15y 11m</td></tr>
+<tr><td class="mn">21</td><td class="mn">11</td><td>£4.80m</td><td>497</td><td>£19.88m</td><td>£15.08m</td><td>15y 12m</td></tr>
+<tr><td class="mn">21</td><td class="mn">12</td><td>£4.80m</td><td>499</td><td>£19.96m</td><td>£15.16m</td><td>16y 0m</td></tr>
+<tr class="yb"><td class="mn">22</td><td class="mn">1</td><td>£4.80m</td><td>500</td><td>£20.00m</td><td>£15.24m</td><td>16y 1m</td></tr>
+<tr><td class="mn">22</td><td class="mn">2</td><td>£4.80m</td><td>503</td><td>£20.12m</td><td>£15.31m</td><td>16y 1m</td></tr>
+<tr><td class="mn">22</td><td class="mn">3</td><td>£4.80m</td><td>505</td><td>£20.20m</td><td>£15.39m</td><td>16y 2m</td></tr>
+<tr><td class="mn">22</td><td class="mn">4</td><td>£4.80m</td><td>507</td><td>£20.28m</td><td>£15.47m</td><td>16y 2m</td></tr>
+<tr><td class="mn">22</td><td class="mn">5</td><td>£4.80m</td><td>508</td><td>£20.32m</td><td>£15.54m</td><td>16y 3m</td></tr>
+<tr><td class="mn">22</td><td class="mn">6</td><td>£4.80m</td><td>511</td><td>£20.44m</td><td>£15.62m</td><td>16y 3m</td></tr>
+<tr><td class="mn">22</td><td class="mn">7</td><td>£4.80m</td><td>512</td><td>£20.48m</td><td>£15.70m</td><td>16y 4m</td></tr>
+<tr><td class="mn">22</td><td class="mn">8</td><td>£4.80m</td><td>515</td><td>£20.60m</td><td>£15.77m</td><td>16y 4m</td></tr>
+<tr><td class="mn">22</td><td class="mn">9</td><td>£4.80m</td><td>516</td><td>£20.64m</td><td>£15.85m</td><td>16y 5m</td></tr>
+<tr><td class="mn">22</td><td class="mn">10</td><td>£4.80m</td><td>518</td><td>£20.72m</td><td>£15.93m</td><td>16y 5m</td></tr>
+<tr><td class="mn">22</td><td class="mn">11</td><td>£4.80m</td><td>520</td><td>£20.80m</td><td>£16.00m</td><td>16y 5m</td></tr>
+<tr><td class="mn">22</td><td class="mn">12</td><td>£4.80m</td><td>522</td><td>£20.88m</td><td>£16.08m</td><td>16y 6m</td></tr>
+<tr class="yb"><td class="mn">23</td><td class="mn">1</td><td>£4.80m</td><td>524</td><td>£20.96m</td><td>£16.16m</td><td>16y 6m</td></tr>
+<tr><td class="mn">23</td><td class="mn">2</td><td>£4.80m</td><td>526</td><td>£21.04m</td><td>£16.23m</td><td>16y 7m</td></tr>
+<tr><td class="mn">23</td><td class="mn">3</td><td>£4.80m</td><td>528</td><td>£21.12m</td><td>£16.31m</td><td>16y 7m</td></tr>
+<tr><td class="mn">23</td><td class="mn">4</td><td>£4.80m</td><td>529</td><td>£21.16m</td><td>£16.39m</td><td>16y 8m</td></tr>
+<tr><td class="mn">23</td><td class="mn">5</td><td>£4.80m</td><td>532</td><td>£21.28m</td><td>£16.46m</td><td>16y 8m</td></tr>
+<tr><td class="mn">23</td><td class="mn">6</td><td>£4.80m</td><td>533</td><td>£21.32m</td><td>£16.54m</td><td>16y 9m</td></tr>
+<tr><td class="mn">23</td><td class="mn">7</td><td>£4.80m</td><td>536</td><td>£21.44m</td><td>£16.61m</td><td>16y 9m</td></tr>
+<tr><td class="mn">23</td><td class="mn">8</td><td>£4.80m</td><td>537</td><td>£21.48m</td><td>£16.69m</td><td>16y 10m</td></tr>
+<tr><td class="mn">23</td><td class="mn">9</td><td>£4.80m</td><td>539</td><td>£21.56m</td><td>£16.77m</td><td>16y 10m</td></tr>
+<tr><td class="mn">23</td><td class="mn">10</td><td>£4.80m</td><td>541</td><td>£21.64m</td><td>£16.84m</td><td>16y 11m</td></tr>
+<tr><td class="mn">23</td><td class="mn">11</td><td>£4.80m</td><td>543</td><td>£21.72m</td><td>£16.92m</td><td>16y 11m</td></tr>
+<tr><td class="mn">23</td><td class="mn">12</td><td>£4.80m</td><td>545</td><td>£21.80m</td><td>£16.99m</td><td>16y 12m</td></tr>
+<tr class="yb"><td class="mn">24</td><td class="mn">1</td><td>£4.80m</td><td>547</td><td>£21.88m</td><td>£17.07m</td><td>17y 0m</td></tr>
+<tr><td class="mn">24</td><td class="mn">2</td><td>£4.80m</td><td>548</td><td>£21.92m</td><td>£17.14m</td><td>17y 0m</td></tr>
+<tr><td class="mn">24</td><td class="mn">3</td><td>£4.80m</td><td>551</td><td>£22.04m</td><td>£17.22m</td><td>17y 1m</td></tr>
+<tr><td class="mn">24</td><td class="mn">4</td><td>£4.80m</td><td>552</td><td>£22.08m</td><td>£17.29m</td><td>17y 1m</td></tr>
+<tr><td class="mn">24</td><td class="mn">5</td><td>£4.80m</td><td>554</td><td>£22.16m</td><td>£17.37m</td><td>17y 2m</td></tr>
+<tr><td class="mn">24</td><td class="mn">6</td><td>£4.80m</td><td>556</td><td>£22.24m</td><td>£17.44m</td><td>17y 2m</td></tr>
+<tr><td class="mn">24</td><td class="mn">7</td><td>£4.80m</td><td>558</td><td>£22.32m</td><td>£17.52m</td><td>17y 3m</td></tr>
+<tr><td class="mn">24</td><td class="mn">8</td><td>£4.80m</td><td>560</td><td>£22.40m</td><td>£17.59m</td><td>17y 3m</td></tr>
+<tr><td class="mn">24</td><td class="mn">9</td><td>£4.80m</td><td>561</td><td>£22.44m</td><td>£17.67m</td><td>17y 4m</td></tr>
+<tr><td class="mn">24</td><td class="mn">10</td><td>£4.80m</td><td>564</td><td>£22.56m</td><td>£17.74m</td><td>17y 4m</td></tr>
+<tr><td class="mn">24</td><td class="mn">11</td><td>£4.80m</td><td>565</td><td>£22.60m</td><td>£17.81m</td><td>17y 4m</td></tr>
+<tr><td class="mn">24</td><td class="mn">12</td><td>£4.80m</td><td>567</td><td>£22.68m</td><td>£17.89m</td><td>17y 5m</td></tr>
+<tr class="yb"><td class="mn">25</td><td class="mn">1</td><td>£4.80m</td><td>570</td><td>£22.80m</td><td>£17.96m</td><td>17y 5m</td></tr>
+<tr><td class="mn">25</td><td class="mn">2</td><td>£4.80m</td><td>570</td><td>£22.80m</td><td>£18.04m</td><td>17y 6m</td></tr>
+<tr><td class="mn">25</td><td class="mn">3</td><td>£4.80m</td><td>573</td><td>£22.92m</td><td>£18.11m</td><td>17y 6m</td></tr>
+<tr><td class="mn">25</td><td class="mn">4</td><td>£4.80m</td><td>575</td><td>£23.00m</td><td>£18.18m</td><td>17y 7m</td></tr>
+<tr><td class="mn">25</td><td class="mn">5</td><td>£4.80m</td><td>576</td><td>£23.04m</td><td>£18.26m</td><td>17y 7m</td></tr>
+<tr><td class="mn">25</td><td class="mn">6</td><td>£4.80m</td><td>578</td><td>£23.12m</td><td>£18.33m</td><td>17y 7m</td></tr>
+<tr><td class="mn">25</td><td class="mn">7</td><td>£4.80m</td><td>580</td><td>£23.20m</td><td>£18.40m</td><td>17y 8m</td></tr>
+<tr><td class="mn">25</td><td class="mn">8</td><td>£4.80m</td><td>582</td><td>£23.28m</td><td>£18.48m</td><td>17y 8m</td></tr>
+<tr><td class="mn">25</td><td class="mn">9</td><td>£4.80m</td><td>584</td><td>£23.36m</td><td>£18.55m</td><td>17y 9m</td></tr>
+<tr><td class="mn">25</td><td class="mn">10</td><td>£4.80m</td><td>586</td><td>£23.44m</td><td>£18.62m</td><td>17y 9m</td></tr>
+<tr><td class="mn">25</td><td class="mn">11</td><td>£4.80m</td><td>587</td><td>£23.48m</td><td>£18.70m</td><td>17y 10m</td></tr>
+<tr><td class="mn">25</td><td class="mn">12</td><td>£4.80m</td><td>589</td><td>£23.56m</td><td>£18.77m</td><td>17y 10m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>And here is what that looks like in numbers. This is Gemach Hamerkazi month by month for twenty-five years, at a base of a thousand new units a month. Watch three columns move together: the new money coming in, the loans going out, and the repayments flowing back. In the early years almost every pound is new money and only a handful of loans go out. As the years pass, the repayments swell until they carry most of the lending, and the average wait stretches from months into many years. The shape of the whole scheme sits in this one table.</p></div>
+</section>
+
+<!-- ============ PAGE 11 - WHAT DRIVES EACH ============ -->
+<section class="slide" data-actname="The mechanics" data-title="What drives each one" data-seconds="60">
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 12 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 560 380" role="img" aria-label="Gemach Hakehiloh grows by reproduction as a top-down family tree; Gemach Hamerkazi refills from repayments">
+      <!-- LEFT: Gemach Hakehiloh, top-down hierarchy -->
+      <text x="130" y="24" text-anchor="middle" class="figttl" fill="#b8395e">Gemach Hakehiloh</text>
+      <text x="130" y="44" text-anchor="middle" class="figsub">grows by reproduction</text>
+      <g stroke="#b8395e" stroke-width="2" fill="none">
+        <line x1="130" y1="74" x2="72" y2="134"/><line x1="130" y1="74" x2="188" y2="134"/>
+        <line x1="72" y1="134" x2="42" y2="200"/><line x1="72" y1="134" x2="102" y2="200"/>
+        <line x1="188" y1="134" x2="158" y2="200"/><line x1="188" y1="134" x2="218" y2="200"/>
+      </g>
+      <g fill="#b8395e">
+        <circle cx="130" cy="70" r="11"/>
+        <circle cx="72" cy="134" r="8"/><circle cx="188" cy="134" r="8"/>
+        <circle cx="42" cy="200" r="6"/><circle cx="102" cy="200" r="6"/><circle cx="158" cy="200" r="6"/><circle cx="218" cy="200" r="6"/>
+      </g>
+      <text x="130" y="236" text-anchor="middle" class="figsub">one wedding seeds new units below it,</text>
+      <text x="130" y="254" text-anchor="middle" class="figsub">so the base compounds each generation</text>
+      <line x1="290" y1="24" x2="290" y2="300" stroke="#dae2ec" stroke-width="1.5"/>
+      <!-- RIGHT: Gemach Hamerkazi, refilling -->
+      <text x="430" y="24" text-anchor="middle" class="figttl" fill="#6a55c8">Gemach Hamerkazi</text>
+      <text x="430" y="44" text-anchor="middle" class="figsub">refills from repayments</text>
+      <g transform="translate(365 74)">
+        <rect x="0" y="22" width="130" height="150" rx="10" fill="#efecfa" stroke="#6a55c8" stroke-width="2"/>
+        <path d="M0 92 q 32 -14 65 0 t 65 0 v80 h-130 z" fill="#6a55c8" opacity=".35"/>
+        <path class="flow" d="M65 -12 C 182 -12 187 112 140 112" stroke="#6a55c8" stroke-width="2.5"/>
+        <path d="M142 112 l 10 -6 v12 z" fill="#6a55c8"/>
+      </g>
+      <text x="430" y="272" text-anchor="middle" class="figsub">runs on a steady flow of joiners,</text>
+      <text x="430" y="290" text-anchor="middle" class="figsub">and past a point refills itself</text>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow t">Two engines</span>
+    <h2>One compounds, the other recycles</h2>
+    <ul class="points">
+      <li class="a"><b>Gemach Hakehiloh grows by reproduction.</b> Every daughter's wedding seeds a new saving household, a rate we can measure in units, one unit being one saving household.</li>
+      <li class="b"><b>Gemach Hamerkazi does not rely on growth.</b> It runs on a steady flow of joiners and, past a point, largely refills itself from repayments.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>So what drives each one forward. Gemach Hakehiloh grows by reproduction. Every daughter's wedding seeds a new saving household, which is a rate we can measure against real membership, in units, where one unit is one saving household. Gemach Hamerkazi does not rely on growth at all. It runs on a steady flow of joiners, and past a certain point it largely refills itself from repayments coming back in. One engine compounds. The other recycles.</p></div>
+</section>
+
+<!-- ============ COMPARISON A - A FAMILY'S EXPERIENCE ============ -->
+<section class="slide wide" data-actname="Side by side" data-title="Side by side: a family's experience" data-seconds="120" data-core>
+  <div class="rail"><span class="act">Side by side</span><span class="sep">/</span><span class="pg">Page 13 of 25</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="stage">
+    <div class="cmp-head">
+      <span class="eyebrow t">Gemach Hakehiloh and Gemach Hamerkazi</span>
+      <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(23px,2.7vw,37px);line-height:1.05;color:var(--ink);margin-top:6px">What each means for a family</h2>
+    </div>
+    <table class="cmp">
+      <thead><tr><th class="h-dim">For a family</th><th class="a">Gemach Hakehiloh</th><th class="b">Gemach Hamerkazi</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">Unit of help</td><td class="ca">Per family, one shared pot</td><td class="cb">Per child, a place in line</td></tr>
+        <tr><td class="dim">What is certain</td><td class="ca">The timing: money on the wedding day</td><td class="cb">The amount: the full &pound;40,000</td></tr>
+        <tr><td class="dim">What varies</td><td class="ca">The loan amount, climbing over the years</td><td class="cb">The waiting time</td></tr>
+        <tr><td class="dim">Cost never returned</td><td class="ca">A flat fee per family, about &pound;5,000 to &pound;7,000</td><td class="cb">&pound;2,400 for each child</td></tr>
+        <tr><td class="dim">Cheaper for</td><td class="ca">Large families, by far</td><td class="cb">A one-child family</td></tr>
+        <tr><td class="dim">Getting in</td><td class="ca">18 years of membership, in effect from a child's birth</td><td class="cb">Join later; a bounded 10-year term per child</td></tr>
+        <tr><td class="dim">Repayments</td><td class="ca">1% a month, capped near &pound;1,200 across the family</td><td class="cb">&pound;400 a month per loan, no family cap</td></tr>
+        <tr><td class="dim">Certainty of being helped</td><td class="ca">Served on the date, every time</td><td class="cb">About half within 50 years; average wait near 22 years</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Now the two side by side, for a family. Gemach Hakehiloh works per family, one shared pot; Gemach Hamerkazi works per child, a place in line. One gives certainty of timing, the money on the day; the other certainty of amount, the full forty thousand. What you never get back is a flat family fee, roughly five to seven thousand pounds whatever your size, against two thousand four hundred a child. So a large family is far better off under Gemach Hakehiloh, and a one-child family under Gemach Hamerkazi, which can also be joined later.</p></div>
+</section>
+
+<!-- ============ COMPARISON B - HOW THE FUND BEHAVES ============ -->
+<section class="slide wide" data-actname="Side by side" data-title="Side by side: how the fund behaves" data-seconds="120">
+  <div class="rail"><span class="act">Side by side</span><span class="sep">/</span><span class="pg">Page 14 of 25</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="stage">
+    <div class="cmp-head">
+      <span class="eyebrow t">Gemach Hakehiloh and Gemach Hamerkazi</span>
+      <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(23px,2.7vw,37px);line-height:1.05;color:var(--ink);margin-top:6px">How each fund behaves</h2>
+    </div>
+    <table class="cmp">
+      <thead><tr><th class="h-dim">The fund</th><th class="a">Gemach Hakehiloh</th><th class="b">Gemach Hamerkazi</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">What it rations</td><td class="ca">The amount</td><td class="cb">The time</td></tr>
+        <tr><td class="dim">What drives it</td><td class="ca">Reproduction, a measurable rate</td><td class="cb">A steady, equal flow of joiners</td></tr>
+        <tr><td class="dim">Its solvency</td><td class="ca">Prudential ratios, thin capital</td><td class="cb">Solvent by construction</td></tr>
+        <tr><td class="dim">How it delivers</td><td class="ca">On the date, the amount grows</td><td class="cb">In full, after a wait</td></tr>
+        <tr><td class="dim">Self-funding</td><td class="ca">Carries itself, generation to generation</td><td class="cb">From about year 11; run-off risk falls</td></tr>
+        <tr><td class="dim">Its sharpest risk</td><td class="ca">Thin capital, so bad debt bites</td><td class="cb">The long wait, partial coverage</td></tr>
+        <tr><td class="dim">Regulatory footing</td><td class="ca">A credit union, already examined</td><td class="cb">Could also be a credit union; has the capital, liquidity not yet tested</td></tr>
+        <tr><td class="dim">Solidarity</td><td class="ca">Small families help carry large ones</td><td class="cb">Each child roughly carries its own weight</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>And the two side by side as funds. Gemach Hakehiloh rations the amount; Gemach Hamerkazi rations the time. One runs on reproduction, a rate we can measure, held solvent by its ratios on thin capital; the other is solvent by construction, running on a steady flow of joiners. Their sharpest risks are opposite: for Gemach Hakehiloh it is thin capital and bad debt, for Gemach Hamerkazi it is the long wait and partial coverage. And in spirit, one has small families help carry large ones, while the other has each child carry its own weight.</p></div>
+</section>
+
+<!-- ============ PAGE - NONE OF THIS IS NEW ============ -->
+<section class="slide center" data-actname="Where the ideas come from" data-title="None of this is new" data-seconds="60">
+  <div class="rail"><span class="act">Act 4 - Where the ideas come from</span><span class="sep">/</span><span class="pg">Page 15 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 900 180" role="img" aria-label="A timeline from rotating village funds to today">
+      <line x1="40" y1="95" x2="860" y2="95" stroke="#c6d2e0" stroke-width="3"/>
+      <g text-anchor="middle">
+        <circle cx="110" cy="95" r="9" class="ft"/><text x="110" y="60" class="figttl">Rotating circles</text><text x="110" y="130" class="figsub">many cultures, ancient</text>
+        <circle cx="330" cy="95" r="9" class="fb"/><text x="330" y="60" class="figttl" fill="#6a55c8">Terminating societies</text><text x="330" y="130" class="figsub">Victorian Britain</text>
+        <circle cx="550" cy="95" r="9" class="fa"/><text x="550" y="60" class="figttl" fill="#b8395e">Permanent societies</text><text x="550" y="130" class="figsub">1840s onward</text>
+        <circle cx="770" cy="95" r="9" class="fam"/><text x="770" y="60" class="figttl">Credit unions &amp; gemachs</text><text x="770" y="130" class="figsub">today</text>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow g">Context, not invention</span>
+    <h2>We are choosing between <em>mature</em> ideas, not inventing risk</h2>
+    <p class="lead">Communities have pooled money to carry big life costs for a very long time, across almost every culture. Each of the two models sits inside a long, well tested tradition. It helps to see which.</p>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>None of this is new. Communities have pooled their money to carry big life costs for a very long time, across almost every culture. The two models in front of the committee are not inventions. Each one sits inside a long and well tested tradition, and it helps to see which.</p></div>
+</section>
+
+<!-- ============ PAGE 12 - CONTRACT SAVINGS (MODEL B) ============ -->
+<section class="slide" data-actname="Where the ideas come from" data-title="The contract-savings tradition (Gemach Hamerkazi)" data-seconds="120">
+  <div class="rail"><span class="act">Act 4 - Where the ideas come from</span><span class="sep">/</span><span class="pg">Page 16 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 520 400" role="img" aria-label="A closed common pool, a ranked line, and repayments recycling to the next member">
+      <ellipse cx="150" cy="150" rx="110" ry="88" fill="#efecfa" stroke="#6a55c8" stroke-width="2"/>
+      <text x="150" y="120" text-anchor="middle" class="lblT" fill="#6a55c8">a closed common pool</text>
+      <text x="150" y="142" text-anchor="middle" class="lblS">everyone saves in</text>
+      <!-- ranked line -->
+      <g transform="translate(90 165)" fill="#6a55c8">
+        <circle cx="0" cy="0" r="9"/><text x="0" y="4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">1</text>
+        <circle cx="34" cy="0" r="9" opacity=".8"/><text x="34" y="4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">2</text>
+        <circle cx="68" cy="0" r="9" opacity=".6"/><text x="68" y="4" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">3</text>
+        <circle cx="102" cy="0" r="9" opacity=".4"/>
+      </g>
+      <!-- allocated loan out and recycle -->
+      <path class="flow" d="M260 150 L 330 150" stroke="#6a55c8" stroke-width="2.5"/><path d="M332 150 l -10 -6 v12 z" fill="#6a55c8"/>
+      <text x="295" y="140" text-anchor="middle" class="lblS">allocated loan</text>
+      <path class="flow" d="M360 175 C 360 250 150 260 150 240" stroke="#10897c" stroke-width="2.5"/>
+      <path d="M150 242 l -6 10 h12 z" fill="#10897c"/>
+      <text x="270" y="270" text-anchor="middle" class="lblS" fill="#10897c">repayments fund the next member</text>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow b">The contract-savings tradition</span>
+    <h2>Two respectable ancestors of the queue</h2>
+    <ul class="points">
+      <li class="b"><b>The German Bausparkassen</b>, running to this day: save into a closed pool, wait your ranked turn for an allocated loan, repayments recycle to the next.</li>
+      <li class="b"><b>Victorian terminating building societies</b>: members subscribed, were paid out in turn, and the society wound up once everyone had been housed.</li>
+      <li>Gemach Hamerkazi is <b>this idea, carried over to weddings</b>.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Gemach Hamerkazi belongs to what is called the contract savings tradition. In Germany, the Bausparkassen, still running today, have people save into a shared closed pool and wait their ranked turn for an allocated loan, with repayments recycling to fund the next member. Victorian Britain did the same with its terminating building societies: members subscribed, were paid out in turn, and the society wound itself up once everyone had been housed. Gemach Hamerkazi is that idea, carried over to weddings.</p></div>
+</section>
+
+<!-- ============ PAGE 13 - MUTUAL TRADITION (MODEL A) ============ -->
+<section class="slide" data-actname="Where the ideas come from" data-title="The mutual tradition (Gemach Hakehiloh)" data-seconds="120">
+  <div class="rail"><span class="act">Act 4 - Where the ideas come from</span><span class="sep">/</span><span class="pg">Page 17 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 520 400" role="img" aria-label="An ongoing growing mutual beside a terminating one, with the rotating circle as a shared ancestor">
+      <!-- growing spiral of circles -->
+      <g transform="translate(150 160)">
+        <circle r="30" fill="#fbeef2" stroke="#b8395e" stroke-width="2"/>
+        <circle r="55" fill="none" stroke="#b8395e" stroke-width="2" opacity=".6"/>
+        <circle r="82" fill="none" stroke="#b8395e" stroke-width="2" opacity=".35"/>
+        <path d="M0 -82 A 82 82 0 0 1 58 -58" fill="none" stroke="#b8395e" stroke-width="3"/>
+        <path d="M58 -58 l 2 -13 l 10 8 z" fill="#b8395e"/>
+        <text x="0" y="4" text-anchor="middle" class="lblT" fill="#b8395e">grows</text>
+        <text x="0" y="118" text-anchor="middle" class="lblS">takes in new savers, does not wind up</text>
+      </g>
+      <!-- terminating circle fading -->
+      <g transform="translate(390 150)" opacity=".55">
+        <circle r="46" fill="none" stroke="#6a55c8" stroke-width="2" stroke-dasharray="5 6"/>
+        <text x="0" y="4" text-anchor="middle" class="lblS" fill="#6a55c8">winds up</text>
+        <text x="0" y="70" text-anchor="middle" class="lblS">the terminating kind</text>
+      </g>
+      <!-- rotating ancestor -->
+      <g transform="translate(270 330)">
+        <circle r="16" fill="none" stroke="#10897c" stroke-width="2"/>
+        <path d="M0 -16 A 16 16 0 0 1 14 -8" fill="none" stroke="#10897c" stroke-width="2.5"/><path d="M14 -8 l 1 -6 l 5 4 z" fill="#10897c"/>
+        <text x="40" y="0" class="lblS" fill="#10897c">the rotating savings circle: the shared ancestor of both</text>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow a">The ongoing mutual tradition</span>
+    <h2>An ongoing, growing, member-owned mutual</h2>
+    <ul class="points">
+      <li class="a"><b>Permanent building societies</b> from the eighteen forties took in continuing savers and grew, instead of winding up.</li>
+      <li class="a"><b>Credit unions</b> carry that forward as regulated, member owned funds; the <b>gemach</b> is the same spirit made charitable.</li>
+      <li>Their oldest cousin, the <b>rotating savings circle</b>, is where taking turns with a shared pot begins.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Gemach Hakehiloh belongs to the ongoing mutual tradition. When building societies became permanent in the eighteen forties, they took in continuing savers and grew, instead of winding up. Credit unions carry that forward as regulated, member owned funds, and the gemach, the interest free loan society our own community already runs, is the same spirit made charitable. Gemach Hakehiloh is this idea: an ongoing, growing, member owned mutual. And the oldest cousin of both is the rotating savings circle, found the world over, where a community simply takes turns with a shared pot.</p></div>
+</section>
+
+<!-- ============ PAGE 14 - WILL IT LAST? MODEL A ============ -->
+<section class="slide" data-actname="Will it last?" data-title="Will it last? Gemach Hakehiloh" data-seconds="120">
+  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 18 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 520 400" role="img" aria-label="Far more families pay in than draw out, with a small bad-debt gauge as the risk">
+      <text x="40" y="40" class="lblT">at any moment</text>
+      <!-- many payers -->
+      <g fill="#b8395e">
+        <g id="payer"></g>
+        <!-- grid of small figures -->
+        <g transform="translate(40 60)">
+          <!-- rows -->
+          <g>
+            <circle cx="0" cy="0" r="6"/><circle cx="22" cy="0" r="6"/><circle cx="44" cy="0" r="6"/><circle cx="66" cy="0" r="6"/><circle cx="88" cy="0" r="6"/><circle cx="110" cy="0" r="6"/><circle cx="132" cy="0" r="6"/><circle cx="154" cy="0" r="6"/><circle cx="176" cy="0" r="6"/><circle cx="198" cy="0" r="6"/>
+            <circle cx="0" cy="22" r="6"/><circle cx="22" cy="22" r="6"/><circle cx="44" cy="22" r="6"/><circle cx="66" cy="22" r="6"/><circle cx="88" cy="22" r="6"/><circle cx="110" cy="22" r="6"/><circle cx="132" cy="22" r="6"/><circle cx="154" cy="22" r="6"/><circle cx="176" cy="22" r="6"/><circle cx="198" cy="22" r="6"/>
+            <circle cx="0" cy="44" r="6"/><circle cx="22" cy="44" r="6"/><circle cx="44" cy="44" r="6"/><circle cx="66" cy="44" r="6"/><circle cx="88" cy="44" r="6"/><circle cx="110" cy="44" r="6"/><circle cx="132" cy="44" r="6"/><circle cx="154" cy="44" r="6"/><circle cx="176" cy="44" r="6"/><circle cx="198" cy="44" r="6"/>
+          </g>
+        </g>
+      </g>
+      <text x="40" y="140" class="lblS">many families paying in</text>
+      <!-- few drawers -->
+      <g transform="translate(300 60)" fill="#c08f2a">
+        <circle cx="0" cy="0" r="8"/><circle cx="26" cy="0" r="8"/><circle cx="52" cy="0" r="8"/>
+      </g>
+      <text x="300" y="92" class="lblS">a few drawing out</text>
+      <!-- generational claim -->
+      <text x="40" y="205" class="lblT" fill="#b8395e">the units a family seeds outnumber the most it ever owes at once</text>
+      <!-- bad debt gauge -->
+      <g transform="translate(300 250)">
+        <text x="60" y="-10" text-anchor="middle" class="lblS">the one sharp risk</text>
+        <path d="M6 60 A 54 54 0 0 1 114 60" fill="none" stroke="#eef0f3" stroke-width="12"/>
+        <path d="M6 60 A 54 54 0 0 1 30 18" fill="none" stroke="#c0392b" stroke-width="12" stroke-linecap="round"/>
+        <text x="60" y="52" text-anchor="middle" class="lblT" fill="#c0392b">bad debt</text>
+        <text x="60" y="80" text-anchor="middle" class="lblS">no margin to absorb it</text>
+      </g>
+      <text x="40" y="270" class="lblS" width="200">interest-free lending earns</text>
+      <text x="40" y="288" class="lblS">no margin, so bad debt is</text>
+      <text x="40" y="306" class="lblS">the thing to guard against</text>
+      <text x="40" y="330" class="lblS" fill="#10897c">which is what the fundraising is for</text>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow a">The sustainability case, and its risks</span>
+    <h2>It carries itself, generation to generation</h2>
+    <ul class="points">
+      <li class="a">The households a family seeds <b>outnumber the most it ever owes</b>, and at any moment <b>far more pay in than draw out</b>.</li>
+      <li class="a">It does lean on <b>fresh intake</b>, but softly: growth is <b>natural</b>, led by children following their parents, and the rate needed is a <b>share of the membership</b>. A <b>withdrawal</b> even helps, leaving its fees as capital and one less commitment to serve.</li>
+      <li class="a">The sharpest risk stays <b>thin capital</b>: interest-free lending has no margin, so <b>bad debt</b> is what the fundraising guards against.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Will Gemach Hakehiloh last? The claim is a generational one: the new households a family seeds outnumber the most it ever owes at once, and at any moment far more families pay in than draw out. It does lean on fresh intake, and can be thinned by withdrawals, but gently. Its growth is natural, carried by children who follow their parents' example, and the rate it needs is measured as a share of the current membership, so it scales with the fund rather than needing a fixed number each year. And a family that withdraws is not pure loss: it leaves its fees behind as capital and takes a future commitment off the books. The sharpest risk stays the thin capital, because interest free lending earns no margin, so bad debt is the thing to guard against, and that is what the fundraising is for.</p></div>
+</section>
+
+<!-- ============ PAGE 15 - WILL IT LAST? MODEL B ============ -->
+<section class="slide" data-actname="Will it last?" data-title="Will it last? Gemach Hamerkazi" data-seconds="90">
+  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 19 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 520 380" role="img" aria-label="Repayments overtake new money around year eleven, while the wait lengthens">
+      <!-- crossover chart -->
+      <g transform="translate(50 40)">
+        <line x1="0" y1="0" x2="0" y2="170" stroke="#c6d2e0" stroke-width="1.5"/>
+        <line x1="0" y1="170" x2="380" y2="170" stroke="#c6d2e0" stroke-width="1.5"/>
+        <path class="flow" d="M0 40 C 120 70 260 150 380 160" stroke="#dd7d33" stroke-width="2.5"/>
+        <path class="flow" d="M0 165 C 120 150 260 60 380 24" stroke="#10897c" stroke-width="2.5"/>
+        <circle cx="150" cy="112" r="5" fill="#16233a"/>
+        <line x1="150" y1="112" x2="150" y2="170" stroke="#16233a" stroke-width="1" stroke-dasharray="3 4"/>
+        <text x="150" y="188" text-anchor="middle" class="lblS">~ year 11</text>
+        <text x="384" y="24" class="lblS" fill="#10897c">repayments</text>
+        <text x="384" y="164" class="lblS" fill="#b45f1a">new money</text>
+        <text x="0" y="-12" class="lblT">it funds itself past the crossover</text>
+      </g>
+      <!-- lengthening wait -->
+      <g transform="translate(50 250)">
+        <text x="0" y="0" class="lblT" fill="#6a55c8">its cost is paid in waiting</text>
+        <rect x="0" y="14" width="120" height="18" rx="4" fill="#c9bff0"/><text x="128" y="28" class="lblS">early joiners</text>
+        <rect x="0" y="40" width="300" height="18" rx="4" fill="#6a55c8"/><text x="308" y="54" class="lblS" fill="#6a55c8">average wait ~ 22 years</text>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow b">Solid by design, slow by design</span>
+    <h2>Solvent by construction; the cost is waiting</h2>
+    <ul class="points">
+      <li class="b">Solvent by construction: it only <b>lends what it holds</b>, and from about <b>year eleven</b> repayments carry most of the lending.</li>
+      <li class="b">While young it needs a <b>steady, constant intake</b> of new units, not new families; a <b>gap breaks the cycle</b>. But it has <b>room to plan ahead</b>.</li>
+      <li class="b">Its cost is <b>waiting</b>: about half served over fifty years, an average wait near <b>twenty-two years</b>.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Will Gemach Hamerkazi last? It is solvent by construction, lending only what it holds, and from around year eleven repayments carry most of the lending. While young it leans on a steady, constant intake of new units, not necessarily new families, since more children from one family count too. A gap in that intake breaks the cycle, so consistency matters more here. In its favour, it can plan a few years ahead, with time to recover from a slow patch. Its cost is paid in waiting. And it need not rule out a credit union either, holding the capital such a home wants, its liquidity simply untested.</p></div>
+</section>
+
+<!-- ============ PAGE 16 - REGULATORY ============ -->
+<section class="slide" data-actname="Governance" data-title="Why a credit union" data-seconds="120">
+  <div class="rail"><span class="act">Act 5 - Governance</span><span class="sep">/</span><span class="pg">Page 20 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 540 360" role="img" aria-label="A credit union holds and protects members' savings, with permission to take deposits and a footing regulators have already examined">
+      <g fill="#6b7a92"><circle cx="42" cy="150" r="12"/><circle cx="42" cy="186" r="12"/><circle cx="42" cy="222" r="12"/></g>
+      <text x="42" y="256" text-anchor="middle" class="figsub">members</text>
+      <path class="flow" d="M64 186 L 176 186" stroke="#10897c" stroke-width="2.5"/><path d="M178 186 l -11 -6 v12 z" fill="#10897c"/>
+      <text x="120" y="176" text-anchor="middle" class="lblS" fill="#10897c">savings in</text>
+      <g transform="translate(268 186)">
+        <path d="M0 -96 L 80 -66 V 8 C 80 68 42 102 0 120 C -42 102 -80 68 -80 8 V -66 Z" fill="#e4f3f1" stroke="#10897c" stroke-width="2.5"/>
+        <text x="0" y="-34" text-anchor="middle" class="figttl" fill="#10897c">Credit</text>
+        <text x="0" y="-10" text-anchor="middle" class="figttl" fill="#10897c">union</text>
+        <g transform="translate(0 30)"><path d="M-9 6 v-9 a9 9 0 0 1 18 0 v9" fill="none" stroke="#10897c" stroke-width="3"/><rect x="-16" y="6" width="32" height="24" rx="4" fill="#10897c"/></g>
+        <text x="0" y="100" text-anchor="middle" class="figsub">holds savings safely</text>
+      </g>
+      <g transform="translate(392 96)">
+        <g><rect width="140" height="54" rx="10" class="card"/><text x="14" y="24" class="lblT" fill="#10897c">Permission</text><text x="14" y="43" class="lblS">to take deposits</text></g>
+        <g transform="translate(0 68)"><rect width="140" height="54" rx="10" class="card"/><text x="14" y="24" class="lblT" fill="#10897c">Protection</text><text x="14" y="43" class="lblS">for members' savings</text></g>
+        <g transform="translate(0 136)"><rect width="140" height="54" rx="10" class="card"/><text x="14" y="24" class="lblT" fill="#10897c">Regulated</text><text x="14" y="43" class="lblS">already examined</text></g>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow g">Why a credit union</span>
+    <h2>The right home for people's savings</h2>
+    <ul class="points">
+      <li>It <b>holds members' savings</b>, and taking deposits <b>needs permission</b> while those savings <b>need protecting</b>. A credit union gives both.</li>
+      <li>It is <b>already examined by regulators</b>, with prudential rules and a common bond behind it.</li>
+      <li>The one awkward fit: <b>non-returnable contributions</b> and <b>interest-free lending</b> sit oddly against ordinary shares.</li>
+    </ul>
+    <div class="tag-row"><span class="chip">Needs a professional's sign-off before the committee relies on it</span></div>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>This is the one part that needs a professional's sign-off, so take it as the direction of travel. Here is why a credit union is the right home. Gemach Hakehiloh holds members' savings, and holding people's money is not a light thing. Taking deposits needs permission, and those savings need protecting, and a credit union gives both, with prudential rules, a common bond, and a footing regulators have already examined. The one awkward fit is that the non returnable contributions and the interest free lending sit oddly against ordinary shares, and that is what a professional would work through. But the reason to reach for a regulated home is simple: it is looking after people's savings.</p></div>
+</section>
+
+<!-- ============ PAGE 17 - PILOT METRICS ============ -->
+<section class="slide" data-actname="Governance" data-title="How a pilot would be judged" data-seconds="90">
+  <div class="rail"><span class="act">Act 5 - Governance</span><span class="sep">/</span><span class="pg">Page 21 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 560 300" role="img" aria-label="A dashboard of gauges with blank slots for committee-set thresholds">
+      <g>
+        <g transform="translate(30 40)"><rect width="150" height="92" rx="10" class="card"/><text x="16" y="30" class="lblT">Units funded</text><text x="16" y="50" class="lblS">vs units enrolled</text><rect x="16" y="62" width="118" height="16" rx="4" fill="#eef2f7" stroke="#c6d2e0" stroke-dasharray="4 4"/><text x="75" y="74" text-anchor="middle" class="lblS">threshold?</text></g>
+        <g transform="translate(205 40)"><rect width="150" height="92" rx="10" class="card"/><text x="16" y="30" class="lblT">Capital headroom</text><text x="16" y="50" class="lblS">above 8%</text><rect x="16" y="62" width="118" height="16" rx="4" fill="#eef2f7" stroke="#c6d2e0" stroke-dasharray="4 4"/><text x="75" y="74" text-anchor="middle" class="lblS">threshold?</text></g>
+        <g transform="translate(380 40)"><rect width="150" height="92" rx="10" class="card"/><text x="16" y="30" class="lblT">Liquidity headroom</text><text x="16" y="50" class="lblS">above 10%</text><rect x="16" y="62" width="118" height="16" rx="4" fill="#eef2f7" stroke="#c6d2e0" stroke-dasharray="4 4"/><text x="75" y="74" text-anchor="middle" class="lblS">threshold?</text></g>
+        <g transform="translate(30 150)"><rect width="150" height="92" rx="10" class="card"/><text x="16" y="30" class="lblT">Loan amount reached</text><text x="16" y="50" class="lblS">toward £40k</text><rect x="16" y="62" width="118" height="16" rx="4" fill="#eef2f7" stroke="#c6d2e0" stroke-dasharray="4 4"/><text x="75" y="74" text-anchor="middle" class="lblS">threshold?</text></g>
+        <g transform="translate(205 150)"><rect width="150" height="92" rx="10" class="card"/><text x="16" y="30" class="lblT">Bad-debt experience</text><text x="16" y="50" class="lblS">watched closely</text><rect x="16" y="62" width="118" height="16" rx="4" fill="#eef2f7" stroke="#c6d2e0" stroke-dasharray="4 4"/><text x="75" y="74" text-anchor="middle" class="lblS">threshold?</text></g>
+        <g transform="translate(380 150)"><rect width="150" height="92" rx="10" class="card"/><text x="16" y="30" class="lblT">Growth in units</text><text x="16" y="50" class="lblS">against real data</text><rect x="16" y="62" width="118" height="16" rx="4" fill="#eef2f7" stroke="#c6d2e0" stroke-dasharray="4 4"/><text x="75" y="74" text-anchor="middle" class="lblS">threshold?</text></g>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow t">Governance as measurement</span>
+    <h2>Because it can be measured, it can be judged</h2>
+    <p class="lead">Gemach Hakehiloh can be tested against the community's own data, over the first three years and beyond, on a small set of numbers.</p>
+    <ul class="points">
+      <li>Units funded against units enrolled, headroom above both floors, the loan amount reached, bad-debt experience, and growth in units.</li>
+      <li><b>The thresholds are yours to set. They are the committee's numbers, not the model's.</b></li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Because Gemach Hakehiloh's growth can be measured, a pilot can be judged honestly. It can be tested against the community's own data, over the first three years and beyond, on a small set of numbers: units funded against units enrolled, the headroom above the capital and liquidity floors, the loan amount reached, the experience of bad debt, and the growth in units. The thresholds on each of these are for the committee to set. They are your numbers, not the model's.</p></div>
+</section>
+
+<!-- ============ PAGE 18 - MEET THE SIMULATORS ============ -->
+<section class="slide" data-actname="The simulators" data-title="Meet the simulators" data-seconds="90">
+  <div class="rail"><span class="act">Act 6 - The simulators</span><span class="sep">/</span><span class="pg">Page 22 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 560 340" role="img" aria-label="Three live tools: Gemach Hakehiloh, Gemach Hamerkazi, and a comparison view">
+      <!-- browser card A -->
+      <g transform="translate(20 40)"><rect width="240" height="120" rx="10" class="card"/><rect width="240" height="26" rx="10" fill="#f4f7fb"/><rect y="16" width="240" height="10" fill="#f4f7fb"/><circle cx="16" cy="13" r="4" fill="#e0a0b3"/><circle cx="30" cy="13" r="4" fill="#efd39c"/><circle cx="44" cy="13" r="4" fill="#a9d9c9"/>
+        <text x="20" y="58" class="lblT" fill="#b8395e">Gemach Hakehiloh</text><text x="20" y="78" class="lblS">the Gemach Hakehiloh simulator</text>
+        <g transform="translate(20 90)"><rect width="26" height="18" rx="3" fill="#fbeef2"/><rect x="32" width="26" height="18" rx="3" fill="#fbeef2"/><rect x="64" width="26" height="18" rx="3" fill="#fbeef2"/><rect x="120" width="90" height="18" rx="3" fill="#eef2f7"/></g>
+      </g>
+      <!-- browser card B -->
+      <g transform="translate(300 40)"><rect width="240" height="120" rx="10" class="card"/><rect width="240" height="26" rx="10" fill="#f4f7fb"/><rect y="16" width="240" height="10" fill="#f4f7fb"/><circle cx="16" cy="13" r="4" fill="#e0a0b3"/><circle cx="30" cy="13" r="4" fill="#efd39c"/><circle cx="44" cy="13" r="4" fill="#a9d9c9"/>
+        <text x="20" y="58" class="lblT" fill="#6a55c8">Gemach Hamerkazi</text><text x="20" y="78" class="lblS">the Gemach Hamerkazi simulator</text>
+        <g transform="translate(20 90)"><rect width="26" height="18" rx="3" fill="#efecfa"/><rect x="32" width="26" height="18" rx="3" fill="#efecfa"/><rect x="64" width="26" height="18" rx="3" fill="#efecfa"/><rect x="120" width="90" height="18" rx="3" fill="#eef2f7"/></g>
+      </g>
+      <!-- compare card -->
+      <g transform="translate(120 190)"><rect width="320" height="120" rx="10" class="card"/><rect width="320" height="26" rx="10" fill="#f4f7fb"/><rect y="16" width="320" height="10" fill="#f4f7fb"/><circle cx="16" cy="13" r="4" fill="#e0a0b3"/><circle cx="30" cy="13" r="4" fill="#efd39c"/><circle cx="44" cy="13" r="4" fill="#a9d9c9"/>
+        <text x="20" y="58" class="lblT" fill="#10897c">Compare the two</text><text x="20" y="78" class="lblS">sets the shared assumptions once, shows both side by side</text>
+        <g transform="translate(20 90)"><rect width="130" height="18" rx="3" fill="#fbeef2"/><rect x="140" width="130" height="18" rx="3" fill="#efecfa"/></g>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow t">Two live tools and a comparison view</span>
+    <h2>Every figure here, yours to reproduce</h2>
+    <p class="lead">All three are on the community website now, in the same design you have been looking at.</p>
+    <ul class="points">
+      <li class="a"><b>berinoh.provaris.co.uk/model-a/</b> - Gemach Hakehiloh</li>
+      <li class="b"><b>berinoh.provaris.co.uk/model-b/</b> - Gemach Hamerkazi</li>
+      <li><b>berinoh.provaris.co.uk</b> - the comparison view</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>Two live tools have been built to go with this, in the same design you have been looking at, and they are on the community website now. One is the Gemach Hakehiloh simulator. One is the Gemach Hamerkazi simulator. And a comparison view sets the handful of shared assumptions once and shows both side by side. Every figure in this presentation can be reproduced, and challenged, in these tools.</p></div>
+</section>
+
+<!-- ============ PAGE 19 - HOW TO TEST ============ -->
+<section class="slide" data-actname="The simulators" data-title="How to test, and what to look for" data-seconds="90">
+  <div class="rail"><span class="act">Act 6 - The simulators</span><span class="sep">/</span><span class="pg">Page 23 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 540 360" role="img" aria-label="Turning bad debt up drops the capital ratio; fewer joiners stretch the wait">
+      <!-- A move -->
+      <g transform="translate(30 40)">
+        <text x="0" y="-10" class="lblT" fill="#b8395e">Gemach Hakehiloh: turn bad debt up</text>
+        <line x1="0" y1="0" x2="0" y2="110" stroke="#c6d2e0" stroke-width="1.5"/><line x1="0" y1="110" x2="210" y2="110" stroke="#c6d2e0" stroke-width="1.5"/>
+        <line x1="0" y1="40" x2="210" y2="40" stroke="#b8395e" stroke-width="1.5" stroke-dasharray="5 5"/><text x="214" y="44" class="lblS" fill="#b8395e">8% floor</text>
+        <path class="flow" d="M0 20 C 70 30 120 78 210 86" stroke="#16233a" stroke-width="2.5"/>
+        <text x="120" y="104" class="lblS">capital falls below and stays</text>
+      </g>
+      <!-- B move -->
+      <g transform="translate(30 220)">
+        <text x="0" y="-10" class="lblT" fill="#6a55c8">Gemach Hamerkazi: fewer joiners a year</text>
+        <rect x="0" y="6" width="120" height="18" rx="4" fill="#c9bff0"/><text x="128" y="20" class="lblS">before</text>
+        <rect x="0" y="32" width="300" height="18" rx="4" fill="#6a55c8"/><text x="308" y="46" class="lblS" fill="#6a55c8">the wait stretches out</text>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow t">Two quick moves</span>
+    <h2>Nothing in the tools is fixed</h2>
+    <ul class="points">
+      <li class="a">In Gemach Hakehiloh, <b>turn bad debt up</b> and watch the capital ratio fall below its floor and stay there.</li>
+      <li class="b">In Gemach Hamerkazi, <b>lower the joiners a year</b> and watch the average wait stretch out.</li>
+      <li>Every figure follows from the rules you set. The committee's job is to judge whether <b>those rules are right</b>.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>The point of the tools is that nothing in them is fixed. In Gemach Hakehiloh, turn bad debt up, and watch the capital ratio fall below its floor and stay there for years. In Gemach Hamerkazi, lower the number of joiners a year, and watch the average wait stretch out. Every figure follows from the rules you set. The committee's job is not to accept the numbers. It is to judge whether the rules behind them are the right ones.</p></div>
+</section>
+
+<!-- ============ PAGE 20 - WHERE THIS COULD GO ============ -->
+<section class="slide center" data-actname="Where this could go" data-title="Where this could go, and close" data-seconds="90">
+  <div class="rail"><span class="act">Act 6 - Close</span><span class="sep">/</span><span class="pg">Page 24 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 720 214" role="img" aria-label="From where we are now, three choices: Gemach Hakehiloh, Gemach Hamerkazi, or a pilot judged on our metrics">
+      <g fill="none" stroke-width="3" stroke-linecap="round">
+        <path d="M360 180 C 280 152 180 112 96 68" stroke="#b8395e"/>
+        <path d="M360 180 C 440 152 540 112 624 68" stroke="#6a55c8"/>
+        <path d="M360 180 L 360 84" stroke="#c08f2a" stroke-width="2.5" stroke-dasharray="2 9"/>
+      </g>
+      <circle cx="360" cy="180" r="7" class="ink"/>
+      <text x="360" y="204" text-anchor="middle" class="figsub">where we are now</text>
+      <circle cx="96" cy="68" r="8" class="fa"/><text x="96" y="48" text-anchor="middle" class="lblT" fill="#b8395e">Gemach Hakehiloh</text>
+      <circle cx="624" cy="68" r="8" class="fb"/><text x="624" y="48" text-anchor="middle" class="lblT" fill="#6a55c8">Gemach Hamerkazi</text>
+      <g transform="translate(360 66)">
+        <line x1="0" y1="-2" x2="0" y2="18" stroke="#16233a" stroke-width="2.5"/>
+        <path d="M0 -2 h34 l-8 9 l8 9 h-34 z" fill="#c08f2a"/>
+        <text x="0" y="-14" text-anchor="middle" class="lblT" fill="#c08f2a">or a pilot</text>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow t">Choices, not a verdict</span>
+    <h2>Every figure moves with the committee's <em>assumptions</em></h2>
+    <p class="lead">A hybrid, a floor under the early loan, stronger reserves so the full amount comes sooner, or a time-boxed pilot on our metrics. Open questions, not a verdict.</p>
+    <div class="tag-row">
+      <a class="chip a" href="https://berinoh.provaris.co.uk/model-a/" target="_blank" rel="noopener">Open Gemach Hakehiloh</a>
+      <a class="chip b" href="https://berinoh.provaris.co.uk/model-b/" target="_blank" rel="noopener">Open Gemach Hamerkazi</a>
+      <a class="chip" href="https://berinoh.provaris.co.uk" target="_blank" rel="noopener">Compare the two</a>
+    </div>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>So, where could this go. There is no verdict here, only choices: a hybrid of the two, a floor under how far the early loan can fall, stronger reserves so the full amount comes sooner, or a time boxed pilot judged on the metrics we just set. Every figure moves with the committee's assumptions, and those assumptions are the real decision. The two tools are linked below, and they are yours to press on.</p></div>
+</section>
+
+
+<!-- ============ PILOT PROPOSAL / CLOSE ============ -->
+<section class="slide" data-actname="A way to begin" data-title="Start with the pilot" data-seconds="95">
+  <div class="rail"><span class="act">Act 7 - A way to begin</span><span class="sep">/</span><span class="pg">Page 25 of 25</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 560 320" role="img" aria-label="150 pounds a month splits into 135 into the pot and 15 to the fund's costs; the sign-up and the real data shape the final scheme">
+      <g transform="translate(24 128)">
+        <rect width="120" height="64" rx="12" fill="#16233a"/>
+        <text x="60" y="34" text-anchor="middle" class="h" font-size="24" fill="#fff">&pound;150</text>
+        <text x="60" y="52" text-anchor="middle" fill="#aab6c9" font-size="12">a month</text>
+      </g>
+      <path class="flow" d="M148 150 C 175 120 182 110 200 108" stroke="#b8395e" stroke-width="2.5"/><path d="M202 108 l -11 -3 v11 z" fill="#b8395e"/>
+      <path class="flow" d="M148 170 C 175 200 182 210 200 212" stroke="#c08f2a" stroke-width="2.5"/><path d="M202 212 l -11 -8 v11 z" fill="#c08f2a"/>
+      <g transform="translate(204 84)"><rect width="176" height="52" rx="10" fill="#fbeef2" stroke="#b8395e" stroke-width="1.5"/><text x="16" y="23" class="lblT" fill="#b8395e">&pound;135</text><text x="16" y="42" class="lblS">into the family pot</text></g>
+      <g transform="translate(204 190)"><rect width="176" height="52" rx="10" fill="#fbeee1" stroke="#c08f2a" stroke-width="1.5"/><text x="16" y="23" class="lblT" fill="#c08f2a">&pound;15</text><text x="16" y="42" class="lblS">to the fund's costs</text></g>
+      <path class="flow" d="M384 160 L 420 160" stroke="#10897c" stroke-width="2.5"/><path d="M422 160 l -11 -6 v12 z" fill="#10897c"/>
+      <g transform="translate(426 118)"><rect width="126" height="84" rx="12" class="card"/><text x="63" y="30" text-anchor="middle" class="lblT">sign-up</text><text x="63" y="50" text-anchor="middle" class="lblT">+ real data</text><text x="63" y="72" text-anchor="middle" class="lblS">shape the scheme</text></g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow t">A way to begin</span>
+    <h2>Start with the <em>pilot</em></h2>
+    <ul class="points">
+      <li>Invite families to begin saving <b>&pound;150 a month</b>: <b>&pound;15</b> toward the fund's costs, <b>&pound;135</b> into their own pot.</li>
+      <li>Build the exact scheme on the strength of the <b>sign-up</b> and the <b>real data</b> it produces.</li>
+      <li>Sold clearly and honestly, this commits us to a <b>beginning</b>, not to every last rule, and <b>leaves room to improve</b>.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+    <p>So here is what I would suggest. Rather than settle every detail now, we begin with a pilot. We invite families to start saving a hundred and fifty pounds a month, with fifteen of it going toward the fund's costs and the rest into their own pot. Then we build the exact scheme on the strength of two things: how well the sign-up goes, and the real data it gives us. Sold clearly and honestly, this is the safest way forward, because it commits the community to a beginning, not to every last rule, and it leaves room to make the scheme better as we learn. Thank you.</p></div>
+</section>
+</div>
+
+<div id="bar">
+  <div id="prog"><i></i></div>
+  <button class="btn" id="prev" title="Back (left arrow)" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7V5z"/></svg></button>
+  <button class="btn play" id="play" title="Play or pause (space)" aria-label="Play or pause"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+  <button class="btn" id="next" title="Skip (right arrow)" aria-label="Skip forward"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7V5z"/></svg></button>
+  <div class="meta"><b id="mpg">1</b> <span id="mtot">/ 25</span> <span class="hideSm" id="mact"></span></div>
+  <div class="grow"></div>
+  <button class="tbtn" id="capBtn" title="Show or hide the on-screen narration">Narration</button>
+  <button class="tbtn" id="menuBtn">Pages</button>
+</div>
+
+<div id="menu"><div class="menu-card">
+  <button class="mclose" id="mclose" aria-label="Close">&times;</button>
+  <h3>All pages</h3>
+  <div class="sub">Jump to any page. Stars mark the key pages.</div>
+  <ul class="mlist" id="mlist"></ul>
+</div></div>
+
+<script>
+/* Adding a recorded voiceover later:
+   Put twenty clips named p01.mp3 ... p20.mp3 in an "audio" folder next to this
+   file, then delete the two slashes at the start of the "for" line just below.
+   Each page will then play its clip and advance when the clip ends. With no
+   clips, every page auto-advances on its own timing. A missing clip falls back
+   to timing on its own, so a half-recorded set still plays through. */
+window.DECK_AUDIO = window.DECK_AUDIO || {};
+// for(var _i=1;_i<=25;_i++){window.DECK_AUDIO[_i]='audio/p'+String(_i).padStart(2,'0')+'.mp3';}
+(function(){
+  'use strict';
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var N = slides.length;
+  var i = 0, playing = false, t0 = 0, raf = 0, elapsed = 0, dur = 8000, audio = null;
+  var corePath = [1,2,6,7,9,10,12,23];     // 1-indexed 15-minute path
+  var pathMode = false;
+  var capsUser = null;                     // null = auto (hide when a page has voice), true/false = forced
+  function capsVisible(){
+    if(capsUser===true) return true;
+    if(capsUser===false) return false;
+    return !window.DECK_AUDIO[i+1];        // auto: show only when there is no voice clip
+  }
+  function applyCaps(){
+    var cap = slides[i] && slides[i].querySelector('.caption');
+    if(cap) cap.classList.toggle('hide', !capsVisible());
+    var cb = document.getElementById('capBtn'); if(cb) cb.classList.toggle('on', capsVisible());
+  }
+  var progI = document.querySelector('#prog i');
+  var mpg = document.getElementById('mpg'), mtot = document.getElementById('mtot'), mact = document.getElementById('mact');
+  var playBtn = document.getElementById('play');
+  var PLAY='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  var PAUSE='<svg viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+  mtot.textContent = '/ ' + N;
+
+  function actName(s){return s.getAttribute('data-actname')||'';}
+  function seconds(s){return (parseFloat(s.getAttribute('data-seconds'))||8)*1000;}
+
+  function order(){ return pathMode ? corePath.map(function(n){return n-1;}) : slides.map(function(_,k){return k;}); }
+  function posInOrder(idx){ var o=order(); return o.indexOf(idx); }
+
+  function show(idx, dir){
+    if(idx<0||idx>=N) return;
+    slides.forEach(function(s){s.classList.remove('active','enter');});
+    i = idx;
+    var s = slides[i];
+    s.classList.add('active');
+    void s.offsetWidth; s.classList.add('enter');
+    var o = order(); var p = o.indexOf(i); if(p<0) p=0;
+    mpg.textContent = (p+1);
+    mtot.textContent = '/ ' + o.length;
+    mact.textContent = actName(s);
+    highlightMenu();
+    applyCaps();
+    startTiming();
+  }
+
+  function startTiming(){
+    stopTiming();
+    elapsed = 0; t0 = performance.now();
+    var s = slides[i];
+    if(audio){ try{audio.pause();}catch(e){} audio=null; }
+    var clip = window.DECK_AUDIO[i+1];
+    if(clip){
+      audio = new Audio(clip);
+      audio.addEventListener('loadedmetadata', function(){ dur = (audio.duration||seconds(s)/1000)*1000; });
+      audio.addEventListener('ended', function(){ advance(1); });
+      audio.addEventListener('error', function(){ audio=null; dur=seconds(s); elapsed=0; t0=performance.now(); });
+      dur = seconds(s);
+      if(playing){ audio.play().catch(function(){}); }
+    } else {
+      dur = seconds(s);
+    }
+    if(playing) loop();
+    else drawProg(0);
+  }
+  function stopTiming(){ if(raf) cancelAnimationFrame(raf); raf=0; }
+  function drawProg(f){ progI.style.width = (Math.max(0,Math.min(1,f))*100).toFixed(2) + '%'; }
+  function loop(){
+    raf = requestAnimationFrame(function(){
+      var f;
+      if(audio && audio.duration){ f = audio.currentTime/audio.duration; }
+      else { elapsed = performance.now()-t0; f = elapsed/dur; }
+      drawProg(f);
+      if(f>=1){ advance(1); return; }
+      if(playing) loop();
+    });
+  }
+  function setPlaying(p){
+    playing = p;
+    playBtn.innerHTML = p ? PAUSE : PLAY;
+    if(p){ t0 = performance.now()-elapsed; if(audio){audio.play().catch(function(){});} loop(); }
+    else { stopTiming(); if(audio){try{audio.pause();}catch(e){}} }
+  }
+  function advance(d){
+    var o = order(); var p = o.indexOf(i);
+    var np = p + d;
+    if(np>=o.length){ setPlaying(false); drawProg(1); return; }
+    if(np<0){ np=0; }
+    show(o[np], d);
+  }
+
+  /* menu */
+  var mlist = document.getElementById('mlist');
+  slides.forEach(function(s,k){
+    var li=document.createElement('li');
+    if(s.hasAttribute('data-core')) li.className='iscore';
+    li.innerHTML='<span class="n">'+(k+1)+'</span><span class="t">'+(s.getAttribute('data-title')||('Page '+(k+1)))+'</span><span class="ac">'+actName(s)+'</span>';
+    li.addEventListener('click',function(){ closeMenu(); show(k,1); });
+    mlist.appendChild(li);
+  });
+  function highlightMenu(){ Array.prototype.forEach.call(mlist.children,function(li,k){ li.classList.toggle('on',k===i); }); }
+  function openMenu(){ document.getElementById('menu').classList.add('open'); }
+  function closeMenu(){ document.getElementById('menu').classList.remove('open'); }
+
+  document.getElementById('prev').addEventListener('click',function(){ advance(-1); });
+  document.getElementById('next').addEventListener('click',function(){ advance(1); });
+  playBtn.addEventListener('click',function(){ setPlaying(!playing); });
+  document.getElementById('capBtn').addEventListener('click',function(){ capsUser = capsVisible()? false : true; applyCaps(); });
+  document.getElementById('menuBtn').addEventListener('click',openMenu);
+  document.getElementById('mclose').addEventListener('click',closeMenu);
+  document.getElementById('menu').addEventListener('click',function(e){ if(e.target.id==='menu') closeMenu(); });
+  /* full deck only */
+
+  document.addEventListener('keydown',function(e){
+    if(e.key===' '){e.preventDefault();setPlaying(!playing);}
+    else if(e.key==='ArrowRight'){advance(1);}
+    else if(e.key==='ArrowLeft'){advance(-1);}
+    else if(e.key==='Escape'){closeMenu();}
+  });
+
+  show(0,1);
+})();
+</script>
+</body>
+</html>
