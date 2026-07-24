@@ -1,94 +1,104 @@
-# The Contract Savings Loan Scheme - interactive model
+# Berinoh community wedding fund - interactive models
 
-Prepared for the Berinoh committee. Live at <https://berinoh.provaris.co.uk>
-(English at `/`, Hebrew at `/he.html`).
+Prepared for the Berinoh committee. Live at <https://berinoh.provaris.co.uk>.
 
-A community wedding-finance mutual. Families pay a small amount monthly for years,
-receive a large interest-free loan when a wedding comes, and repay it so the next
-family can be helped. This page lets a committee change every rule and see the
-consequence over fifty years or more.
+Two designs for a community wedding-finance mutual, each with its own interactive
+simulator, plus a landing page that compares them on shared assumptions. A
+committee can change every rule and watch the consequence over fifty years or more.
+
+- **Model A, Gemach Hakehiloh.** A per-family pot inside a credit-union framework.
+  A family saves together and pays a small monthly fee. When a child marries, the
+  fund lends what it can afford that year, on the wedding date, and the loan grows
+  toward the full amount as the fund matures and reserves build.
+- **Model B, the Queue Scheme (Contract Savings Loan Scheme).** Per child, rationed
+  by time. A family saves for each child and joins a waiting list; when its turn
+  comes it receives the full interest-free loan, and its repayments help the next
+  family in line. Once mature it largely funds itself.
+
+## URLs
+
+```
+/                landing page and side-by-side comparison
+/model-a/        Gemach Hakehiloh simulator (English)
+/model-b/        Queue Scheme simulator (English)
+/model-b/he/     Queue Scheme simulator (Hebrew, right to left)
+/he.html         redirect stub -> /model-b/he/ (kept: an earlier reviewer holds this link)
+```
 
 ## Layout
 
 ```
-index.html          English page. Markup only.
-he.html             Hebrew page, right to left. Markup only.
-css/app.css         One stylesheet for both languages.
-js/engine-b.js      The simulation. No DOM, no language.
-js/charts.js        SVG chart renderer.
-js/cycle.js         Generates the money-cycle diagram.
-js/format.js        Number, currency and duration formatting.
-js/strings-en.js    English runtime strings.
-js/strings-he.js    Hebrew runtime strings.
-js/app.js           State, presets, wiring, rendering.
-tests/engine.test.js  Regression checks.
-CNAME               Custom domain. Do not delete.
+index.html            Landing and comparison page. Markup only.
+he.html               Redirect stub to /model-b/he/. Do not delete.
+model-a/index.html    Model A page (English). Markup only.
+model-b/index.html    Model B page (English). Markup only.
+model-b/he/index.html Model B page (Hebrew, RTL). Markup only.
+
+css/app.css           One stylesheet for every page, both directions.
+
+js/engine-a.js        Model A simulation. No DOM, no language.
+js/engine-b.js        Model B simulation. No DOM, no language.
+js/seed-500.js        Household seed data for Model A.
+js/charts.js          SVG chart renderer.
+js/cycle.js           Model B money-cycle diagram.
+js/format.js          Number, currency and duration formatting.
+js/strings-a-en.js    Model A English runtime strings.
+js/strings-en.js      Model B English runtime strings.
+js/strings-he.js      Model B Hebrew runtime strings.
+js/app-a.js           Model A state, presets, wiring, rendering.
+js/app.js             Model B state, presets, wiring, rendering.
+js/compare.js         Landing page: runs both engines on shared inputs.
+
+tests/engine-a.test.js  Model A regression checks (49).
+tests/engine.test.js    Model B regression checks (25).
+CNAME                 Custom domain. Do not delete.
 ```
+
+All pages load assets by absolute path (`/css/...`, `/js/...`), so they work at any
+depth.
 
 ## The one rule worth knowing
 
-`js/engine-b.js` **touches no DOM and contains no language**. It takes a settings
-object and returns arrays of numbers. That is what makes it testable in node,
-portable into Excel or Python, and reviewable by an actuary who does not care
-about the interface. Keep it that way.
-
-Everything the user reads at runtime lives in `strings-en.js` and `strings-he.js`.
-Static page copy (headings, control labels, the assumptions list, the footer) sits
-in the two HTML files, because it is easier to proofread in place and the page
-should still be readable without JavaScript. So a translator edits two files per
-language, not one. That is a deliberate trade.
+Both engines **touch no DOM and contain no language**. Each takes a settings object
+and returns arrays of numbers. That is what makes them testable in node, portable
+into Excel or Python, and reviewable by an actuary who does not care about the
+interface. Keep it that way. Everything a user reads at runtime lives in the
+`strings-*` files; static page copy sits in the HTML so it is readable without
+JavaScript and easy to proofread in place.
 
 ## Running the tests
 
 ```
 node tests/engine.test.js
+node tests/engine-a.test.js
 ```
 
-Exits non-zero on failure. Run it after any change to the engine. It checks the
-per-member arithmetic, the base-case headline figures, the invariants that must
-never break (cash never negative, unlent cash never exceeds one loan, loans always
-whole), scale invariance, and the run-off scenario.
+Each exits non-zero on failure. Run them after any change to the matching engine.
 
-## How the engine works
+## Model A base case
 
-One month at a time, repeating seven steps:
+Three years of collecting before lending begins, a modest start-up capital left
+after set-up costs, roughly 35,000 pounds a year of fundraising to cover the capital
+shortfall, and no losses or withdrawals assumed. The loan starts near 10,000 pounds
+and is lifted only when the fund can hold the higher figure while keeping its capital
+and liquidity above their floors, so it only ever rises. Growth is by reproduction,
+measured against member data, not assumed.
 
-1. New children enrol and join the back of the queue
-2. If exits are on, a fraction of those waiting leave and are refunded their savings
-3. Everyone still waiting, and still inside their contribution period, pays in
-4. Repayments arrive, reduced by the default rate, with recoveries after their lag
-5. Running costs come off
-6. **The lending loop.** Take the family at the front, add the top-up they owe, and
-   ask whether the cash covers a whole loan while leaving the reserve intact. If
-   yes, issue and repeat. If no, stop for the month
-7. Leftover cash carries into next month
+## Model B base case
 
-Step 6 is the whole scheme. Waiting times, coverage and run-off survivability all
-fall out of how many times that loop turns each month.
-
-Defaults and exits are **expected values, not random draws**. A 2% annual default
-rate removes exactly 2% of the surviving balance. The engine is therefore
-deterministic: identical inputs always give identical outputs, with no sampling
-noise. The trade-off is that it gives a central estimate rather than a
-distribution, so it will not tell you the odds of a bad decade. Adding that means a
-Monte Carlo layer on top, which is a contained piece of work and a reasonable ask
-from an actuary.
-
-## Validation
-
-Reproduces an independently built model to within 0.01%. Headline base case over
-fifty years: 335,080 weddings funded, 55.8% of enrollees served, average wait 22
-years 1 month, 88.4% of final-year money coming from repayments rather than new
-savers, with repayments overtaking new money in year 11.
+Over fifty years: 335,080 weddings funded, 55.8% of enrollees served, average wait
+22 years 1 month, 88.4% of final-year money coming from repayments rather than new
+savers, with repayments overtaking new money in year 11. Reproduces an independently
+built model to within 0.01%.
 
 ## Deployment
 
-GitHub Pages from `main`, root folder. Push and the live site updates within about
-a minute. There is no build step and no server. Do not delete `CNAME`; the custom
+GitHub Pages from `main`, root folder. Push and the live site updates within about a
+minute. There is no build step and no server. Do not delete `CNAME`; the custom
 domain stops working if you do.
 
 ## Scope
 
-This model sets out the mechanics of the scheme as described. It is not a
-recommendation, a forecast, or a substitute for actuarial review. Every figure
-moves with the assumptions entered on the page.
+These models set out the mechanics of each scheme as described. They are not a
+recommendation, a forecast, or a substitute for actuarial or legal review. Every
+figure moves with the assumptions entered on the page.

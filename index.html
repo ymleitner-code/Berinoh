@@ -3,167 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Contract Savings Loan Scheme - Interactive Model</title>
+<title>Two ways to fund our community's weddings - Berinoh</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="/css/app.css">
+<style>
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:820px){.two{grid-template-columns:1fr}}
+  .modelcard{display:flex;flex-direction:column;gap:8px}
+  .modelcard .tag{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+  .modelcard.a .tag{color:var(--out)} .modelcard.b .tag{color:var(--queue)}
+  .modelcard h2{font-family:var(--display);font-size:24px;font-weight:700}
+  .modelcard p{font-size:14.5px;color:var(--ink-2);flex:1}
+  .modelcard .go{align-self:flex-start;margin-top:6px;font-family:var(--body);border:1.5px solid var(--ink);
+    background:var(--ink);color:#fff;border-radius:999px;padding:9px 18px;font-size:14.5px;font-weight:700;text-decoration:none}
+  .modelcard .go:hover{background:#000}
+  .cmp-ctrls{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+  @media(max-width:720px){.cmp-ctrls{grid-template-columns:1fr 1fr}}
+  .cmp-ctrls .f label span{color:var(--accent,#3b6ea5);float:right;font-weight:700}
+  .colhead{font-family:var(--display);font-size:20px;font-weight:700;margin-bottom:10px}
+  .colhead.a{color:var(--out)} .colhead.b{color:var(--queue)}
+  .costtbl td.a{color:var(--out);font-weight:700} .costtbl td.b{color:var(--queue);font-weight:700}
+</style>
 </head>
 <body>
 <div class="shell">
 
 <header class="masthead">
-  <div class="eyebrow">Prepared for the Berinoh committee <span>&middot; July 2026</span><a class="lang" href="he.html" hreflang="he">עברית</a></div>
-  <h1>The Contract Savings Loan Scheme:<br>how families fund <em>each other's</em> weddings</h1>
-  <p class="standfirst">Families pay in a small amount each month for years. In return they receive a large interest-free loan when a wedding comes, and they pay that loan back so the next family can be helped. This page lets you change every rule of the scheme and watch what happens over the next fifty years.</p>
+  <div class="eyebrow">Prepared for the Berinoh committee <span>&middot; July 2026</span></div>
+  <h1>Two ways to fund our community's <em>weddings</em></h1>
+  <p class="standfirst">The committee is weighing two designs for a community wedding fund. They help families in opposite ways: one gives the money on the day but the amount grows over the years, the other gives the full amount but after a wait. Open either simulator to test it, or compare them side by side below.</p>
   <div class="rule"></div>
 </header>
 
-<section class="cycle-wrap">
-  <div class="cycle-grid">
-    <div id="cycleHost"></div>
-    <div class="cycle-read">
-      <h3>Where the money for loans comes from</h3>
-      <div class="bigpct"><span id="cycPct">0</span><small>%</small></div>
-      <p class="readout" id="cycRead">&#160;</p>
-      <div class="split" aria-hidden="true">
-        <i id="splitNew" style="background:var(--new);width:100%"></i>
-        <i id="splitRec" style="background:var(--recyc);width:0%"></i>
-      </div>
-      <div class="split-key"><span style="color:var(--new)">New family money</span><span style="color:var(--recyc)">Repayments recycled</span></div>
-      <div class="scrub">
-        <label for="cycYear"><span>Drag through the years</span><b>Year <span id="cycYearOut">1</span></b></label>
-        <input type="range" id="cycYear" min="1" max="50" value="1" step="1">
-      </div>
+<section class="block">
+  <div class="two">
+    <div class="panel modelcard a">
+      <div class="tag">Model A</div>
+      <h2>Gemach Hakehiloh</h2>
+      <p>A family saves together and pays a small monthly fee. When a child marries, the fund lends what it can afford that year, on the wedding date, and the loan grows toward the full amount as the fund matures. It sits in a credit-union framework and grows with the community.</p>
+      <a class="go" href="model-a/">Open the Gemach Hakehiloh simulator</a>
+    </div>
+    <div class="panel modelcard b">
+      <div class="tag">Model B</div>
+      <h2>The Queue Scheme</h2>
+      <p>A family saves for each child and joins a waiting list. When its turn comes it receives the full interest-free loan, and its repayments help the next family in line. It runs on a steady flow of joiners and, once mature, largely funds itself.</p>
+      <a class="go" href="model-b/">Open the Queue Scheme simulator</a>
     </div>
   </div>
 </section>
 
 <section class="block">
   <div class="block-head">
-    <h2>One family's journey</h2>
-    <p>The same &pound;4,800 does two jobs: half is the family's own savings, half is what keeps the fund alive for everyone else.</p>
+    <h2>Compare them on the same assumptions</h2>
+    <p>Set a few shared figures and see how each scheme serves the community. The two work in different units, so this is a like-for-like on what a family gets and how many are helped, not a single scoreboard.</p>
   </div>
-  <div class="journey" id="journey"></div>
-</section>
-
-<section class="block">
-  <div class="block-head">
-    <h2>Test the scheme yourself</h2>
-    <p>Start with a ready-made scenario, then change anything you like. Every chart below updates as you type.</p>
-  </div>
-  <div class="presets">
-    <button class="pbtn" id="p-base" type="button">Base case</button>
-    <button class="pbtn" id="p-caut" type="button">Cautious</button>
-    <button class="pbtn" id="p-sev" type="button">Severe stress</button>
-    <button class="pbtn" id="p-ro" type="button">Run-off test</button>
-  </div>
-  <p class="preset-note" id="presetNote"></p>
-
-  <div class="ctrl-grid">
-    <div class="ctrl c1">
-      <h4>WHAT FAMILIES PAY</h4>
-      <div class="f"><label for="contrib">Monthly payment per child (&pound;)</label><input type="number" id="contrib" value="40" step="5" min="1"></div>
-      <div class="f"><label for="capMonths">Months of paying in</label><input type="number" id="capMonths" value="120" step="6" min="12"></div>
-      <div class="f"><label for="savingsSharePct">Kept as the family's own savings (%)</label><input type="number" id="savingsSharePct" value="50" step="5" min="0" max="100"><div class="hint">The remainder is the community contribution that builds the fund's capital.</div></div>
-      <div class="summary" id="sumDesign"></div>
-    </div>
-    <div class="ctrl c2">
-      <h4>THE LOAN AND THE MEMBERS</h4>
-      <div class="f"><label for="loan">Wedding loan (&pound;)</label><input type="number" id="loan" value="40000" step="1000" min="1000"></div>
-      <div class="f"><label for="repayRatePct">Repaid each month (% of the loan)</label><input type="number" id="repayRatePct" value="1" step="0.1" min="0.1"></div>
-      <div class="f"><label for="intakeBase">New children enrolled each year</label><input type="number" id="intakeBase" value="12000" step="500" min="12"></div>
-      <div class="f"><label for="intakeGrowthPct">Enrolment growth each year (%)</label><input type="number" id="intakeGrowthPct" value="0" step="0.5"><div class="hint">Use a negative number to model a shrinking community.</div></div>
-    </div>
-    <div class="ctrl c3">
-      <h4>WHAT COULD GO WRONG</h4>
-      <div class="f"><label for="defaultAnnualPct">Loans that stop being repaid (% a year)</label><input type="number" id="defaultAnnualPct" value="0" step="0.5" min="0" max="60"></div>
-      <div class="f"><label for="recoveryPct">Of that, eventually recovered (%)</label><input type="number" id="recoveryPct" value="0" step="5" min="0" max="100"></div>
-      <div class="f"><label for="recoveryLagM">Recovery takes this long (months)</label><input type="number" id="recoveryLagM" value="12" step="6" min="0"></div>
-      <div class="f"><label for="exitAnnualPct">Waiting families who leave (% a year)</label><input type="number" id="exitAnnualPct" value="0" step="0.5" min="0" max="50"><div class="hint">Leavers get their own savings back. The community contribution stays.</div></div>
-    </div>
-    <div class="ctrl c4">
-      <h4>RUNNING THE FUND</h4>
-      <div class="f"><label for="costPctInflow">Running costs (% of money received)</label><input type="number" id="costPctInflow" value="0" step="0.5" min="0" max="40"></div>
-      <div class="f"><label for="costPerMemberYear">Admin cost per member (&pound; a year)</label><input type="number" id="costPerMemberYear" value="0" step="1" min="0"></div>
-      <div class="f"><label for="reservePct">Cash reserve held back (% of savings owed)</label><input type="number" id="reservePct" value="0" step="1" min="0" max="50"><div class="hint">Money kept aside rather than lent, so families can be repaid on demand.</div></div>
-      <div class="f"><label for="runOffYear">Stop all new enrolment after year</label><input type="number" id="runOffYear" value="0" step="1" min="0"><div class="hint">0 means enrolment continues. Set 20 to test what happens if the scheme closes to newcomers.</div></div>
-      <div class="hbs" id="hbs"></div>
-    </div>
-  </div>
-</section>
-
-<section class="block">
-  <div class="block-head"><h2>Where the scheme stands at the end of the period</h2></div>
-  <div class="stats" id="stats"></div>
-</section>
-
-<section class="block">
-  <div class="block-head">
-    <h2>The picture that matters</h2>
-    <p>In the early years almost every loan is paid for by families still saving. As repayments build, the fund increasingly pays for itself.</p>
-  </div>
-  <div class="charts">
-    <div class="chart full tall" id="c-mix"></div>
-    <div class="chart full" id="c-self"></div>
-    <div class="chart" id="c-race"></div>
-    <div class="chart" id="c-wait"></div>
-    <div class="chart" id="c-queue"></div>
-    <div class="chart" id="c-cover"></div>
-    <div class="chart" id="c-cash"></div>
-    <div class="chart" id="c-loss"></div>
-  </div>
-</section>
-
-<section class="block">
-  <div class="block-head">
-    <h2>What if nobody new ever joined again?</h2>
-    <p>This is the question a committee should always ask of a scheme like this. Set a run-off year in the controls above and these figures answer it.</p>
-  </div>
-  <div class="ro-grid" id="roGrid"></div>
-</section>
-
-<section class="block">
-  <div class="block-head"><h2>Year by year</h2></div>
-  <div class="tbl-head">
-    <p class="preset-note" style="margin:0">One row for each year of the run.</p>
-    <button class="dl" id="dlBtn" type="button">Download the monthly figures</button>
-  </div>
-  <div class="scroller"><table id="tbl"></table></div>
-</section>
-
-<section class="block">
-  <div class="block-head"><h2>What this model assumes</h2></div>
   <div class="panel">
-    <ul class="notes">
-      <li>Families pay in from the month they enrol and stop once they have reached the full paid-in target or have received their loan.</li>
-      <li>When a family reaches the front of the list, any shortfall against the full target is paid at that moment, and that money is available to help fund the same month's lending.</li>
-      <li>Loans are paid out whole. If the fund cannot afford a complete loan, that family waits until the following month.</li>
-      <li>Repayments begin the month after a loan is paid out. Because the family's own savings cover the closing instalments, cash repayments stop early and the fund keeps the community contribution.</li>
-      <li>Cash that is not lent stays in the fund and is available the following month. Nothing sits idle.</li>
-      <li>Families are served strictly in the order they enrolled.</li>
-      <li>Loans that stop being repaid are modelled as a steady annual rate applied to loans still in repayment, with any recovery arriving after the stated delay.</li>
-      <li>Running costs are taken out of money received before any lending decision is made.</li>
-      <li>The reserve is measured against the savings the fund would owe waiting families, and is never lent.</li>
-      <li>Results scale with size. Doubling enrolment doubles the money and leaves waiting times and percentages unchanged.</li>
-      <li>Every figure here follows from the rules you set on this page. Whether those rules and rates are realistic is the committee's judgement, not the model's.</li>
-    </ul>
+    <div class="cmp-ctrls">
+      <div class="f"><label for="cyears">Years to run <span id="vyears">50</span></label><input type="number" id="cyears" value="50" step="5" min="10" max="90"></div>
+      <div class="f"><label for="cloan">Full loan (&pound;) <span id="vloan">£40,000</span></label><input type="number" id="cloan" value="40000" step="1000" min="1000"></div>
+      <div class="f"><label for="cbad">Bad debt (% a year) <span id="vbad">0%</span></label><input type="number" id="cbad" value="0" step="0.5" min="0" max="15"></div>
+      <div class="f"><label for="cchildren">Model B, new children a year <span id="vchildren">12,000</span></label><input type="number" id="cchildren" value="12000" step="500" min="12"></div>
+    </div>
+    <div class="two">
+      <div><div class="colhead a">Gemach Hakehiloh</div><div class="stats" id="outA"></div></div>
+      <div><div class="colhead b">The Queue Scheme</div><div class="stats" id="outB"></div></div>
+    </div>
+  </div>
+
+  <div class="chart full tall" id="c-cov" style="margin-top:18px"></div>
+
+  <div class="panel" style="margin-top:18px">
+    <div class="block-head" style="margin-bottom:10px"><h2 style="font-size:20px">What a family pays that it never gets back</h2>
+      <p>The non-returnable community contribution, by family size. Model A charges a flat fee per family whatever the size; Model B charges per child. Illustrative.</p></div>
+    <div class="scroller"><table class="costtbl">
+      <thead><tr><th>Non-returnable contribution</th><th>One child</th><th>Four children</th><th>Ten children</th></tr></thead>
+      <tbody>
+        <tr><td>Model A, the flat fee over the life of membership</td><td class="a">about &pound;5,000 to &pound;7,000</td><td class="a">about &pound;5,000 to &pound;7,000</td><td class="a">about &pound;5,000 to &pound;7,000</td></tr>
+        <tr><td>Model B, at &pound;2,400 a child</td><td class="b">&pound;2,400</td><td class="b">&pound;9,600</td><td class="b">&pound;24,000</td></tr>
+        <tr><td>Cheaper for the family</td><td>Model B</td><td>close to even</td><td>Model A, by far</td></tr>
+      </tbody>
+    </table></div>
   </div>
 </section>
 
 <footer>
-  <p><b>The Contract Savings Loan Scheme &middot; interactive model.</b> Prepared for the Berinoh committee, July 2026.</p>
-  <p style="margin-top:6px">This model sets out the mechanics of the scheme as described. It is not a recommendation, a forecast, or a substitute for actuarial review. The figures move entirely with the assumptions entered above.</p>
+  <p><b>Berinoh community wedding fund.</b> Two interactive models, prepared for the committee, July 2026.</p>
+  <p style="margin-top:6px">These models set out the mechanics of each scheme as described. They are not a recommendation, a forecast, or a substitute for actuarial or legal review. Every figure moves with the assumptions you set.</p>
 </footer>
 
 </div>
 <div id="tip" role="status"></div>
 
-<script src="js/format.js"></script>
-<script src="js/strings-en.js"></script>
-<script src="js/engine-b.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/cycle.js"></script>
-<script src="js/app.js"></script>
+<script>window.STRINGS={unitBn:'bn',unitM:'m',unitK:'k',axisYears:'years',durationNone:'-',duration:function(y,m){return y>0?(y+'y '+m+'m'):(m+'m');},yearOf:function(y){return 'year '+y;},tipYear:function(x){return 'Year '+x;}};</script>
+<script src="/js/format.js"></script>
+<script src="/js/charts.js"></script>
+<script src="/js/engine-a.js"></script>
+<script src="/js/engine-b.js"></script>
+<script src="/js/seed-500.js"></script>
+<script src="/js/compare.js"></script>
 </body>
 </html>
