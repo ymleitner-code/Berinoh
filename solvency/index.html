@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemach Hamerkazi &middot; solvency simulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#16302c; --ink2:#42605a; --muted:#7a8a86; --line:#dbe8e4; --teal:#0f7a6b; --teal-soft:#eef7f4;
+    --gold:#c9a23a; --red:#c0472a; --bg:#f6faf8; --card:#ffffff; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 60px}
+  h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:30px;margin:0 0 4px;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--red)}
+  .lead{color:var(--ink2);max-width:790px;margin:0 0 18px;font-size:15.5px}
+  .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:11.5px;font-weight:700;color:var(--teal);margin-bottom:8px}
+  .layout{display:grid;grid-template-columns:300px 1fr;gap:22px;align-items:start}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 18px;position:sticky;top:16px}
+  .panel h2{font-family:"Fraunces",serif;font-size:16px;margin:2px 0 12px}
+  .presets{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+  .presets button{text-align:left;border:1px solid var(--line);background:#fbfdfc;border-radius:9px;padding:8px 11px;cursor:pointer;font:inherit;font-size:13.5px;font-weight:600;color:var(--ink);transition:.12s}
+  .presets button:hover{border-color:var(--teal);background:var(--teal-soft)}
+  .presets button small{display:block;font-weight:400;color:var(--muted);font-size:11.5px;margin-top:1px}
+  .grp{border-top:1px solid var(--line);padding-top:11px;margin-top:11px}
+  .grp:first-of-type{border-top:none;margin-top:0;padding-top:0}
+  .f{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:7px 0}
+  .f label{font-size:13px;color:var(--ink2)}
+  .f input{width:88px;border:1px solid var(--line);border-radius:7px;padding:5px 7px;font:inherit;font-size:13px;text-align:right}
+  .f input:focus{outline:none;border-color:var(--teal)}
+  .modewrap{display:flex;gap:6px;margin:4px 0 8px}
+  .modewrap button{flex:1;border:1px solid var(--line);background:#fbfdfc;border-radius:8px;padding:6px 4px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--ink2)}
+  .modewrap button.on{border-color:var(--teal);background:var(--teal);color:#fff}
+  .tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+  .tile .k{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+  .tile .v{font-family:"Fraunces",serif;font-size:22px;font-weight:600;margin-top:3px;line-height:1.1}
+  .tile .v small{font-size:13px;color:var(--ink2);font-weight:500}
+  .tile.good .v{color:var(--teal)} .tile.bad .v{color:var(--red)}
+  .tile.verdict{border-width:2px}
+  .tile.verdict.good{border-color:var(--teal);background:var(--teal-soft)}
+  .tile.verdict.bad{border-color:var(--red);background:#fbeee9}
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .chart{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px 6px}
+  .chart.big{grid-column:1 / -1}
+  .chart canvas{width:100%;height:210px;display:block}
+  .chart.big canvas{height:250px}
+  .note{color:var(--muted);font-size:12.5px;margin:16px 2px 0;max-width:840px}
+  .snap{width:100%;margin-top:9px;border:1px dashed var(--teal);background:var(--teal-soft);color:var(--teal);border-radius:9px;padding:8px;font:inherit;font-weight:700;font-size:13px;cursor:pointer}
+  .snap:hover{background:#e0f0eb}
+
+  .sitenav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;font-size:13px;font-weight:700}
+  .sitenav a{color:var(--ink2);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:#fff}
+  .sitenav a:hover{border-color:var(--teal);color:var(--teal)}
+  .sitenav a.cur{background:var(--teal);color:#fff;border-color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="sitenav">
+    <a href="/">Compare the two</a>
+    <a href="/model-a/">Gemach Hakehiloh</a>
+    <a href="/model-b/">Gemach Hamerkazi</a>
+    <a class="cur" href="/solvency/">Roster stress test</a>
+  </nav>
+  
+  <div class="eyebrow">Berinoh &middot; solvency test</div>
+  <h1>Funding every wedding on time: <em>when the money runs out</em></h1>
+  <p class="lead">No queue, no waiting. Every wedding is paid in full the month it falls, whether or not the fund can afford it, so the cash balance is free to go negative. This shows how a full &pound;40k loan at 16.67 times savings drives the fund deep into the red, and how far the loan has to come down to keep the cash line above zero for all fifty years. The green tiles give the largest loan that stays liquid.</p>
+
+  <div class="layout">
+    <aside class="panel">
+      <h2>Presets</h2>
+      <div class="presets" id="presets">
+        <button data-p="full">Full &pound;40k (&times;16.67)<small>the design that collapses</small></button>
+        <button data-p="l15">Fixed &pound;15k loan<small>still too big without a queue</small></button>
+        <button data-p="safe">Snap to the safe maximum<small>largest loan that stays liquid</small></button>
+      </div>
+
+      <div class="grp">
+        <div class="f"><label>Loan rule</label></div>
+        <div class="modewrap" id="modewrap">
+          <button data-m="multiple" class="on">&times; savings</button>
+          <button data-m="fixed">Fixed &pound;</button>
+        </div>
+        <div class="f" id="rowMult"><label>Multiple of savings</label><input id="multiple" type="number" step="0.1" value="16.67"></div>
+        <div class="f" id="rowFixed" style="display:none"><label>Fixed loan (&pound;)</label><input id="loan" type="number" step="1000" value="40000"></div>
+        <button class="snap" id="snapBtn">Set to the safe maximum</button>
+      </div>
+
+      <div class="grp">
+        <div class="f"><label>Founding families</label><input id="families" type="number" step="1" value="538"></div>
+        <div class="f"><label>Children per family</label><input id="childrenPerFamily" type="number" step="0.01" value="3.99"></div>
+        <div class="f"><label>Marriage age</label><input id="marriageAge" type="number" step="1" value="20"></div>
+        <div class="f"><label>Annual growth (%)</label><input id="growthPct" type="number" step="0.5" value="4.5"></div>
+      </div>
+
+      <div class="grp">
+        <div class="f"><label>Monthly pay-in (&pound;)</label><input id="contrib" type="number" step="5" value="40"></div>
+        <div class="f"><label>Pay-in months</label><input id="payMonths" type="number" step="6" value="120"></div>
+        <div class="f"><label>Saved share (%)</label><input id="savingsSharePct" type="number" step="5" value="50"></div>
+        <div class="f"><label>Repaid per month (%)</label><input id="repayRatePct" type="number" step="0.1" value="1"></div>
+      </div>
+
+      <div class="grp">
+        <div class="f"><label>Bad debt (%/yr)</label><input id="badPct" type="number" step="0.5" value="3"></div>
+        <div class="f"><label>Overhead (&pound;/yr)</label><input id="overhead" type="number" step="10000" value="0"></div>
+        <div class="f"><label>Years</label><input id="years" type="number" step="5" value="50"></div>
+      </div>
+    </aside>
+
+    <main>
+      <div class="tiles" id="tiles"></div>
+      <div class="charts">
+        <div class="chart big"><canvas id="cCash"></canvas></div>
+        <div class="chart"><canvas id="cFlow"></canvas></div>
+        <div class="chart"><canvas id="cLoan"></canvas></div>
+        <div class="chart"><canvas id="cWed"></canvas></div>
+        <div class="chart"><canvas id="cCum"></canvas></div>
+      </div>
+      <p class="note">The cash chart is the test: any dip below the zero line means the fund has run out of money that month. Because there is no queue, the loan cannot flex and the wait cannot absorb the shock, so solvency depends entirely on the loan being small enough that repayments and pay-ins keep pace with the weddings falling due. The safe-maximum figures are found by searching for the largest loan whose cash line never crosses zero across the whole run. Built on the Hakehiloh age distribution; a mechanism model, not a forecast.</p>
+    </main>
+  </div>
+</div>
+
+<script>
+const AGE_DIST=[[0.5,0.141],[2.5,0.150],[4.5,0.136],[6.5,0.128],[8.5,0.130],[10.5,0.111],[12.5,0.096],[14.5,0.089],[16.5,0.019]];
+function gaussSpread(arr,center,sd,total,H){ if(total<=0)return; center=Math.max(1,center);
+  let lo=Math.max(1,Math.round(center-3*sd)),hi=Math.min(H,Math.round(center+3*sd)); if(hi<lo)hi=lo;
+  let ws=[],sum=0; for(let m=lo;m<=hi;m++){const z=(m-center)/sd,w=Math.exp(-0.5*z*z);ws.push(w);sum+=w;}
+  for(let i=0;i<ws.length;i++) arr[lo+i]+=total*ws[i]/sum; }
+function build(P){
+  const H=Math.round(P.years*12),mAge=P.marriageAge,sd=P.marriageSpreadY*12,contrib=P.contrib,capM=P.payMonths,savPer=contrib*P.savingsShare;
+  const N0=Math.round(P.families*P.childrenPerFamily),EXT=H+400;
+  let wed=new Float64Array(EXT+1);
+  for(const ad of AGE_DIST){const c=Math.max(1,Math.round((mAge-ad[0])*12));gaussSpread(wed,c,sd,N0*ad[1],EXT);}
+  const genLag=Math.round((mAge+P.reproGapY)*12),s=Math.pow(1+P.growthPct/100,genLag/12);
+  for(let m=1;m<=EXT;m++){if(wed[m]>1e-12)gaussSpread(wed,m+genLag,sd*1.4,wed[m]*s,EXT);}
+  let diff=new Float64Array(H+2);
+  for(let w=1;w<=H+capM;w++){if(wed[w]<=1e-12)continue;const n=wed[w],st=Math.max(1,w-capM),en=Math.min(H+1,w);if(st<en){diff[st]+=contrib*n;if(en<=H)diff[en]-=contrib*n;}}
+  let cA=new Float64Array(H+2),run=0;for(let m=1;m<=H;m++){run+=diff[m];cA[m]=run;}
+  return {H,wed,cA,savPer,capM};
+}
+function sim(P,B){ // no queue: fund every wedding on time; cash may go negative
+  const {H,wed,cA,savPer,capM}=B, repayRate=P.repayRate, hz=1-Math.pow(1-P.badPct/100,1/12), cFix=P.overhead/12;
+  const mode=P.mode,fixedLoan=P.loan,M=P.multiple,loanMax=P.loanMax;
+  let cash=0,princ=new Float64Array(H+2),term=new Int32Array(H+2),minCash=Infinity,cumLent=0,cumIn=0;
+  const out=[];
+  for(let m=1;m<=H;m++){
+    const C=cA[m]; let Rp=0;
+    for(let t=Math.max(1,m-220);t<m;t++){if(princ[t]<=0)continue;const age=m-t;if(age<=term[t])Rp+=repayRate*princ[t]*Math.pow(1-hz,age);}
+    const sav=savPer*Math.min(capM,Math.max(0,m-1));
+    const loanPer= mode==='multiple'? Math.min(loanMax,M*sav) : fixedLoan;
+    const n=wed[m], o=n*loanPer;
+    cash += C+Rp-cFix-o;
+    const cashP=Math.max(0,loanPer-sav), tt=loanPer>0?Math.max(1,Math.round(cashP/(repayRate*loanPer))):1;
+    princ[m]=o; term[m]=tt; cumLent+=o; cumIn+=C+Rp; minCash=Math.min(minCash,cash);
+    out.push({m,cash,out:o,inn:C+Rp,loanPer,wed:n,cumLent});
+  }
+  return {out,minCash,cumLent};
+}
+function solveMax(P,B,key){ let lo=0,hi=key==='multiple'?30:60000;
+  for(let i=0;i<38;i++){const mid=(lo+hi)/2; const q=Object.assign({},P,{mode:key,[key==='multiple'?'multiple':'loan']:mid});
+    if(sim(q,B).minCash>=-1e-6) lo=mid; else hi=mid;} return lo; }
+
+let MODE='multiple';
+function P(){ const g=id=>parseFloat(document.getElementById(id).value)||0;
+  return {years:g('years'),marriageAge:g('marriageAge'),marriageSpreadY:1.6,reproGapY:5,contrib:g('contrib'),
+    payMonths:g('payMonths'),savingsShare:g('savingsSharePct')/100,repayRate:g('repayRatePct')/100,mode:MODE,
+    loan:g('loan'),multiple:g('multiple'),loanMax:40000,badPct:g('badPct'),overhead:g('overhead'),
+    families:g('families'),childrenPerFamily:g('childrenPerFamily'),growthPct:g('growthPct')}; }
+function aggregate(rows,years){ const yr=[];
+  for(let y=1;y<=years;y++){ const a=(y-1)*12,b=y*12; let o=0,inn=0,lw=0,n=0,wsum=0;
+    for(let m=a;m<b;m++){const r=rows[m];if(!r)continue;o+=r.out;inn+=r.inn;wsum+=r.wed;if(r.loanPer>0){lw+=r.loanPer;n++;}}
+    const e=rows[b-1]||rows[rows.length-1];
+    yr.push({year:y,cash:e.cash,outYr:o,inYr:inn,loan:n>0?lw/n:null,wedYr:wsum,cumLent:e.cumLent}); }
+  return yr; }
+
+function draw(cid,cfg){
+  const canvas=document.getElementById(cid), dpr=window.devicePixelRatio||1, rect=canvas.getBoundingClientRect();
+  const W=rect.width||520, Hh=rect.height||210;
+  canvas.width=W*dpr; canvas.height=Hh*dpr;
+  const x=canvas.getContext('2d'); x.scale(dpr,dpr); x.clearRect(0,0,W,Hh);
+  const mL=60,mR=14,mT=26,mB=26, pw=W-mL-mR, ph=Hh-mT-mB;
+  const xs=cfg.series[0].data.map(d=>d.x), xmin=Math.min(...xs), xmax=Math.max(...xs);
+  let dmax=-Infinity,dmin=Infinity; cfg.series.forEach(s=>s.data.forEach(d=>{ if(d.y!=null){dmax=Math.max(dmax,d.y);dmin=Math.min(dmin,d.y);} }));
+  let ymax=cfg.ymax!=null?cfg.ymax:dmax, ymin=cfg.allowNeg?Math.min(0,dmin):0;
+  if(ymax<=ymin)ymax=ymin+1; const pad=(ymax-ymin)*0.08; ymax+=pad; if(cfg.allowNeg&&dmin<0)ymin-=pad;
+  const X=v=>mL+(v-xmin)/((xmax-xmin)||1)*pw, Y=v=>mT+ph-(v-ymin)/((ymax-ymin)||1)*ph;
+  x.font='11px system-ui'; x.fillStyle='#8b9a96'; x.strokeStyle='#eef4f2'; x.lineWidth=1;
+  for(let i=0;i<=4;i++){ const yv=ymin+(ymax-ymin)*i/4, yy=Y(yv);
+    x.beginPath();x.moveTo(mL,yy);x.lineTo(W-mR,yy);x.stroke();
+    x.textAlign='right';x.fillText(cfg.yfmt?cfg.yfmt(yv):Math.round(yv), mL-6, yy+3); }
+  x.textAlign='center'; const nx=Math.min(5,Math.max(1,xmax-xmin));
+  for(let i=0;i<=nx;i++){ const xv=Math.round(xmin+(xmax-xmin)*i/nx); x.fillText('Yr '+xv, X(xv), Hh-7); }
+  if(cfg.zero && ymin<0){ const zy=Y(0); // shade below zero + bold zero line
+    x.fillStyle='rgba(192,71,42,0.07)'; x.fillRect(mL,zy,pw,Y(ymin)-zy);
+    x.strokeStyle='#c0472a'; x.lineWidth=1.4; x.beginPath();x.moveTo(mL,zy);x.lineTo(W-mR,zy);x.stroke(); }
+  cfg.series.forEach(s=>{ x.strokeStyle=s.color;x.lineWidth=2.2;x.beginPath();let st=false;
+    s.data.forEach(d=>{ if(d.y==null){st=false;return;} const px=X(d.x),py=Y(d.y); if(!st){x.moveTo(px,py);st=true;}else x.lineTo(px,py); }); x.stroke(); });
+  x.textAlign='left';x.fillStyle='#16302c';x.font='600 12.5px system-ui';x.fillText(cfg.title,mL,15);
+  if(cfg.series.length>1){ let lx=mL+x.measureText(cfg.title).width+16;
+    cfg.series.forEach(s=>{ x.fillStyle=s.color;x.fillRect(lx,7,11,9); x.fillStyle='#5a6d68';x.font='11px system-ui';x.fillText(s.name,lx+14,15); lx+=14+x.measureText(s.name).width+16; }); }
+}
+const money=v=>{ const a=Math.abs(v); const sign=v<0?'-':''; if(a>=1e6)return sign+'£'+(a/1e6).toFixed(1)+'m'; if(a>=1000)return sign+'£'+(a/1000).toFixed(0)+'k'; return sign+'£'+Math.round(a); };
+
+let curMaxM=0, curMaxF=0;
+function run(){
+  const p=P(), B=build(p), R=sim(p,B), A=aggregate(R.out,p.years), end=A[A.length-1];
+  curMaxM=solveMax(p,B,'multiple'); curMaxF=solveMax(p,B,'loan');
+  const liquid=R.minCash>=-1e-6;
+  const tiles=[
+    ['Verdict', liquid?'Liquid':'Collapses', 'verdict '+(liquid?'good':'bad')],
+    ['Lowest cash', money(R.minCash), R.minCash>=0?'good':'bad'],
+    ['Safe max multiple', '&times;'+curMaxM.toFixed(1), 'good'],
+    ['Safe max loan (full term)', money(curMaxM*p.contrib*p.savingsShare*p.payMonths), 'good'],
+    ['Total lent, year '+p.years, money(end.cumLent), '']
+  ];
+  document.getElementById('tiles').innerHTML=tiles.map(t=>`<div class="tile ${t[2]}"><div class="k">${t[0]}</div><div class="v">${t[1]}</div></div>`).join('');
+  draw('cCash',{title:'Cash balance over time (below zero = insolvent)',allowNeg:true,zero:true,yfmt:money,
+    series:[{name:'cash',color:R.minCash<0?'#c0472a':'#0f7a6b',data:A.map(r=>({x:r.year,y:r.cash}))}]});
+  draw('cFlow',{title:'Money in vs out, per year',yfmt:money,
+    series:[{name:'in',color:'#2f8f7f',data:A.map(r=>({x:r.year,y:r.inYr}))},
+            {name:'out',color:'#c0472a',data:A.map(r=>({x:r.year,y:r.outYr}))}]});
+  draw('cLoan',{title:'Average loan issued',ref:40000,yfmt:money,ymax:Math.max(40000,end.loan||0),
+    series:[{name:'loan',color:'#8a5cc4',data:A.map(r=>({x:r.year,y:r.loan}))}]});
+  draw('cWed',{title:'Weddings due each year',yfmt:v=>Math.round(v),
+    series:[{name:'weddings',color:'#c9a23a',data:A.map(r=>({x:r.year,y:r.wedYr}))}]});
+  draw('cCum',{title:'Total lent to date',yfmt:money,
+    series:[{name:'cumulative lent',color:'#42605a',data:A.map(r=>({x:r.year,y:r.cumLent}))}]});
+}
+
+function setMode(m){ MODE=m;
+  document.querySelectorAll('#modewrap button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
+  document.getElementById('rowMult').style.display=m==='multiple'?'':'none';
+  document.getElementById('rowFixed').style.display=m==='fixed'?'':'none';
+}
+function set(id,v){document.getElementById(id).value=v;}
+document.querySelectorAll('#modewrap button').forEach(b=>b.onclick=()=>{ setMode(b.dataset.m); run(); });
+const presets={ full:()=>{setMode('multiple');set('multiple',16.67);}, l15:()=>{setMode('fixed');set('loan',15000);},
+  safe:()=>{ if(MODE==='multiple') set('multiple', Math.floor(curMaxM*10)/10); else set('loan', Math.floor(curMaxF/100)*100); } };
+document.querySelectorAll('#presets button').forEach(b=>b.onclick=()=>{ presets[b.dataset.p](); run(); });
+document.getElementById('snapBtn').onclick=()=>{ if(MODE==='multiple') set('multiple',Math.floor(curMaxM*10)/10); else set('loan',Math.floor(curMaxF/100)*100); run(); };
+document.querySelectorAll('input').forEach(i=>i.addEventListener('input',run));
+window.addEventListener('resize',run);
+setMode('multiple'); run();
+</script>
+</body>
+</html>
