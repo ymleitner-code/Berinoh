@@ -110,7 +110,7 @@ body{font-family:var(--body);background:#0f1626;color:var(--ink);
 #bar{position:fixed;left:0;right:0;bottom:0;z-index:40;
   background:linear-gradient(to top,rgba(15,22,38,.97),rgba(15,22,38,.9));
   color:#eaf0f8;padding:9px 20px;padding-bottom:calc(9px + env(safe-area-inset-bottom,0px));
-  display:flex;align-items:center;justify-content:center;gap:12px}
+  display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
 /* player controls, shown inside the narration box */
 #controls{flex:0 0 auto;margin-top:14px;border-top:1px solid #bcdfd8;padding-top:12px}
 #controls #prog{position:static;height:5px;width:100%;background:#cfe6e0;border-radius:3px;overflow:hidden;margin:0 0 12px}
@@ -136,6 +136,8 @@ a.tbtn{text-decoration:none;display:inline-flex;align-items:center;gap:5px}
 .tbtn.linkB{color:#c3b6f0;border-color:rgba(195,182,240,.45)}
 .tbtn.linkA:hover{color:#ffc6d6;border-color:#f0a8bd}
 .tbtn.linkB:hover{color:#dacffb;border-color:#c3b6f0}
+.tbtn.linkS{color:#8fdccb;border-color:rgba(143,220,203,.5)}
+.tbtn.linkS:hover{color:#c6f2e8;border-color:#8fdccb}
 @media(max-width:640px){#bar .hideSm{display:none}#bar .meta{min-width:0}}
 
 /* ---- page menu ---- */
@@ -209,7 +211,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 1 - COVER ============ -->
 <section class="slide center" data-actname="Opening" data-title="Cover and how this works" data-seconds="45">
-  <div class="rail"><span class="act">Berinoh committee</span><span class="sep">/</span><span class="pg">Page 1 of 28</span></div>
+  <div class="rail"><span class="act">Berinoh committee</span><span class="sep">/</span><span class="pg">Page 1 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 640 300" role="img" aria-label="Two paths meeting under a wedding canopy">
       <g fill="none" stroke-width="2.5" stroke-linecap="round">
@@ -243,7 +245,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 2 - THE QUESTION ============ -->
 <section class="slide" data-actname="Opening" data-title="The question the committee is weighing" data-seconds="120">
-  <div class="rail"><span class="act">Act 1 - Opening</span><span class="sep">/</span><span class="pg">Page 2 of 28</span></div>
+  <div class="rail"><span class="act">Act 1 - Opening</span><span class="sep">/</span><span class="pg">Page 2 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 520 420" role="img" aria-label="A fixed wedding date with cost building behind it">
       <!-- rising cost bars behind -->
@@ -283,7 +285,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 3 - MEET THE TWO ============ -->
 <section class="slide" data-actname="A family's view" data-title="Meet the two schemes" data-seconds="90">
-  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 3 of 28</span></div>
+  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 3 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 540 420" role="img" aria-label="Gemach Hakehiloh grows the amount; Gemach Hamerkazi makes you wait">
       <!-- A: growing amount -->
@@ -338,7 +340,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 4 - INSIDE MODEL A ============ -->
 <section class="slide" data-actname="A family's view" data-title="A family inside Gemach Hakehiloh" data-seconds="90">
-  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 4 of 28</span></div>
+  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 4 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 540 420" role="img" aria-label="One family pot feeds several weddings, the loan rising over the years">
       <!-- pot -->
@@ -368,21 +370,21 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
   </div>
   <div class="copy">
     <span class="eyebrow a">Inside Gemach Hakehiloh</span>
-    <h2>The day is always covered</h2>
+    <h2>The available loan is there on the day</h2>
     <p class="lead">You pay about a hundred and fifty pounds a month as a family, and that is the same whether you have one child or ten.</p>
     <ul class="points">
-      <li class="a">On each wedding date, <b>the money is there</b>.</li>
+      <li class="a">On each wedding date, <b>the available loan is provided</b>.</li>
       <li class="a">Early on the loan is smaller; it <b>climbs year by year</b> as the fund matures.</li>
       <li class="a">A large family is <b>carried generously</b>; a small family is close to saving for itself.</li>
     </ul>
   </div></div>
   <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
-    <p>Step inside Gemach Hakehiloh as a family. You pay about a hundred and fifty pounds a month, and that is the same whether you have one child or ten. On each wedding date, the money is there. In the early years the loan is smaller, and it climbs year by year as the fund matures. A large family is carried generously by the shared pot. A small family is close to simply saving for itself. The promise here is timing. The day is always covered.</p></div>
+    <p>Step inside Gemach Hakehiloh as a family. You pay about a hundred and fifty pounds a month, and that is the same whether you have one child or ten. On each wedding date, the money is there. In the early years the loan is smaller, and it climbs year by year as the fund matures. A large family is carried generously by the shared pot. A small family is close to simply saving for itself. The promise here is timing: the model is designed to provide the available loan on the wedding date.</p></div>
 </section>
 
 <!-- ============ PAGE 5 - INSIDE MODEL B ============ -->
 <section class="slide" data-actname="A family's view" data-title="A family inside Gemach Hamerkazi" data-seconds="90">
-  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 5 of 28</span></div>
+  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 5 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 540 420" role="img" aria-label="A numbered ticket and a line advancing to the full sum">
       <!-- ticket -->
@@ -428,7 +430,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 6 - THE SAME FAMILY, TWO SCHEMES (CORE) ============ -->
 <section class="slide" data-actname="A family's view" data-title="The same family, two schemes" data-seconds="90" data-core>
-  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 6 of 28</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="rail"><span class="act">Act 2 - A family's view</span><span class="sep">/</span><span class="pg">Page 6 of 29</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 520 420" role="img" aria-label="A balance weighing certainty of timing against certainty of amount, with a cost by family size table">
       <!-- balance -->
@@ -476,7 +478,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 7 - MODEL A MECHANICS (CORE) ============ -->
 <section class="slide" data-actname="The mechanics" data-title="Gemach Hakehiloh, how the money moves" data-seconds="120" data-core>
-  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 7 of 28</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 7 of 29</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 560 400" role="img" aria-label="Families save into the fund, the fund lends at weddings, repayments return to the fund">
       <!-- three nodes -->
@@ -509,7 +511,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <!-- repayment arc back -->
       <path class="flow" d="M475 236 C 475 320 280 330 280 260" stroke="#10897c" stroke-width="2.5"/>
       <path d="M280 262 l -6 10 h12 z" fill="#10897c"/>
-      <text x="360" y="322" text-anchor="middle" class="lblS" fill="#10897c">repayments, 1% a month, back to the fund</text>
+      <text x="360" y="322" text-anchor="middle" class="lblS" fill="#10897c">repayments, 1% of the loan a month, back to the fund</text>
     </svg>
   </div>
   <div class="copy">
@@ -518,17 +520,17 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
     <ul class="points">
       <li class="a">A family saves into a <b>pot, capped at £40,000</b>, and pays a small monthly fee that is <b>never returned</b>.</li>
       <li class="a">Most of the fee <b>builds reserves</b>; a smaller part covers running costs.</li>
-      <li class="a">Borrowing opens after <b>eighteen years</b> of membership; founding families are let in from the start.</li>
-      <li class="a">Loans repay at <b>1% a month</b>, a rate the committee can raise to grow the loan sooner; still capped near <b>£1,200</b> across a family, and the family's own pot closes the tail of its last loan.</li>
+      <li class="a">Borrowing opens after <b>eighteen years</b> of membership; the founding families are eligible from the outset.</li>
+      <li class="a">Each month a family repays <b>1% of the original loan</b>, about <b>£400</b> on a £40k loan, a rate the committee can raise to grow the loan sooner; still capped near <b>£1,200</b> across a family, and the family's own pot closes the tail of its last loan.</li>
     </ul>
   </div></div>
   <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
-    <p>How Gemach Hakehiloh actually moves its money. A family saves into a pot, up to a cap of forty thousand pounds. Alongside it they pay a small monthly fee that is never returned; most of that fee builds the fund's reserves, and a smaller part covers running costs. After eighteen years of membership a family can borrow, though the founding families are let in from the start. Each loan is repaid at one per cent a month, and that rate is a choice the committee can raise: a higher repayment brings the money back faster and lets the loan climb to its full size sooner. Either way, no family pays more than about twelve hundred pounds a month across all its loans at once. At the very end, a family's own pot closes the tail of its last loan.</p></div>
+    <p>How Gemach Hakehiloh actually moves its money. A family saves into a pot, up to a cap of forty thousand pounds. Alongside it they pay a small monthly fee that is never returned; most of that fee builds the fund's reserves, and a smaller part covers running costs. After eighteen years of membership a family can borrow, though the founding families are eligible from the outset. Each month, the family repays an amount equal to one per cent of the original loan. On a forty thousand pound loan, that is four hundred pounds a month. That rate is a choice the committee can raise. A higher repayment brings the money back faster, and lets the loan climb to its full size sooner. Either way, no family pays more than about twelve hundred pounds a month across all its loans at once. At the very end, a family's own pot closes the tail of its last loan.</p></div>
 </section>
 
 <!-- ============ PAGE 8 - MODEL A BALANCE SHEET ============ -->
 <section class="slide" data-actname="The mechanics" data-title="Gemach Hakehiloh, the balance sheet it must hold" data-seconds="120">
-  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 8 of 28</span></div>
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 8 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 540 400" role="img" aria-label="Two safety floors, capital at eight per cent and cash at ten per cent of members savings">
       <!-- savings bar -->
@@ -571,7 +573,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 9 - MODEL B MECHANICS (CORE) ============ -->
 <section class="slide" data-actname="The mechanics" data-title="Gemach Hamerkazi, how the money moves" data-seconds="120" data-core>
-  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 9 of 28</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 9 of 29</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 540 400" role="img" aria-label="Four thousand eight hundred splits in two, then a loan of forty thousand repaid over time">
       <!-- 4800 bar split -->
@@ -631,7 +633,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 10 - GEMACH HAMERKAZI, HOW THE FUND TURNS ============ -->
 <section class="slide" data-actname="The mechanics" data-title="Gemach Hamerkazi, how the fund turns" data-seconds="120" data-core>
-  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 10 of 28</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 10 of 29</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 560 400" role="img" aria-label="A steady intake fills the fund until a member is called forward to top up and borrow, and the monthly money in comes from new joiners and, more and more over time, from loan repayments">
       <!-- TOP: how a turn comes round -->
@@ -692,12 +694,12 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ MERKAZI 25-YEAR MONTHLY TABLE ============ -->
 <section class="slide wide" data-actname="The mechanics" data-title="Gemach Hamerkazi, 25 years month by month" data-seconds="95">
-  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 11 of 28</span></div>
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 11 of 29</span></div>
   <div class="stage">
     <div class="cmp-head">
       <span class="eyebrow b">Gemach Hamerkazi, the numbers underneath</span>
       <h2 style="font-family:var(--display);font-weight:700;font-size:clamp(23px,2.7vw,37px);line-height:1.05;color:var(--ink);margin-top:6px">Twenty-five years, month by month</h2>
-      <p style="font-size:14.5px;color:var(--muted);margin-top:6px;max-width:80ch">Base case, a thousand new units a month. Scroll to watch the new money give way to loan repayments while the wait lengthens.</p>
+      <p style="font-size:14.5px;color:var(--muted);margin-top:6px;max-width:80ch">The table uses a normalised base of 1,000 units so the movement of money can be seen clearly; the same mechanics scale to the community's actual intake. Scroll to watch the new money give way to loan repayments while the wait lengthens.</p>
     </div>
     <div class="mtbl-wrap">
       <table class="mtbl">
@@ -1013,7 +1015,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 11 - WHAT DRIVES EACH ============ -->
 <section class="slide" data-actname="The mechanics" data-title="What drives each one" data-seconds="60">
-  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 12 of 28</span></div>
+  <div class="rail"><span class="act">Act 3 - The mechanics</span><span class="sep">/</span><span class="pg">Page 12 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 560 380" role="img" aria-label="Gemach Hakehiloh grows by reproduction as a top-down family tree; Gemach Hamerkazi refills from repayments">
       <!-- LEFT: Gemach Hakehiloh, top-down hierarchy -->
@@ -1050,16 +1052,16 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
     <h2>One compounds, the other recycles</h2>
     <ul class="points">
       <li class="a"><b>Gemach Hakehiloh grows by reproduction.</b> Every daughter's wedding seeds a new saving household, a rate we can measure in units, one unit being one saving household.</li>
-      <li class="b"><b>Gemach Hamerkazi does not rely on growth.</b> It runs on a steady flow of joiners and, past a point, largely refills itself from repayments.</li>
+      <li class="b"><b>Gemach Hamerkazi does not rely on compound growth.</b> It runs on a steady level of new joining units, and over time increasingly on repayments from earlier borrowers.</li>
     </ul>
   </div></div>
   <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
-    <p>So what drives each one forward. Gemach Hakehiloh grows by reproduction. Every daughter's wedding seeds a new saving household, which is a rate we can measure against real membership, in units, where one unit is one saving household. Gemach Hamerkazi does not rely on growth at all. It runs on a steady flow of joiners, and past a certain point it largely refills itself from repayments coming back in. One engine compounds. The other recycles.</p></div>
+    <p>So what drives each one forward. Gemach Hakehiloh grows by reproduction. Every daughter's wedding seeds a new saving household, which is a rate we can measure against real membership, in units, where one unit is one saving household. Gemach Hamerkazi does not rely on compound growth. It relies instead on a steady level of new joining units. And over time it leans increasingly on repayments from earlier borrowers. One engine compounds. The other recycles.</p></div>
 </section>
 
 <!-- ============ COMPARISON A - A FAMILY'S EXPERIENCE ============ -->
 <section class="slide wide" data-actname="Side by side" data-title="Side by side: a family's experience" data-seconds="120" data-core>
-  <div class="rail"><span class="act">Side by side</span><span class="sep">/</span><span class="pg">Page 13 of 28</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="rail"><span class="act">Side by side</span><span class="sep">/</span><span class="pg">Page 13 of 29</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
   <div class="stage">
     <div class="cmp-head">
       <span class="eyebrow t">Gemach Hakehiloh and Gemach Hamerkazi</span>
@@ -1085,7 +1087,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ COMPARISON B - HOW THE FUND BEHAVES ============ -->
 <section class="slide wide" data-actname="Side by side" data-title="Side by side: how the fund behaves" data-seconds="120">
-  <div class="rail"><span class="act">Side by side</span><span class="sep">/</span><span class="pg">Page 14 of 28</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
+  <div class="rail"><span class="act">Side by side</span><span class="sep">/</span><span class="pg">Page 14 of 29</span><span class="core"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>Core page</span></div>
   <div class="stage">
     <div class="cmp-head">
       <span class="eyebrow t">Gemach Hakehiloh and Gemach Hamerkazi</span>
@@ -1099,19 +1101,19 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
         <tr><td class="dim">Its solvency</td><td class="ca">Prudential ratios, thin capital</td><td class="cb">Solvent when the loan fits the flow</td></tr>
         <tr><td class="dim">How it delivers</td><td class="ca">On the date, the amount grows</td><td class="cb">In full, after a wait</td></tr>
         <tr><td class="dim">Self-funding</td><td class="ca">Carries itself, generation to generation</td><td class="cb">From about year 11; run-off risk falls</td></tr>
-        <tr><td class="dim">Its sharpest risk</td><td class="ca">Thin capital, so bad debt bites</td><td class="cb">The long wait, partial coverage</td></tr>
+        <tr><td class="dim">Its sharpest risk</td><td class="ca">Thin capital, so bad debt bites</td><td class="cb">The long wait; coverage is delayed</td></tr>
         <tr><td class="dim">Regulatory footing</td><td class="ca">A credit union, already examined</td><td class="cb">Could also be a credit union; has the capital, liquidity not yet tested</td></tr>
         <tr><td class="dim">Solidarity</td><td class="ca">Small families help carry large ones</td><td class="cb">Each child roughly carries its own weight</td></tr>
       </tbody>
     </table>
   </div>
   <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
-    <p>And the two side by side as funds. Gemach Hakehiloh rations the amount; Gemach Hamerkazi rations the time. One runs on reproduction, a rate we can measure, held solvent by its ratios on thin capital; the other is solvent by construction, running on a steady flow of joiners. Their sharpest risks are opposite: for Gemach Hakehiloh it is thin capital and bad debt, for Gemach Hamerkazi it is the long wait and partial coverage. And in spirit, one has small families help carry large ones, while the other has each child carry its own weight.</p></div>
+    <p>And the two side by side as funds. Gemach Hakehiloh rations the amount; Gemach Hamerkazi rations the time. One runs on reproduction, a rate we can measure, held solvent by its ratios on thin capital. The other's lending mechanism is designed not to overdraw the pool, running on a steady flow of joiners. Their sharpest risks are opposite. For Gemach Hakehiloh it is thin capital and bad debt. For Gemach Hamerkazi it is the long wait and delayed coverage, since the full loan is promised but may wait; it becomes partial only if the committee sets the loan below the full amount. And in spirit, one has small families help carry large ones, while the other has each child carry its own weight.</p></div>
 </section>
 
 <!-- ============ PAGE - NONE OF THIS IS NEW ============ -->
 <section class="slide center" data-actname="Where the ideas come from" data-title="None of this is new" data-seconds="60">
-  <div class="rail"><span class="act">Act 4 - Where the ideas come from</span><span class="sep">/</span><span class="pg">Page 15 of 28</span></div>
+  <div class="rail"><span class="act">Act 4 - Where the ideas come from</span><span class="sep">/</span><span class="pg">Page 15 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 900 180" role="img" aria-label="A timeline from rotating village funds to today">
       <line x1="40" y1="95" x2="860" y2="95" stroke="#c6d2e0" stroke-width="3"/>
@@ -1134,7 +1136,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 12 - CONTRACT SAVINGS (MODEL B) ============ -->
 <section class="slide" data-actname="Where the ideas come from" data-title="The contract-savings tradition (Gemach Hamerkazi)" data-seconds="120">
-  <div class="rail"><span class="act">Act 4 - Where the ideas come from</span><span class="sep">/</span><span class="pg">Page 16 of 28</span></div>
+  <div class="rail"><span class="act">Act 4 - Where the ideas come from</span><span class="sep">/</span><span class="pg">Page 16 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 520 400" role="img" aria-label="A closed common pool, a ranked line, and repayments recycling to the next member">
       <ellipse cx="150" cy="150" rx="110" ry="88" fill="#efecfa" stroke="#6a55c8" stroke-width="2"/>
@@ -1170,7 +1172,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 13 - MUTUAL TRADITION (MODEL A) ============ -->
 <section class="slide" data-actname="Where the ideas come from" data-title="The mutual tradition (Gemach Hakehiloh)" data-seconds="120">
-  <div class="rail"><span class="act">Act 4 - Where the ideas come from</span><span class="sep">/</span><span class="pg">Page 17 of 28</span></div>
+  <div class="rail"><span class="act">Act 4 - Where the ideas come from</span><span class="sep">/</span><span class="pg">Page 17 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 520 400" role="img" aria-label="An ongoing growing mutual beside a terminating one, with the rotating circle as a shared ancestor">
       <!-- growing spiral of circles -->
@@ -1212,7 +1214,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 14 - WILL IT LAST? MODEL A ============ -->
 <section class="slide" data-actname="Will it last?" data-title="Will it last? Gemach Hakehiloh" data-seconds="120">
-  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 18 of 28</span></div>
+  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 18 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 520 400" role="img" aria-label="Far more families pay in than draw out, with a small bad-debt gauge as the risk">
       <text x="40" y="40" class="lblT">at any moment</text>
@@ -1266,7 +1268,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 15 - WILL IT LAST? MODEL B ============ -->
 <section class="slide" data-actname="Will it last?" data-title="Will it last? Gemach Hamerkazi" data-seconds="90">
-  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 19 of 28</span></div>
+  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 19 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 520 380" role="img" aria-label="Repayments overtake new money around year eleven, while the wait lengthens">
       <!-- crossover chart -->
@@ -1292,38 +1294,45 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
   </div>
   <div class="copy">
     <span class="eyebrow b">Solid by design, slow by design</span>
-    <h2>Solvent by construction; the cost is waiting</h2>
+    <h2>It stays within the money it holds; the cost is waiting</h2>
     <ul class="points">
-      <li class="b">Solvent by construction: it only <b>lends what it holds</b>, and from about <b>year eleven</b> repayments carry most of the lending.</li>
+      <li class="b">Its <b>lending mechanism is designed not to overdraw the pool</b>: loans are allocated only when funds are available, and from about <b>year eleven</b> repayments carry most of the lending.</li>
       <li class="b">While young it needs a <b>steady, constant intake</b> of new units, not new families; a <b>gap breaks the cycle</b>. But it has <b>room to plan ahead</b>.</li>
       <li class="b">Its cost is <b>waiting</b>, and how long is set by one thing, the <b>loan size</b>. At the full &pound;40k the wait is long; a smaller loan brings it right down, as the next page shows.</li>
     </ul>
   </div></div>
   <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
-    <p>Will Gemach Hamerkazi last? It is solvent by construction, lending only what it holds, and from around year eleven repayments carry most of the lending. While young it leans on a steady, constant intake of new units, not necessarily new families, since more children from one family count too. A gap in that intake breaks the cycle, so consistency matters more here. In its favour, it can plan a few years ahead, with time to recover from a slow patch. Its cost is paid in waiting, and how long depends entirely on the size of the loan, which is the very next thing we look at. And it need not rule out a credit union either, holding the capital such a home wants, its liquidity simply untested.</p></div>
+    <p>Will Gemach Hamerkazi last? Its lending mechanism is designed not to overdraw the pool, because loans are allocated only when sufficient funds are available. From around year eleven, repayments carry most of the lending. While young it leans on a steady, constant intake of new units, not necessarily new families, since more children from one family count too. A gap in that intake breaks the cycle, so consistency matters more here. In its favour, it can plan a few years ahead, with time to recover from a slow patch. Its cost is paid in waiting, and how long depends entirely on the size of the loan, which is the very next thing we look at. And it need not rule out a credit union either, holding the capital such a home wants, its liquidity simply untested.</p></div>
 </section>
 
 <!-- ============ NEW - THE LOAN SIZE DIAL ============ -->
 <section class="slide" data-actname="Will it last?" data-title="The loan size is the dial" data-seconds="110" data-core>
-  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 20 of 28</span></div>
+  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 20 of 29</span></div>
   <div class="stage"><div class="figure">
-    <svg viewBox="0 0 540 384" role="img" aria-label="A smaller loan keeps the fund solvent and the wait short; the full loan needs a long queue or it runs out of money">
-      <g transform="translate(56 28)">
-        <text x="0" y="-10" class="lblT">The same scheme, two loan sizes</text>
-        <line x1="0" y1="0" x2="0" y2="150" stroke="#c6d2e0" stroke-width="1.5"/>
-        <line x1="0" y1="78" x2="392" y2="78" stroke="#b8395e" stroke-width="1.4" stroke-dasharray="5 5"/>
-        <text x="-8" y="82" text-anchor="end" class="lblS" fill="#b8395e">&pound;0</text>
-        <path class="flow" fill="none" d="M0 62 C 130 54 260 48 392 42" stroke="#10897c" stroke-width="2.6"/>
-        <text x="392" y="34" text-anchor="end" class="lblS" fill="#10897c">&pound;15k loan: stays in the black</text>
-        <path class="flow" fill="none" d="M0 68 C 110 94 200 150 300 150 C 356 150 386 122 392 112" stroke="#c0472a" stroke-width="2.6"/>
-        <text x="120" y="140" class="lblS" fill="#c0472a">&pound;40k paid on the day: runs out</text>
+    <svg viewBox="0 0 540 372" role="img" aria-label="A dial: turn it toward a small loan for a short wait and solvency, or toward a large loan for a long wait or insolvency">
+      <defs><linearGradient id="dialgrad" x1="0" x2="1"><stop offset="0" stop-color="#10897c"/><stop offset="1" stop-color="#6a55c8"/></linearGradient></defs>
+      <g transform="translate(40 54)">
+        <text x="0" y="-24" class="lblT">Turn the dial: the loan size sets everything</text>
+        <rect x="0" y="0" width="460" height="16" rx="8" fill="url(#dialgrad)"/>
+        <g class="lblS" text-anchor="middle" fill="#42605a"><text x="6" y="40">&pound;12-15k</text><text x="230" y="40">&pound;25k</text><text x="454" y="40">&pound;40k</text></g>
+        <g transform="translate(84 8)"><circle r="15" fill="#fff" stroke="#10897c" stroke-width="3.5"/><circle r="4.5" fill="#10897c"/></g>
+        <text x="84" y="-6" text-anchor="middle" class="lblS" fill="#10897c">a safe setting</text>
       </g>
-      <g transform="translate(56 250)">
-        <text x="0" y="-2" class="lblT" fill="#6a55c8">What the loan size buys</text>
-        <rect x="0" y="14" width="120" height="22" rx="5" fill="#10897c"/><text x="60" y="29" text-anchor="middle" class="lblS" fill="#fff">~&pound;12-15k</text>
-        <text x="130" y="29" class="lblS">nearly all funded, a short wait, solvent</text>
-        <rect x="0" y="46" width="300" height="22" rx="5" fill="#6a55c8"/><text x="60" y="61" text-anchor="middle" class="lblS" fill="#fff">&pound;40k</text>
-        <text x="310" y="61" class="lblS" fill="#6a55c8">a long queue, or no money at all</text>
+      <g transform="translate(40 148)">
+        <rect width="216" height="176" rx="12" fill="#e4f3f1" stroke="#10897c" stroke-width="1.5"/>
+        <text x="20" y="38" class="lblT" fill="#10897c">Turn it down</text>
+        <text x="20" y="72" class="lblS">a short wait</text>
+        <text x="20" y="100" class="lblS">nearly everyone funded soon</text>
+        <text x="20" y="128" class="lblS">stays within its own funds</text>
+        <text x="20" y="158" class="lblS" fill="#10897c">solvent</text>
+      </g>
+      <g transform="translate(284 148)">
+        <rect width="216" height="176" rx="12" fill="#efecfa" stroke="#6a55c8" stroke-width="1.5"/>
+        <text x="20" y="38" class="lblT" fill="#6a55c8">Turn it up</text>
+        <text x="20" y="72" class="lblS">a long wait...</text>
+        <text x="20" y="100" class="lblS">or, if paid on the day,</text>
+        <text x="20" y="128" class="lblS" fill="#c0472a">the fund runs out of money</text>
+        <text x="20" y="158" class="lblS" fill="#c0472a">insolvent</text>
       </g>
     </svg>
   </div>
@@ -1331,18 +1340,18 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
     <span class="eyebrow b">The one dial that matters</span>
     <h2>The loan size is the <em>dial</em></h2>
     <ul class="points">
-      <li class="b">At the full <b>&pound;40k</b>, paying every wedding <b>on the day</b> would send the fund deep into deficit. The <b>queue</b> is what keeps it solvent, by asking families to wait.</li>
+      <li class="b">If the model assumes every family gets the full <b>&pound;40k on the wedding date</b>, without waiting for funds, the projected cash balance turns <b>heavily negative</b>. The <b>queue is not incidental</b>: it keeps the scheme within the money it holds.</li>
       <li class="b">Bring the loan to about <b>&pound;12-15k</b> and the fund pays <b>nearly every wedding within a few years</b> of the day, and stays in the black throughout.</li>
       <li class="b">So the loan is a <b>dial the committee sets</b>: a bigger loan means a longer wait, a smaller loan a shorter one. <b>Nothing else moves it as much.</b></li>
     </ul>
   </div></div>
   <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
-    <p>Here is the single most important thing we found. Gemach Hamerkazi has one dial that matters above all the others, and it is the size of the loan. If we insist on the full forty thousand pounds and pay every wedding on the day it falls, the fund runs out of money and goes deep into deficit. The only reason the scheme can be called solvent is the queue: asking families to wait is exactly what keeps it in the black. Bring the loan down to around twelve to fifteen thousand, and the picture changes completely. The fund pays nearly every wedding within a few years of the day, and it never runs dry. So the loan size is not a detail, it is the dial. A larger loan buys a longer wait; a smaller loan a shorter one. Everything else we tested moves the scheme far less than this one choice.</p></div>
+    <p>Here is the single most important thing we found. Gemach Hamerkazi has one dial that matters above all the others, and it is the size of the loan. If the model assumes that every family receives the full forty thousand pounds on the wedding date, without waiting for sufficient funds to become available, the projected cash balance quickly turns heavily negative. The queue is therefore not an incidental feature. It is what keeps the scheme within the money it actually holds. Bring the loan down to around twelve to fifteen thousand, and the picture changes. The fund pays nearly every wedding within a few years of the day, and it stays within its funds throughout. So the loan size is not a detail. It is the dial. A larger loan buys a longer wait. A smaller loan a shorter one. Everything else we tested moves the scheme far less than this one choice.</p></div>
 </section>
 
 <!-- ============ NEW - WHY THIS FITS BERINOH ============ -->
 <section class="slide" data-actname="Will it last?" data-title="Why this scheme fits us" data-seconds="105" data-core>
-  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 21 of 28</span></div>
+  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 21 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 560 360" role="img" aria-label="Our two constraints, families arriving late and modest sign-up, are exactly what Gemach Hamerkazi does not require">
       <g transform="translate(20 26)">
@@ -1384,27 +1393,34 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ NEW - STEADY FLOW HAS A COST ============ -->
 <section class="slide" data-actname="Will it last?" data-title="Steady flow has a cost" data-seconds="110" data-core>
-  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 22 of 28</span></div>
+  <div class="rail"><span class="act">Act 5 - Will it last?</span><span class="sep">/</span><span class="pg">Page 22 of 29</span></div>
   <div class="stage"><div class="figure">
-    <svg viewBox="0 0 540 384" role="img" aria-label="Signing everyone up at once bunches weddings into a wave that lowers the safe loan, and a small scheme cannot carry a fixed overhead">
-      <g transform="translate(52 28)">
-        <text x="0" y="-10" class="lblT">Weddings a year</text>
-        <line x1="0" y1="0" x2="0" y2="120" stroke="#c6d2e0" stroke-width="1.5"/>
-        <line x1="0" y1="120" x2="392" y2="120" stroke="#c6d2e0" stroke-width="1.5"/>
-        <path class="flow" fill="none" d="M0 116 C 70 70 130 24 196 22 C 262 20 300 66 392 96" stroke="#c9a23a" stroke-width="2.6"/>
-        <text x="196" y="14" text-anchor="middle" class="lblS" fill="#b8860b">all upfront: a wave</text>
-        <path class="flow" fill="none" d="M0 116 C 130 96 260 82 392 76" stroke="#10897c" stroke-width="2.3" stroke-dasharray="6 4"/>
-        <text x="392" y="68" text-anchor="end" class="lblS" fill="#10897c">steady: smoother</text>
+    <svg viewBox="0 0 540 372" role="img" aria-label="Three costs of a steady flow: a demand wave from front-loading, a lower safe loan, and a fixed overhead on a small scheme">
+      <g transform="translate(20 16)">
+        <rect width="500" height="104" rx="12" class="card"/>
+        <text x="20" y="32" class="lblT" fill="#b8860b">1 &middot; Front-loading bunches the weddings</text>
+        <text x="20" y="62" class="lblS">everyone at once means a wave of</text>
+        <text x="20" y="82" class="lblS">demand later; a steady flow stays smooth</text>
+        <g transform="translate(342 32)">
+          <path class="flow" fill="none" d="M0 56 C 34 18 70 8 100 10 C 130 12 148 42 176 54" stroke="#c9a23a" stroke-width="2.4"/>
+          <path class="flow" fill="none" d="M0 56 C 60 48 120 42 176 40" stroke="#10897c" stroke-width="2" stroke-dasharray="5 4"/>
+        </g>
       </g>
-      <g transform="translate(52 196)">
-        <text x="0" y="0" class="lblT" fill="#6a55c8">the safe loan it can carry</text>
-        <rect x="0" y="12" width="300" height="20" rx="5" fill="#10897c"/><text x="290" y="27" text-anchor="end" class="lblS" fill="#fff">steady ~&pound;16k</text>
-        <rect x="0" y="38" width="206" height="20" rx="5" fill="#6a55c8"/><text x="196" y="53" text-anchor="end" class="lblS" fill="#fff">all upfront ~&pound;11k</text>
+      <g transform="translate(20 132)">
+        <rect width="500" height="104" rx="12" class="card"/>
+        <text x="20" y="32" class="lblT" fill="#6a55c8">2 &middot; That wave lowers the safe loan</text>
+        <text x="20" y="62" class="lblS">steady intake supports about &pound;16k;</text>
+        <text x="20" y="82" class="lblS">all-upfront only about &pound;11k</text>
+        <g transform="translate(300 44)">
+          <rect x="0" y="0" width="180" height="15" rx="4" fill="#10897c"/><text x="0" y="-5" class="lblS" fill="#10897c">steady ~&pound;16k</text>
+          <rect x="0" y="30" width="124" height="15" rx="4" fill="#6a55c8"/><text x="132" y="42" class="lblS" fill="#6a55c8">upfront ~&pound;11k</text>
+        </g>
       </g>
-      <g transform="translate(52 288)">
-        <text x="0" y="0" class="lblT" fill="#b45f1a">a small scheme, a fixed cost</text>
-        <rect x="0" y="12" width="70" height="22" rx="5" fill="#f0e6d2" stroke="#c08f2a" stroke-width="1.5"/><text x="80" y="27" class="lblS">small turnover</text>
-        <line x1="0" y1="48" x2="238" y2="48" stroke="#b8395e" stroke-width="2.5" stroke-dasharray="6 4"/><text x="246" y="52" class="lblS" fill="#b8395e">overhead does not shrink</text>
+      <g transform="translate(20 248)">
+        <rect width="500" height="104" rx="12" class="card"/>
+        <text x="20" y="32" class="lblT" fill="#b45f1a">3 &middot; A small scheme, a fixed cost</text>
+        <text x="20" y="62" class="lblS">small turnover cannot carry a fixed overhead;</text>
+        <text x="20" y="82" class="lblS">and a steady flow needs continual recruiting</text>
       </g>
     </svg>
   </div>
@@ -1412,18 +1428,61 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
     <span class="eyebrow b">The honest catch</span>
     <h2>It needs steady flow, and flow has a <em>cost</em></h2>
     <ul class="points">
-      <li class="b">Signing everyone up at once is <b>not a shortcut</b>: it bunches the children's weddings into a wave, which <b>lowers the safe loan</b> from about &pound;16k to about &pound;11k.</li>
+      <li class="b">If a large founding cohort joins at once and their weddings are <b>more concentrated</b> than a steady monthly intake would produce, the fund faces a <b>future wave of demand</b>. In our modelling that lowers the sustainable loan from about <b>&pound;16k to about &pound;11k</b>.</li>
       <li class="b">A steady flow is what it wants, but that means <b>recruiting continually</b>, not one founding drive. More marketing effort, and more cost.</li>
       <li class="b">A scheme kept <b>small</b> turns over little, so a <b>fixed overhead weighs heavily</b>. Below a certain size it cannot pay for itself.</li>
     </ul>
   </div></div>
   <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
-    <p>There is one honest catch worth naming. Gemach Hamerkazi wants a steady flow of joiners, and steady flow has a cost. First, we cannot shortcut it by signing everyone up in one drive: taking every family at once bunches their children's weddings into a wave twenty years later, and that wave lowers the largest loan the fund can safely carry, from around sixteen thousand pounds to around eleven. Second, a steady flow means recruiting continually, year after year, which is more marketing effort and more cost than a single founding push. And third, a scheme we keep deliberately small turns over very little each year, so a fixed running cost, staff, compliance, the marketing itself, weighs heavily on it, and below a certain size it cannot pay for itself. None of this sinks the scheme, but the committee should go in with eyes open: the shape it prefers is the more demanding one to sustain.</p></div>
+    <p>There is one honest catch. Gemach Hamerkazi wants a steady flow of joiners, and steady flow has a cost. First, a founding drive is not a shortcut. If a large founding cohort joins at once, and their expected claims are more concentrated than a steady monthly intake would produce, the fund faces a future wave of demand. In our modelling, that reduces the sustainable loan from around sixteen thousand pounds to around eleven. Second, a steady flow means recruiting continually, which is more marketing effort and cost than a single founding push. And third, a scheme kept deliberately small turns over very little each year, so a fixed running cost weighs heavily on it, and below a certain size it cannot pay for itself. None of this sinks the scheme, but the committee should go in with eyes open.</p></div>
+</section>
+
+<!-- ============ NEW - WHICH MODEL TO PILOT (TRANSITION) ============ -->
+<section class="slide" data-actname="A decision" data-title="Which model to pilot" data-seconds="115" data-core>
+  <div class="rail"><span class="act">Act 5 - A decision</span><span class="sep">/</span><span class="pg">Page 23 of 29</span></div>
+  <div class="stage"><div class="figure">
+    <svg viewBox="0 0 560 360" role="img" aria-label="Hamerkazi fits recruitment but has practical costs; Hakehiloh is harder to start but may give a stronger benefit; the pilot tests whether the needed participation is achievable">
+      <g transform="translate(18 22)">
+        <rect width="252" height="126" rx="12" fill="#efecfa" stroke="#6a55c8" stroke-width="2"/>
+        <text x="20" y="32" class="lblT" fill="#6a55c8">Gemach Hamerkazi</text>
+        <text x="20" y="60" class="lblS">Fits recruitment: join later, no big push</text>
+        <text x="20" y="84" class="lblS">But: loan size, the wait, ongoing</text>
+        <text x="20" y="104" class="lblS">marketing, the cost of running small</text>
+      </g>
+      <g transform="translate(290 22)">
+        <rect width="252" height="126" rx="12" fill="#fbeef2" stroke="#b8395e" stroke-width="2"/>
+        <text x="20" y="32" class="lblT" fill="#b8395e">Gemach Hakehiloh</text>
+        <text x="20" y="60" class="lblS">Harder to start: earlier, broader sign-up</text>
+        <text x="20" y="84" class="lblS">But: a stronger, more predictable</text>
+        <text x="20" y="104" class="lblS">benefit, if enough families join</text>
+      </g>
+      <path class="flow" fill="none" d="M150 152 L 214 196" stroke="#c08f2a" stroke-width="2.5"/><path d="M216 198 l -12 -3 v11 z" fill="#c08f2a"/>
+      <path class="flow" fill="none" d="M410 152 L 346 196" stroke="#c08f2a" stroke-width="2.5"/><path d="M344 198 l 12 -3 v11 z" fill="#c08f2a"/>
+      <g transform="translate(150 206)">
+        <rect width="260" height="96" rx="12" class="card"/>
+        <text x="130" y="36" text-anchor="middle" class="lblT" fill="#c08f2a">The pilot</text>
+        <text x="130" y="62" text-anchor="middle" class="lblS">tests whether the participation</text>
+        <text x="130" y="82" text-anchor="middle" class="lblS">Gemach Hakehiloh needs is achievable</text>
+      </g>
+    </svg>
+  </div>
+  <div class="copy">
+    <span class="eyebrow g">From analysis to a decision</span>
+    <h2>Why the pilot begins with <em>Gemach Hakehiloh</em></h2>
+    <ul class="points">
+      <li class="b">Gemach Hamerkazi may fit our recruitment pattern more naturally: families can join later, and it needs no very high initial sign-up.</li>
+      <li class="b">But its likely loan size, the waiting period, the ongoing recruitment effort and the cost of running a smaller scheme may make it <b>less attractive in practice</b>.</li>
+      <li class="a">Gemach Hakehiloh is harder to establish, needing earlier and broader participation, yet if enough families join it may offer a <b>stronger, more predictable benefit</b>.</li>
+      <li>The pilot's purpose is therefore to <b>test whether that level of participation can realistically be achieved</b>.</li>
+    </ul>
+  </div></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
+    <p>So which model should we actually begin with. Gemach Hamerkazi may fit our recruitment pattern more naturally, because families can join later and the model does not require a very high initial sign-up. However, the likely loan size, the waiting period, the ongoing recruitment effort and the operating cost of maintaining a smaller scheme may make it less attractive in practice. Gemach Hakehiloh is harder to establish, because it requires earlier and broader participation. But if a pilot demonstrates sufficient uptake, it may ultimately offer families a stronger and more predictable benefit. The purpose of the pilot is therefore to test whether that level of participation can realistically be achieved.</p></div>
 </section>
 
 <!-- ============ PAGE 16 - REGULATORY ============ -->
 <section class="slide" data-actname="Governance" data-title="Why a credit union" data-seconds="120">
-  <div class="rail"><span class="act">Act 5 - Governance</span><span class="sep">/</span><span class="pg">Page 23 of 28</span></div>
+  <div class="rail"><span class="act">Act 5 - Governance</span><span class="sep">/</span><span class="pg">Page 24 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 540 360" role="img" aria-label="A credit union holds and protects members' savings, with permission to take deposits and a footing regulators have already examined">
       <g fill="#6b7a92"><circle cx="42" cy="150" r="12"/><circle cx="42" cy="186" r="12"/><circle cx="42" cy="222" r="12"/></g>
@@ -1448,19 +1507,19 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
     <span class="eyebrow g">Why a credit union</span>
     <h2>The right home for people's savings</h2>
     <ul class="points">
-      <li>It <b>holds members' savings</b>, and taking deposits <b>needs permission</b> while those savings <b>need protecting</b>. A credit union gives both.</li>
+      <li>Both models <b>hold members' savings</b>, and taking deposits <b>needs permission</b> while those savings <b>need protecting</b>. A credit union gives both.</li>
       <li>It is <b>already examined by regulators</b>, with prudential rules and a common bond behind it.</li>
       <li>The one awkward fit: <b>non-returnable contributions</b> and <b>interest-free lending</b> sit oddly against ordinary shares.</li>
     </ul>
     <div class="tag-row"><span class="chip">Needs a professional's sign-off before the committee relies on it</span></div>
   </div></div>
   <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
-    <p>This is the one part that needs a professional's sign-off, so take it as the direction of travel. Here is why a credit union is the right home. Gemach Hakehiloh holds members' savings, and holding people's money is not a light thing. Taking deposits needs permission, and those savings need protecting, and a credit union gives both, with prudential rules, a common bond, and a footing regulators have already examined. The one awkward fit is that the non returnable contributions and the interest free lending sit oddly against ordinary shares, and that is what a professional would work through. On affordability, the regulator's other main concern, the scheme is reassuring: it only ever lends money it already holds, so it cannot over commit, and at a modest starting loan it is good value for a family against ordinary credit. But the reason to reach for a regulated home is simple: it is looking after people's savings.</p></div>
+    <p>This is the one part that needs a professional's sign-off, so take it as the direction of travel. Both models hold members' savings, and holding people's money is not a light thing. Taking deposits needs permission, and those savings need protecting; a credit union gives both, on a footing regulators have already examined. It is worth being precise about how each scheme commits itself. Gemach Hakehiloh creates future lending expectations linked to wedding dates. Gemach Hamerkazi controls its commitments through the queue, and only advances a loan when funds are available. The awkward fit is that the non returnable contributions and interest free lending sit oddly against ordinary shares, and that is what a professional would work through. But the reason to reach for a regulated home is simple: it is looking after people's savings.</p></div>
 </section>
 
 <!-- ============ PAGE 17 - PILOT METRICS ============ -->
 <section class="slide" data-actname="Governance" data-title="How a pilot would be judged" data-seconds="90">
-  <div class="rail"><span class="act">Act 5 - Governance</span><span class="sep">/</span><span class="pg">Page 24 of 28</span></div>
+  <div class="rail"><span class="act">Act 5 - Governance</span><span class="sep">/</span><span class="pg">Page 25 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 560 300" role="img" aria-label="A dashboard of gauges with blank slots for committee-set thresholds">
       <g>
@@ -1476,19 +1535,20 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
   <div class="copy">
     <span class="eyebrow t">Governance as measurement</span>
     <h2>Because it can be measured, it can be judged</h2>
-    <p class="lead">Gemach Hakehiloh can be tested against the community's own data, over the first three years and beyond, on a small set of numbers.</p>
+    <p class="lead">A <b>Gemach Hakehiloh</b> pilot can be tested against the community's own data, over the first three years and beyond, on a small set of numbers.</p>
     <ul class="points">
-      <li>Units funded against units enrolled, headroom above both floors, the loan amount reached, bad-debt experience, and growth in units.</li>
+      <li class="a"><b>Gemach Hakehiloh:</b> units funded against units enrolled, headroom above both floors, the loan amount reached, bad-debt experience, and growth in units.</li>
+      <li class="b"><b>Gemach Hamerkazi</b> would instead watch monthly enrolment and its consistency, the projected wait, the sustainable loan size, the operating cost per unit, the share of weddings funded in a set period, and the cash free for future loans.</li>
       <li><b>The thresholds are yours to set. They are the committee's numbers, not the model's.</b></li>
     </ul>
   </div></div>
   <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
-    <p>Because Gemach Hakehiloh's growth can be measured, a pilot can be judged honestly. It can be tested against the community's own data, over the first three years and beyond, on a small set of numbers: units funded against units enrolled, the headroom above the capital and liquidity floors, the loan amount reached, the experience of bad debt, and the growth in units. The thresholds on each of these are for the committee to set. They are your numbers, not the model's.</p></div>
+    <p>Because a scheme's numbers can be measured, a pilot can be judged honestly. A Gemach Hakehiloh pilot can be tested against the community's own data, over the first three years and beyond. The measures are a small set of numbers. They are units funded against units enrolled, the headroom above the capital and liquidity floors, the loan amount reached, the experience of bad debt, and the growth in units. A Gemach Hamerkazi pilot would be judged differently. There the measures would be monthly enrolment and its consistency, the projected waiting period, the sustainable loan size, the operating cost per saving unit, the share of expected weddings funded within a set period, and the cash available for future loans. Either way, the thresholds on each measure are for the committee to set. They are your numbers, not the model's.</p></div>
 </section>
 
 <!-- ============ PAGE 18 - MEET THE SIMULATORS ============ -->
 <section class="slide" data-actname="The simulators" data-title="Meet the simulators" data-seconds="90">
-  <div class="rail"><span class="act">Act 6 - The simulators</span><span class="sep">/</span><span class="pg">Page 25 of 28</span></div>
+  <div class="rail"><span class="act">Act 6 - The simulators</span><span class="sep">/</span><span class="pg">Page 26 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 560 340" role="img" aria-label="Three live tools: Gemach Hakehiloh, Gemach Hamerkazi, and a comparison view">
       <!-- browser card A -->
@@ -1518,6 +1578,10 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li class="b"><b>berinoh.provaris.co.uk/solvency/</b> - the roster stress test</li>
       <li><b>berinoh.provaris.co.uk</b> - the comparison view</li>
     </ul>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:18px">
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzFtbSIgaGVpZ2h0PSIzMW1tIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAzMSAzMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMSwxSDJWMkgxek0yLDFIM1YySDJ6TTMsMUg0VjJIM3pNNCwxSDVWMkg0ek01LDFINlYySDV6TTYsMUg3VjJINnpNNywxSDhWMkg3ek0xMCwxSDExVjJIMTB6TTEzLDFIMTRWMkgxM3pNMTQsMUgxNVYySDE0ek0xNywxSDE4VjJIMTd6TTE4LDFIMTlWMkgxOHpNMTksMUgyMFYySDE5ek0yMCwxSDIxVjJIMjB6TTIzLDFIMjRWMkgyM3pNMjQsMUgyNVYySDI0ek0yNSwxSDI2VjJIMjV6TTI2LDFIMjdWMkgyNnpNMjcsMUgyOFYySDI3ek0yOCwxSDI5VjJIMjh6TTI5LDFIMzBWMkgyOXpNMSwySDJWM0gxek03LDJIOFYzSDd6TTksMkgxMFYzSDl6TTEwLDJIMTFWM0gxMHpNMTEsMkgxMlYzSDExek0xMywySDE0VjNIMTN6TTE1LDJIMTZWM0gxNXpNMTYsMkgxN1YzSDE2ek0xNywySDE4VjNIMTd6TTE4LDJIMTlWM0gxOHpNMjAsMkgyMVYzSDIwek0yMywySDI0VjNIMjN6TTI5LDJIMzBWM0gyOXpNMSwzSDJWNEgxek0zLDNINFY0SDN6TTQsM0g1VjRINHpNNSwzSDZWNEg1ek03LDNIOFY0SDd6TTEyLDNIMTNWNEgxMnpNMTQsM0gxNVY0SDE0ek0xNSwzSDE2VjRIMTV6TTE3LDNIMThWNEgxN3pNMjAsM0gyMVY0SDIwek0yMSwzSDIyVjRIMjF6TTIzLDNIMjRWNEgyM3pNMjUsM0gyNlY0SDI1ek0yNiwzSDI3VjRIMjZ6TTI3LDNIMjhWNEgyN3pNMjksM0gzMFY0SDI5ek0xLDRIMlY1SDF6TTMsNEg0VjVIM3pNNCw0SDVWNUg0ek01LDRINlY1SDV6TTcsNEg4VjVIN3pNMTAsNEgxMVY1SDEwek0xMyw0SDE0VjVIMTN6TTE0LDRIMTVWNUgxNHpNMTUsNEgxNlY1SDE1ek0xNiw0SDE3VjVIMTZ6TTE5LDRIMjBWNUgxOXpNMjAsNEgyMVY1SDIwek0yMSw0SDIyVjVIMjF6TTIzLDRIMjRWNUgyM3pNMjUsNEgyNlY1SDI1ek0yNiw0SDI3VjVIMjZ6TTI3LDRIMjhWNUgyN3pNMjksNEgzMFY1SDI5ek0xLDVIMlY2SDF6TTMsNUg0VjZIM3pNNCw1SDVWNkg0ek01LDVINlY2SDV6TTcsNUg4VjZIN3pNOSw1SDEwVjZIOXpNMTAsNUgxMVY2SDEwek0xMSw1SDEyVjZIMTF6TTEyLDVIMTNWNkgxMnpNMTUsNUgxNlY2SDE1ek0yMCw1SDIxVjZIMjB6TTIzLDVIMjRWNkgyM3pNMjUsNUgyNlY2SDI1ek0yNiw1SDI3VjZIMjZ6TTI3LDVIMjhWNkgyN3pNMjksNUgzMFY2SDI5ek0xLDZIMlY3SDF6TTcsNkg4VjdIN3pNMTIsNkgxM1Y3SDEyek0xNCw2SDE1VjdIMTR6TTIwLDZIMjFWN0gyMHpNMjEsNkgyMlY3SDIxek0yMyw2SDI0VjdIMjN6TTI5LDZIMzBWN0gyOXpNMSw3SDJWOEgxek0yLDdIM1Y4SDJ6TTMsN0g0VjhIM3pNNCw3SDVWOEg0ek01LDdINlY4SDV6TTYsN0g3VjhINnpNNyw3SDhWOEg3ek05LDdIMTBWOEg5ek0xMSw3SDEyVjhIMTF6TTEzLDdIMTRWOEgxM3pNMTUsN0gxNlY4SDE1ek0xNyw3SDE4VjhIMTd6TTE5LDdIMjBWOEgxOXpNMjEsN0gyMlY4SDIxek0yMyw3SDI0VjhIMjN6TTI0LDdIMjVWOEgyNHpNMjUsN0gyNlY4SDI1ek0yNiw3SDI3VjhIMjZ6TTI3LDdIMjhWOEgyN3pNMjgsN0gyOVY4SDI4ek0yOSw3SDMwVjhIMjl6TTEyLDhIMTNWOUgxMnpNMTQsOEgxNVY5SDE0ek0xNSw4SDE2VjlIMTV6TTE3LDhIMThWOUgxN3pNMTgsOEgxOVY5SDE4ek0xOSw4SDIwVjlIMTl6TTIwLDhIMjFWOUgyMHpNMSw5SDJWMTBIMXpNMyw5SDRWMTBIM3pNNSw5SDZWMTBINXpNNyw5SDhWMTBIN3pNMTAsOUgxMVYxMEgxMHpNMTEsOUgxMlYxMEgxMXpNMTMsOUgxNFYxMEgxM3pNMTUsOUgxNlYxMEgxNXpNMTYsOUgxN1YxMEgxNnpNMTgsOUgxOVYxMEgxOHpNMTksOUgyMFYxMEgxOXpNMjEsOUgyMlYxMEgyMXpNMjUsOUgyNlYxMEgyNXpNMjgsOUgyOVYxMEgyOHpNMSwxMEgyVjExSDF6TTIsMTBIM1YxMUgyek00LDEwSDVWMTFINHpNNSwxMEg2VjExSDV6TTksMTBIMTBWMTFIOXpNMTMsMTBIMTRWMTFIMTN6TTE1LDEwSDE2VjExSDE1ek0xNiwxMEgxN1YxMUgxNnpNMjEsMTBIMjJWMTFIMjF6TTIyLDEwSDIzVjExSDIyek0yMywxMEgyNFYxMUgyM3pNMjYsMTBIMjdWMTFIMjZ6TTI5LDEwSDMwVjExSDI5ek0yLDExSDNWMTJIMnpNNiwxMUg3VjEySDZ6TTcsMTFIOFYxMkg3ek04LDExSDlWMTJIOHpNOSwxMUgxMFYxMkg5ek0xMywxMUgxNFYxMkgxM3pNMTQsMTFIMTVWMTJIMTR6TTE4LDExSDE5VjEySDE4ek0yMSwxMUgyMlYxMkgyMXpNMjIsMTFIMjNWMTJIMjJ6TTI0LDExSDI1VjEySDI0ek0yNSwxMUgyNlYxMkgyNXpNMjcsMTFIMjhWMTJIMjd6TTI4LDExSDI5VjEySDI4ek0yOSwxMUgzMFYxMkgyOXpNMywxMkg0VjEzSDN6TTQsMTJINVYxM0g0ek01LDEySDZWMTNINXpNOSwxMkgxMFYxM0g5ek0xMiwxMkgxM1YxM0gxMnpNMTMsMTJIMTRWMTNIMTN6TTE2LDEySDE3VjEzSDE2ek0xOCwxMkgxOVYxM0gxOHpNMjEsMTJIMjJWMTNIMjF6TTIyLDEySDIzVjEzSDIyek0yMywxMkgyNFYxM0gyM3pNMjQsMTJIMjVWMTNIMjR6TTI1LDEySDI2VjEzSDI1ek0yOCwxMkgyOVYxM0gyOHpNMSwxM0gyVjE0SDF6TTIsMTNIM1YxNEgyek0zLDEzSDRWMTRIM3pNNCwxM0g1VjE0SDR6TTUsMTNINlYxNEg1ek02LDEzSDdWMTRINnpNNywxM0g4VjE0SDd6TTksMTNIMTBWMTRIOXpNMTAsMTNIMTFWMTRIMTB6TTExLDEzSDEyVjE0SDExek0xMywxM0gxNFYxNEgxM3pNMTcsMTNIMThWMTRIMTd6TTE4LDEzSDE5VjE0SDE4ek0yMiwxM0gyM1YxNEgyMnpNMjMsMTNIMjRWMTRIMjN6TTI2LDEzSDI3VjE0SDI2ek0yOCwxM0gyOVYxNEgyOHpNMjksMTNIMzBWMTRIMjl6TTIsMTRIM1YxNUgyek00LDE0SDVWMTVINHpNNSwxNEg2VjE1SDV6TTYsMTRIN1YxNUg2ek04LDE0SDlWMTVIOHpNMTEsMTRIMTJWMTVIMTF6TTEyLDE0SDEzVjE1SDEyek0xMywxNEgxNFYxNUgxM3pNMTQsMTRIMTVWMTVIMTR6TTE2LDE0SDE3VjE1SDE2ek0xNywxNEgxOFYxNUgxN3pNMTgsMTRIMTlWMTVIMTh6TTIxLDE0SDIyVjE1SDIxek0yMiwxNEgyM1YxNUgyMnpNMjMsMTRIMjRWMTVIMjN6TTI2LDE0SDI3VjE1SDI2ek0yOSwxNEgzMFYxNUgyOXpNMSwxNUgyVjE2SDF6TTIsMTVIM1YxNkgyek01LDE1SDZWMTZINXpNNywxNUg4VjE2SDd6TTEyLDE1SDEzVjE2SDEyek0xMywxNUgxNFYxNkgxM3pNMTUsMTVIMTZWMTZIMTV6TTE2LDE1SDE3VjE2SDE2ek0xNywxNUgxOFYxNkgxN3pNMTgsMTVIMTlWMTZIMTh6TTE5LDE1SDIwVjE2SDE5ek0yMiwxNUgyM1YxNkgyMnpNMjYsMTVIMjdWMTZIMjZ6TTI4LDE1SDI5VjE2SDI4ek0yOSwxNUgzMFYxNkgyOXpNMiwxNkgzVjE3SDJ6TTUsMTZINlYxN0g1ek02LDE2SDdWMTdINnpNMTAsMTZIMTFWMTdIMTB6TTExLDE2SDEyVjE3SDExek0xMiwxNkgxM1YxN0gxMnpNMTQsMTZIMTVWMTdIMTR6TTE1LDE2SDE2VjE3SDE1ek0xNywxNkgxOFYxN0gxN3pNMTgsMTZIMTlWMTdIMTh6TTE5LDE2SDIwVjE3SDE5ek0yMSwxNkgyMlYxN0gyMXpNMjMsMTZIMjRWMTdIMjN6TTI0LDE2SDI1VjE3SDI0ek0yNiwxNkgyN1YxN0gyNnpNMjgsMTZIMjlWMTdIMjh6TTEsMTdIMlYxOEgxek0yLDE3SDNWMThIMnpNNSwxN0g2VjE4SDV6TTYsMTdIN1YxOEg2ek03LDE3SDhWMThIN3pNOSwxN0gxMFYxOEg5ek0xMCwxN0gxMVYxOEgxMHpNMTEsMTdIMTJWMThIMTF6TTE1LDE3SDE2VjE4SDE1ek0xNiwxN0gxN1YxOEgxNnpNMTgsMTdIMTlWMThIMTh6TTIwLDE3SDIxVjE4SDIwek0yMSwxN0gyMlYxOEgyMXpNMjIsMTdIMjNWMThIMjJ6TTIzLDE3SDI0VjE4SDIzek0yNCwxN0gyNVYxOEgyNHpNMjYsMTdIMjdWMThIMjZ6TTI4LDE3SDI5VjE4SDI4ek0yOSwxN0gzMFYxOEgyOXpNMiwxOEgzVjE5SDJ6TTYsMThIN1YxOUg2ek0xMCwxOEgxMVYxOUgxMHpNMTIsMThIMTNWMTlIMTJ6TTEzLDE4SDE0VjE5SDEzek0xNSwxOEgxNlYxOUgxNXpNMTYsMThIMTdWMTlIMTZ6TTIxLDE4SDIyVjE5SDIxek0yMiwxOEgyM1YxOUgyMnpNMjMsMThIMjRWMTlIMjN6TTI2LDE4SDI3VjE5SDI2ek0yNywxOEgyOFYxOUgyN3pNMjksMThIMzBWMTlIMjl6TTEsMTlIMlYyMEgxek03LDE5SDhWMjBIN3pNOCwxOUg5VjIwSDh6TTExLDE5SDEyVjIwSDExek0xNCwxOUgxNVYyMEgxNHpNMTgsMTlIMTlWMjBIMTh6TTIxLDE5SDIyVjIwSDIxek0yNCwxOUgyNVYyMEgyNHpNMjUsMTlIMjZWMjBIMjV6TTI4LDE5SDI5VjIwSDI4ek0yOSwxOUgzMFYyMEgyOXpNMiwyMEgzVjIxSDJ6TTgsMjBIOVYyMUg4ek0xMywyMEgxNFYyMUgxM3pNMTYsMjBIMTdWMjFIMTZ6TTE4LDIwSDE5VjIxSDE4ek0xOSwyMEgyMFYyMUgxOXpNMjIsMjBIMjNWMjFIMjJ6TTI2LDIwSDI3VjIxSDI2ek0yOCwyMEgyOVYyMUgyOHpNMSwyMUgyVjIySDF6TTQsMjFINVYyMkg0ek01LDIxSDZWMjJINXpNNiwyMUg3VjIySDZ6TTcsMjFIOFYyMkg3ek04LDIxSDlWMjJIOHpNOSwyMUgxMFYyMkg5ek0xMCwyMUgxMVYyMkgxMHpNMTIsMjFIMTNWMjJIMTJ6TTEzLDIxSDE0VjIySDEzek0xNywyMUgxOFYyMkgxN3pNMTgsMjFIMTlWMjJIMTh6TTE5LDIxSDIwVjIySDE5ek0yMSwyMUgyMlYyMkgyMXpNMjIsMjFIMjNWMjJIMjJ6TTIzLDIxSDI0VjIySDIzek0yNCwyMUgyNVYyMkgyNHpNMjUsMjFIMjZWMjJIMjV6TTksMjJIMTBWMjNIOXpNMTAsMjJIMTFWMjNIMTB6TTExLDIySDEyVjIzSDExek0xNCwyMkgxNVYyM0gxNHpNMTYsMjJIMTdWMjNIMTZ6TTE3LDIySDE4VjIzSDE3ek0yMSwyMkgyMlYyM0gyMXpNMjUsMjJIMjZWMjNIMjV6TTI3LDIySDI4VjIzSDI3ek0yOCwyMkgyOVYyM0gyOHpNMjksMjJIMzBWMjNIMjl6TTEsMjNIMlYyNEgxek0yLDIzSDNWMjRIMnpNMywyM0g0VjI0SDN6TTQsMjNINVYyNEg0ek01LDIzSDZWMjRINXpNNiwyM0g3VjI0SDZ6TTcsMjNIOFYyNEg3ek0xMSwyM0gxMlYyNEgxMXpNMTIsMjNIMTNWMjRIMTJ6TTEzLDIzSDE0VjI0SDEzek0xNSwyM0gxNlYyNEgxNXpNMTYsMjNIMTdWMjRIMTZ6TTE3LDIzSDE4VjI0SDE3ek0xOCwyM0gxOVYyNEgxOHpNMjAsMjNIMjFWMjRIMjB6TTIxLDIzSDIyVjI0SDIxek0yMywyM0gyNFYyNEgyM3pNMjUsMjNIMjZWMjRIMjV6TTI2LDIzSDI3VjI0SDI2ek0yOCwyM0gyOVYyNEgyOHpNMjksMjNIMzBWMjRIMjl6TTEsMjRIMlYyNUgxek03LDI0SDhWMjVIN3pNMTAsMjRIMTFWMjVIMTB6TTE0LDI0SDE1VjI1SDE0ek0xNSwyNEgxNlYyNUgxNXpNMTcsMjRIMThWMjVIMTd6TTE4LDI0SDE5VjI1SDE4ek0yMSwyNEgyMlYyNUgyMXpNMjUsMjRIMjZWMjVIMjV6TTI2LDI0SDI3VjI1SDI2ek0yOCwyNEgyOVYyNUgyOHpNMjksMjRIMzBWMjVIMjl6TTEsMjVIMlYyNkgxek0zLDI1SDRWMjZIM3pNNCwyNUg1VjI2SDR6TTUsMjVINlYyNkg1ek03LDI1SDhWMjZIN3pNOSwyNUgxMFYyNkg5ek0xMCwyNUgxMVYyNkgxMHpNMTEsMjVIMTJWMjZIMTF6TTEzLDI1SDE0VjI2SDEzek0xNSwyNUgxNlYyNkgxNXpNMTYsMjVIMTdWMjZIMTZ6TTE3LDI1SDE4VjI2SDE3ek0xOCwyNUgxOVYyNkgxOHpNMjEsMjVIMjJWMjZIMjF6TTIyLDI1SDIzVjI2SDIyek0yMywyNUgyNFYyNkgyM3pNMjQsMjVIMjVWMjZIMjR6TTI1LDI1SDI2VjI2SDI1ek0yOCwyNUgyOVYyNkgyOHpNMSwyNkgyVjI3SDF6TTMsMjZINFYyN0gzek00LDI2SDVWMjdINHpNNSwyNkg2VjI3SDV6TTcsMjZIOFYyN0g3ek0xMCwyNkgxMVYyN0gxMHpNMTEsMjZIMTJWMjdIMTF6TTEyLDI2SDEzVjI3SDEyek0xNSwyNkgxNlYyN0gxNXpNMTYsMjZIMTdWMjdIMTZ6TTE4LDI2SDE5VjI3SDE4ek0xOSwyNkgyMFYyN0gxOXpNMjAsMjZIMjFWMjdIMjB6TTIyLDI2SDIzVjI3SDIyek0yNCwyNkgyNVYyN0gyNHpNMjUsMjZIMjZWMjdIMjV6TTI3LDI2SDI4VjI3SDI3ek0xLDI3SDJWMjhIMXpNMywyN0g0VjI4SDN6TTQsMjdINVYyOEg0ek01LDI3SDZWMjhINXpNNywyN0g4VjI4SDd6TTksMjdIMTBWMjhIOXpNMTAsMjdIMTFWMjhIMTB6TTE0LDI3SDE1VjI4SDE0ek0yMSwyN0gyMlYyOEgyMXpNMjQsMjdIMjVWMjhIMjR6TTI1LDI3SDI2VjI4SDI1ek0yNiwyN0gyN1YyOEgyNnpNMjksMjdIMzBWMjhIMjl6TTEsMjhIMlYyOUgxek03LDI4SDhWMjlIN3pNMTAsMjhIMTFWMjlIMTB6TTEyLDI4SDEzVjI5SDEyek0xOCwyOEgxOVYyOUgxOHpNMTksMjhIMjBWMjlIMTl6TTIxLDI4SDIyVjI5SDIxek0yMywyOEgyNFYyOUgyM3pNMjQsMjhIMjVWMjlIMjR6TTI1LDI4SDI2VjI5SDI1ek0yOCwyOEgyOVYyOUgyOHpNMSwyOUgyVjMwSDF6TTIsMjlIM1YzMEgyek0zLDI5SDRWMzBIM3pNNCwyOUg1VjMwSDR6TTUsMjlINlYzMEg1ek02LDI5SDdWMzBINnpNNywyOUg4VjMwSDd6TTksMjlIMTBWMzBIOXpNMTEsMjlIMTJWMzBIMTF6TTEyLDI5SDEzVjMwSDEyek0xMywyOUgxNFYzMEgxM3pNMTUsMjlIMTZWMzBIMTV6TTE2LDI5SDE3VjMwSDE2ek0xNywyOUgxOFYzMEgxN3pNMTgsMjlIMTlWMzBIMTh6TTIwLDI5SDIxVjMwSDIwek0yMSwyOUgyMlYzMEgyMXpNMjUsMjlIMjZWMzBIMjV6TTI4LDI5SDI5VjMwSDI4ek0yOSwyOUgzMFYzMEgyOXoiIGlkPSJxci1wYXRoIiBmaWxsPSIjMTYyMzNhIiBmaWxsLW9wYWNpdHk9IjEiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIi8+PC9zdmc+" alt="QR code linking to berinoh.provaris.co.uk" width="82" height="82" style="border:1px solid var(--line);border-radius:10px;background:#fff;padding:5px">
+      <div><div style="font-weight:800;color:var(--teal);font-size:12.5px;letter-spacing:.05em">LIVE &middot; SCAN TO OPEN</div><div style="color:var(--muted);font-size:14px;margin-top:3px;max-width:34ch">Point a phone camera here to open every tool on any device.</div></div>
+    </div>
   </div></div>
   <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Several live tools have been built to go with this, in the same design you have been looking at, and they are on the community website now. One is the Gemach Hakehiloh simulator. One is the Gemach Hamerkazi simulator. There is a roster stress test that funds our own founding families on time and shows exactly when the money would run out. And a comparison view sets the handful of shared assumptions once and shows both schemes side by side. Every figure in this presentation can be reproduced, and challenged, in these tools.</p></div>
@@ -1525,7 +1589,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 19 - HOW TO TEST ============ -->
 <section class="slide" data-actname="The simulators" data-title="How to test, and what to look for" data-seconds="90">
-  <div class="rail"><span class="act">Act 6 - The simulators</span><span class="sep">/</span><span class="pg">Page 26 of 28</span></div>
+  <div class="rail"><span class="act">Act 6 - The simulators</span><span class="sep">/</span><span class="pg">Page 27 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 540 360" role="img" aria-label="Turning bad debt up drops the capital ratio; fewer joiners stretch the wait">
       <!-- A move -->
@@ -1560,7 +1624,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PAGE 20 - WHERE THIS COULD GO ============ -->
 <section class="slide center" data-actname="Where this could go" data-title="Where this could go, and close" data-seconds="90">
-  <div class="rail"><span class="act">Act 6 - Close</span><span class="sep">/</span><span class="pg">Page 27 of 28</span></div>
+  <div class="rail"><span class="act">Act 6 - Close</span><span class="sep">/</span><span class="pg">Page 28 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 720 214" role="img" aria-label="From where we are now, three choices: Gemach Hakehiloh, Gemach Hamerkazi, or a pilot judged on our metrics">
       <g fill="none" stroke-width="3" stroke-linecap="round">
@@ -1596,7 +1660,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 
 <!-- ============ PILOT PROPOSAL / CLOSE ============ -->
 <section class="slide" data-actname="A way to begin" data-title="Start with the pilot" data-seconds="95">
-  <div class="rail"><span class="act">Act 7 - A way to begin</span><span class="sep">/</span><span class="pg">Page 28 of 28</span></div>
+  <div class="rail"><span class="act">Act 7 - A way to begin</span><span class="sep">/</span><span class="pg">Page 29 of 29</span></div>
   <div class="stage"><div class="figure">
     <svg viewBox="0 0 560 320" role="img" aria-label="150 pounds a month splits into 135 into the pot and 15 to the fund's costs; the sign-up and the real data shape the final scheme">
       <g transform="translate(24 128)">
@@ -1638,8 +1702,10 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 </div>
 
 <div id="bar">
+  <a class="tbtn" href="https://berinoh.provaris.co.uk" target="_blank" rel="noopener">Compare &#8599;</a>
   <a class="tbtn linkA" href="https://berinoh.provaris.co.uk/model-a/" target="_blank" rel="noopener">Gemach Hakehiloh &#8599;</a>
   <a class="tbtn linkB" href="https://berinoh.provaris.co.uk/model-b/" target="_blank" rel="noopener">Gemach Hamerkazi &#8599;</a>
+  <a class="tbtn linkS" href="https://berinoh.provaris.co.uk/solvency/" target="_blank" rel="noopener">Roster stress test &#8599;</a>
 </div>
 
 <div id="menu"><div class="menu-card">
@@ -1657,7 +1723,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
    clips, every page auto-advances on its own timing. A missing clip falls back
    to timing on its own, so a half-recorded set still plays through. */
 window.DECK_AUDIO = window.DECK_AUDIO || {};
-// for(var _i=1;_i<=28;_i++){window.DECK_AUDIO[_i]='audio/p'+String(_i).padStart(2,'0')+'.mp3';}
+// for(var _i=1;_i<=29;_i++){window.DECK_AUDIO[_i]='audio/p'+String(_i).padStart(2,'0')+'.mp3';}
 (function(){
   'use strict';
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));

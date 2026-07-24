@@ -217,3 +217,8 @@ footer b{color:var(--ink)}
 
 /* preset scenario buttons removed from the interface (base case is the default) */
 .presets{display:none}
+
+.sitenav a.s{color:#0f7a6b}
+.sitenav a.p{color:#8a6d1a}
+.sitenav a.s.current{background:#0f7a6b;border-color:#0f7a6b}
+.sitenav a.p.current{background:#8a6d1a;border-color:#8a6d1a}
