@@ -214,3 +214,6 @@ footer b{color:var(--ink)}
   .app-controls{position:static;max-height:none;overflow:visible;border:0;padding:0;background:none;border-radius:0;margin-top:44px}
   .app-out .block{margin-top:44px}
 }
+
+/* preset scenario buttons removed from the interface (base case is the default) */
+.presets{display:none}
