@@ -32,7 +32,7 @@
   .modewrap{display:flex;gap:6px;margin:4px 0 8px}
   .modewrap button{flex:1;border:1px solid var(--line);background:#fbfdfc;border-radius:8px;padding:6px 4px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--ink2)}
   .modewrap button.on{border-color:var(--teal);background:var(--teal);color:#fff}
-  .tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin-bottom:18px}
   .tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 13px}
   .tile .k{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
   .tile .v{font-family:"Fraunces",serif;font-size:22px;font-weight:600;margin-top:3px;line-height:1.1}
@@ -79,6 +79,14 @@
       </div>
 
       <div class="grp">
+        <div class="f"><label>Who joins, and when</label></div>
+        <div class="modewrap" id="shapewrap">
+          <button data-s="front" class="on">All upfront</button>
+          <button data-s="steady">Steady intake</button>
+        </div>
+      </div>
+
+      <div class="grp">
         <div class="f"><label>Loan rule</label></div>
         <div class="modewrap" id="modewrap">
           <button data-m="multiple" class="on">&times; savings</button>
@@ -119,7 +127,7 @@
         <div class="chart"><canvas id="cWed"></canvas></div>
         <div class="chart"><canvas id="cCum"></canvas></div>
       </div>
-      <p class="note">The cash chart is the test: any dip below the zero line means the fund has run out of money that month. Because there is no queue, the loan cannot flex and the wait cannot absorb the shock, so solvency depends entirely on the loan being small enough that repayments and pay-ins keep pace with the weddings falling due. The safe-maximum figures are found by searching for the largest loan whose cash line never crosses zero across the whole run. Built on the Hakehiloh age distribution; a mechanism model, not a forecast.</p>
+      <p class="note">The cash chart is the test: any dip below the zero line means the fund has run out of money that month. Because there is no queue, the loan cannot flex and the wait cannot absorb the shock, so solvency depends entirely on the loan being small enough that repayments and pay-ins keep pace with the weddings falling due. The safe-maximum figures are found by searching for the largest loan whose cash line never crosses zero across the whole run. Switch "All upfront" to "Steady intake" to see how much the shape matters: taking every family at once concentrates their children's weddings into a wave that lowers the safe loan, whereas a steady flow smooths it and lifts it. And a fixed overhead is a heavy burden on a small scheme, which turns over little each year, as the "money in" figure shows. Built on the Hakehiloh age distribution; a mechanism model, not a forecast.</p>
     </main>
   </div>
 </div>
@@ -133,10 +141,18 @@ function gaussSpread(arr,center,sd,total,H){ if(total<=0)return; center=Math.max
 function build(P){
   const H=Math.round(P.years*12),mAge=P.marriageAge,sd=P.marriageSpreadY*12,contrib=P.contrib,capM=P.payMonths,savPer=contrib*P.savingsShare;
   const N0=Math.round(P.families*P.childrenPerFamily),EXT=H+400;
-  let wed=new Float64Array(EXT+1);
-  for(const ad of AGE_DIST){const c=Math.max(1,Math.round((mAge-ad[0])*12));gaussSpread(wed,c,sd,N0*ad[1],EXT);}
+  let front=new Float64Array(EXT+1);
+  for(const ad of AGE_DIST){const c=Math.max(1,Math.round((mAge-ad[0])*12));gaussSpread(front,c,sd,N0*ad[1],EXT);}
   const genLag=Math.round((mAge+P.reproGapY)*12),s=Math.pow(1+P.growthPct/100,genLag/12);
-  for(let m=1;m<=EXT;m++){if(wed[m]>1e-12)gaussSpread(wed,m+genLag,sd*1.4,wed[m]*s,EXT);}
+  for(let m=1;m<=EXT;m++){if(front[m]>1e-12)gaussSpread(front,m+genLag,sd*1.4,front[m]*s,EXT);}
+  let wed;
+  if(P.shape==='steady'){
+    wed=new Float64Array(EXT+1);
+    for(let m=1;m<=H;m++){ const rate=Math.pow(1+P.growthPct/100,(m-1)/12);
+      for(const ad of AGE_DIST){ const wm=m+Math.max(0,Math.round((mAge-ad[0])*12)); gaussSpread(wed,wm,sd,rate*ad[1],EXT); } }
+    let tf=0,ts=0; for(let m=1;m<=H;m++){tf+=front[m];ts+=wed[m];} const k=ts>0?tf/ts:1;
+    for(let m=1;m<wed.length;m++) wed[m]*=k;
+  } else wed=front;
   let diff=new Float64Array(H+2);
   for(let w=1;w<=H+capM;w++){if(wed[w]<=1e-12)continue;const n=wed[w],st=Math.max(1,w-capM),en=Math.min(H+1,w);if(st<en){diff[st]+=contrib*n;if(en<=H)diff[en]-=contrib*n;}}
   let cA=new Float64Array(H+2),run=0;for(let m=1;m<=H;m++){run+=diff[m];cA[m]=run;}
@@ -164,10 +180,10 @@ function solveMax(P,B,key){ let lo=0,hi=key==='multiple'?30:60000;
   for(let i=0;i<38;i++){const mid=(lo+hi)/2; const q=Object.assign({},P,{mode:key,[key==='multiple'?'multiple':'loan']:mid});
     if(sim(q,B).minCash>=-1e-6) lo=mid; else hi=mid;} return lo; }
 
-let MODE='multiple';
+let MODE='multiple', SHAPE='front';
 function P(){ const g=id=>parseFloat(document.getElementById(id).value)||0;
   return {years:g('years'),marriageAge:g('marriageAge'),marriageSpreadY:1.6,reproGapY:5,contrib:g('contrib'),
-    payMonths:g('payMonths'),savingsShare:g('savingsSharePct')/100,repayRate:g('repayRatePct')/100,mode:MODE,
+    payMonths:g('payMonths'),savingsShare:g('savingsSharePct')/100,repayRate:g('repayRatePct')/100,mode:MODE,shape:SHAPE,
     loan:g('loan'),multiple:g('multiple'),loanMax:40000,badPct:g('badPct'),overhead:g('overhead'),
     families:g('families'),childrenPerFamily:g('childrenPerFamily'),growthPct:g('growthPct')}; }
 function aggregate(rows,years){ const yr=[];
@@ -215,7 +231,8 @@ function run(){
     ['Lowest cash', money(R.minCash), R.minCash>=0?'good':'bad'],
     ['Safe max multiple', '&times;'+curMaxM.toFixed(1), 'good'],
     ['Safe max loan (full term)', money(curMaxM*p.contrib*p.savingsShare*p.payMonths), 'good'],
-    ['Total lent, year '+p.years, money(end.cumLent), '']
+    ['Total lent, year '+p.years, money(end.cumLent), ''],
+    ['Money in, year '+Math.min(p.years,20), money((A[Math.min(p.years,20)-1]||end).inYr), '']
   ];
   document.getElementById('tiles').innerHTML=tiles.map(t=>`<div class="tile ${t[2]}"><div class="k">${t[0]}</div><div class="v">${t[1]}</div></div>`).join('');
   draw('cCash',{title:'Cash balance over time (below zero = insolvent)',allowNeg:true,zero:true,yfmt:money,
@@ -238,6 +255,7 @@ function setMode(m){ MODE=m;
 }
 function set(id,v){document.getElementById(id).value=v;}
 document.querySelectorAll('#modewrap button').forEach(b=>b.onclick=()=>{ setMode(b.dataset.m); run(); });
+document.querySelectorAll('#shapewrap button').forEach(b=>b.onclick=()=>{ SHAPE=b.dataset.s; document.querySelectorAll('#shapewrap button').forEach(x=>x.classList.toggle('on',x.dataset.s===SHAPE)); run(); });
 const presets={ full:()=>{setMode('multiple');set('multiple',16.67);}, l15:()=>{setMode('fixed');set('loan',15000);},
   safe:()=>{ if(MODE==='multiple') set('multiple', Math.floor(curMaxM*10)/10); else set('loan', Math.floor(curMaxF/100)*100); } };
 document.querySelectorAll('#presets button').forEach(b=>b.onclick=()=>{ presets[b.dataset.p](); run(); });
