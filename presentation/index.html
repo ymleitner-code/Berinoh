@@ -29,16 +29,18 @@ body{font-family:var(--body);background:#0f1626;color:var(--ink);
 /* ---- deck frame ---- */
 #deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
   background:radial-gradient(120% 120% at 50% 0%,#f4f7fb 0%,var(--paper) 55%,#e6ebf3 100%)}
-.slide{position:absolute;inset:0;display:none;flex-direction:column;
-  padding:clamp(16px,3vw,48px) clamp(18px,4vw,64px) clamp(80px,10vh,100px);opacity:0;
+.slide{position:absolute;inset:0;display:none;
+  grid-template-columns:minmax(0,1fr) clamp(300px,29vw,384px);grid-template-rows:auto minmax(0,1fr);
+  column-gap:clamp(20px,2.6vw,40px);
+  padding:clamp(14px,2.6vw,38px) clamp(18px,3.2vw,52px) clamp(78px,9vh,94px);opacity:0;
   transition:opacity .5s ease}
-.slide.active{display:flex;opacity:1}
+.slide.active{display:grid;opacity:1}
 .slide.enter{animation:rise .55s ease both}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.slide,.slide.enter{transition:none;animation:none}}
 
 /* ---- top rail ---- */
-.rail{display:flex;align-items:center;gap:12px;flex:0 0 auto;
+.rail{grid-column:1 / -1;grid-row:1;display:flex;align-items:center;gap:12px;
   font-size:15px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
 .rail .act{color:var(--teal)}
 .rail .sep{color:var(--line-2)}
@@ -49,13 +51,13 @@ body{font-family:var(--body);background:#0f1626;color:var(--ink);
 .rail .core svg{width:15px;height:15px;fill:var(--gold)}
 
 /* ---- stage: figure + copy ---- */
-.stage{flex:1 1 auto;display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(20px,3.6vw,58px);
-  align-items:center;min-height:0;padding:clamp(6px,1.6vh,22px) 0}
-.slide.center .stage{grid-template-columns:1fr;max-width:1040px;margin:0 auto;text-align:center;justify-items:center}
+.stage{grid-column:1;grid-row:2;display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(16px,2.4vw,36px);
+  align-items:center;min-height:0;min-width:0;overflow:auto;padding:clamp(4px,1.2vh,14px) 0}
+.slide.center .stage{grid-template-columns:1fr;text-align:start;justify-items:start}
 .figure{min-width:0;display:flex;align-items:center;justify-content:center}
 .slide.center .figure{width:100%}
-.slide.center .figure svg{max-height:22vh}
-.figure svg{width:100%;height:auto;max-height:45vh;overflow:visible;display:block}
+.slide.center .figure svg{max-height:34vh}
+.figure svg{width:100%;height:auto;max-height:50vh;overflow:visible;display:block}
 .copy{min-width:0;max-width:56ch}
 .slide.center .copy{max-width:74ch}
 .slide.center .copy h2{font-size:clamp(24px,3.4vw,42px)}
@@ -79,12 +81,19 @@ body{font-family:var(--body);background:#0f1626;color:var(--ink);
 .chip.a{color:var(--a);border-color:#e6bccb} .chip.b{color:var(--b);border-color:#ccc2ef}
 
 /* ---- narration caption ---- */
-.caption{flex:0 0 auto;max-width:1240px;width:100%;margin:0 auto;
-  padding:clamp(10px,1.5vh,16px) 4px 2px;border-top:2px solid var(--line-2)}
-.caption .lbl{font-size:11.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.caption{grid-column:2;grid-row:2;align-self:stretch;min-height:0;overflow:auto;
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--teal-soft);border:1px solid #bcdfd8;border-radius:16px;padding:clamp(16px,1.5vw,26px)}
+.caption .lbl{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--recyc);margin-bottom:11px;display:flex;align-items:center;gap:7px}
 .caption .lbl .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2.2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
-.caption p{font-size:clamp(17px,1.72vw,22px);line-height:1.42;color:var(--ink);max-width:112ch;font-weight:600;letter-spacing:-.005em}
+.caption p{font-size:clamp(16px,1.4vw,20px);line-height:1.5;color:var(--ink);font-weight:600;letter-spacing:-.003em}
+@media(max-width:920px){
+  .slide{grid-template-columns:1fr;grid-template-rows:auto auto auto;row-gap:14px}
+  .stage{grid-column:1;grid-row:2;grid-template-columns:1fr;overflow:visible}
+  .caption{grid-column:1;grid-row:3}
+  .slide.center .figure svg,.figure svg{max-height:40vh}
+}
 .caption p .said{color:var(--ink)} .caption p .rest{color:var(--muted)}
 
 /* ---- control bar ---- */
@@ -110,6 +119,11 @@ body{font-family:var(--body);background:#0f1626;color:var(--ink);
   font-family:var(--body);font-weight:700;font-size:12.5px;border-radius:999px;padding:7px 13px;cursor:pointer}
 .tbtn:hover{border-color:#fff;color:#fff}
 .tbtn.on{background:var(--gold);border-color:var(--gold);color:#231a05}
+a.tbtn{text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.tbtn.linkA{color:#f0a8bd;border-color:rgba(240,168,189,.45)}
+.tbtn.linkB{color:#c3b6f0;border-color:rgba(195,182,240,.45)}
+.tbtn.linkA:hover{color:#ffc6d6;border-color:#f0a8bd}
+.tbtn.linkB:hover{color:#dacffb;border-color:#c3b6f0}
 @media(max-width:640px){#bar .hideSm{display:none}#bar .meta{min-width:0}}
 
 /* ---- page menu ---- */
@@ -147,7 +161,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 .flow{fill:none;stroke-linecap:round;stroke-linejoin:round}
 
 /* wide comparison-table layout */
-.slide.wide .stage{display:block;overflow:auto;align-self:start}
+.slide.wide .stage{grid-column:1;grid-row:2;display:block;overflow:auto;align-self:stretch}
 .slide.wide .cmp-head{margin-bottom:6px}
 .slide.wide .cmp-head .lead{margin-top:8px}
 .cmp{width:100%;border-collapse:collapse;font-size:clamp(14px,1.42vw,18px);margin-top:8px}
@@ -166,7 +180,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
 .caption.hide{display:none}
 
 /* month-by-month table */
-.mtbl-wrap{overflow-y:auto;max-height:36vh;border:1px solid var(--line);border-radius:10px;margin-top:10px}
+.mtbl-wrap{overflow-y:auto;max-height:56vh;border:1px solid var(--line);border-radius:10px;margin-top:10px}
 .mtbl{width:100%;border-collapse:collapse;font-size:clamp(12.5px,1.12vw,15px);font-variant-numeric:tabular-nums}
 .mtbl thead th{position:sticky;top:0;z-index:1;background:var(--ink);color:#fff;font-family:var(--body);
   font-weight:700;font-size:12.5px;padding:9px 12px;text-align:right;white-space:nowrap}
@@ -211,7 +225,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
     <h2>Two ways to fund our community's <em>weddings</em></h2>
     <p class="lead">Prepared for the Berinoh committee. It runs on its own. Play and pause as you like, step back or skip with the arrows, and open Pages to jump anywhere.</p>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Welcome. This is a short walk through two ways our community could fund its weddings, prepared for the committee. It runs on its own. Use play and pause whenever you like, step back or skip ahead with the arrows, and open Pages to jump anywhere.</p></div>
 </section>
 
@@ -251,7 +265,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li>They ask families to trust in <b>opposite ways</b>.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>A wedding has a date that cannot move, and a cost that cannot be halved. When the day comes, the money has to be there. A community fund exists to carry that weight together. The question in front of the committee is not whether to help, but how to share the load, and two honest designs are on the table. They are built on opposite promises, and they ask families to trust in opposite ways.</p></div>
 </section>
 
@@ -306,7 +320,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li>One <b>grows the amount</b>. The other <b>makes you wait for it</b>.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Here are the two, in one breath each. The first, Gemach Hakehiloh, works per family. A family saves together, and when a child marries the fund lends what it can afford that year, on the day, with the amount growing over time toward the full sum. The second, Gemach Hamerkazi, is one pool the whole community shares. You save for each child and take a place in line, and when your turn comes you receive the full loan. One grows the amount. The other makes you wait for it.</p></div>
 </section>
 
@@ -350,7 +364,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li class="a">A large family is <b>carried generously</b>; a small family is close to saving for itself.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Step inside Gemach Hakehiloh as a family. You pay about a hundred and fifty pounds a month, and that is the same whether you have one child or ten. On each wedding date, the money is there. In the early years the loan is smaller, and it climbs year by year as the fund matures. A large family is carried generously by the shared pot. A small family is close to simply saving for itself. The promise here is timing. The day is always covered.</p></div>
 </section>
 
@@ -396,7 +410,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li class="b">What you give in return is <b>patience</b>, because the line can be long.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Now step inside Gemach Hamerkazi. Here you save for each child, about forty pounds a month for ten years, and you take a numbered place in the line. When your turn comes, you receive the full forty thousand pounds, the same amount for everyone. The promise here is the amount. It is complete from the first turn. What you give in return is patience, because the line can be long.</p></div>
 </section>
 
@@ -444,7 +458,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       </tbody>
     </table>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>This is the trade the committee will feel most. One fund is per family, the other per child. One gives you certainty of timing, the other certainty of amount. For a large family Gemach Hakehiloh is far cheaper, because the fee is flat. For a family with one child Gemach Hamerkazi can cost less, because you only pay for the one. Neither is better in the abstract. They simply hand the family a different kind of certainty, and a different bill.</p></div>
 </section>
 
@@ -496,7 +510,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li class="a">Loans repay at <b>1% a month</b>, a rate the committee can raise to grow the loan sooner; still capped near <b>£1,200</b> across a family, and the family's own pot closes the tail of its last loan.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>How Gemach Hakehiloh actually moves its money. A family saves into a pot, up to a cap of forty thousand pounds. Alongside it they pay a small monthly fee that is never returned; most of that fee builds the fund's reserves, and a smaller part covers running costs. After eighteen years of membership a family can borrow, though the founding families are let in from the start. Each loan is repaid at one per cent a month, and that rate is a choice the committee can raise: a higher repayment brings the money back faster and lets the loan climb to its full size sooner. Either way, no family pays more than about twelve hundred pounds a month across all its loans at once. At the very end, a family's own pot closes the tail of its last loan.</p></div>
 </section>
 
@@ -539,7 +553,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li class="a"><b>Fundraising</b>, around £35,000 a year, keeps it at its floor in the early years.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Because Gemach Hakehiloh sits inside a credit union frame, it has to hold two safety levels at all times: capital at eight per cent of members' savings, and cash at ten per cent. It does not lend on day one. It collects for about three years first, and opens its lending with a modest start-up capital once the set-up costs are met, in the order of a hundred and fifty thousand pounds. Fundraising, in the region of thirty five thousand pounds a year, is what keeps it at its floor in the early years. These two lines are what make it a regulated fund rather than simply a pot of money.</p></div>
 </section>
 
@@ -599,7 +613,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li class="b">Served strictly <b>first in, first served</b>.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>How Gemach Hamerkazi moves its money. Forty pounds a month for a hundred and twenty months comes to four thousand eight hundred pounds. That splits in half. One half stays yours, your savings. The other half is a contribution that builds the fund and is not returned. In exchange you receive a loan of forty thousand pounds, about sixteen times what you saved. You repay it at four hundred pounds a month, and your own savings quietly settle the final few months. Families are served strictly in the order they joined, first in, first served.</p></div>
 </section>
 
@@ -660,7 +674,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li class="b">The <b>next month</b> it happens again, because money is already arriving from <b>two sources</b>: new joiners, and earlier borrowers repaying. Early on it is mostly joiners; over the years <b>repayments take over</b>.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Here is what makes Gemach Hamerkazi turn. It needs a steady, equal number of families joining every month; that regular intake is the engine. Picture a thousand units paying in. The moment the pool holds enough for a full loan, the next family in line is called forward, tops up, and borrows the forty thousand. And the next month it can happen again, because the money is already arriving from two places: new joiners, and earlier borrowers now repaying. Early on it is almost all joiners. Over the years, the repayments grow and take over, and the fund begins to carry itself.</p></div>
 </section>
 
@@ -981,7 +995,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       </table>
     </div>
   </div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>And here is what that looks like in numbers. This is Gemach Hamerkazi month by month for twenty-five years, at a base of a thousand new units a month. Watch three columns move together: the new money coming in, the loans going out, and the repayments flowing back. In the early years almost every pound is new money and only a handful of loans go out. As the years pass, the repayments swell until they carry most of the lending, and the average wait stretches from months into many years. The shape of the whole scheme sits in this one table.</p></div>
 </section>
 
@@ -1027,7 +1041,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li class="b"><b>Gemach Hamerkazi does not rely on growth.</b> It runs on a steady flow of joiners and, past a point, largely refills itself from repayments.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>So what drives each one forward. Gemach Hakehiloh grows by reproduction. Every daughter's wedding seeds a new saving household, which is a rate we can measure against real membership, in units, where one unit is one saving household. Gemach Hamerkazi does not rely on growth at all. It runs on a steady flow of joiners, and past a certain point it largely refills itself from repayments coming back in. One engine compounds. The other recycles.</p></div>
 </section>
 
@@ -1053,7 +1067,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       </tbody>
     </table>
   </div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Now the two side by side, for a family. Gemach Hakehiloh works per family, one shared pot; Gemach Hamerkazi works per child, a place in line. One gives certainty of timing, the money on the day; the other certainty of amount, the full forty thousand. What you never get back is a flat family fee, roughly five to seven thousand pounds whatever your size, against two thousand four hundred a child. So a large family is far better off under Gemach Hakehiloh, and a one-child family under Gemach Hamerkazi, which can also be joined later.</p></div>
 </section>
 
@@ -1079,7 +1093,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       </tbody>
     </table>
   </div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>And the two side by side as funds. Gemach Hakehiloh rations the amount; Gemach Hamerkazi rations the time. One runs on reproduction, a rate we can measure, held solvent by its ratios on thin capital; the other is solvent by construction, running on a steady flow of joiners. Their sharpest risks are opposite: for Gemach Hakehiloh it is thin capital and bad debt, for Gemach Hamerkazi it is the long wait and partial coverage. And in spirit, one has small families help carry large ones, while the other has each child carry its own weight.</p></div>
 </section>
 
@@ -1102,7 +1116,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
     <h2>We are choosing between <em>mature</em> ideas, not inventing risk</h2>
     <p class="lead">Communities have pooled money to carry big life costs for a very long time, across almost every culture. Each of the two models sits inside a long, well tested tradition. It helps to see which.</p>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>None of this is new. Communities have pooled their money to carry big life costs for a very long time, across almost every culture. The two models in front of the committee are not inventions. Each one sits inside a long and well tested tradition, and it helps to see which.</p></div>
 </section>
 
@@ -1138,7 +1152,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li>Gemach Hamerkazi is <b>this idea, carried over to weddings</b>.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Gemach Hamerkazi belongs to what is called the contract savings tradition. In Germany, the Bausparkassen, still running today, have people save into a shared closed pool and wait their ranked turn for an allocated loan, with repayments recycling to fund the next member. Victorian Britain did the same with its terminating building societies: members subscribed, were paid out in turn, and the society wound itself up once everyone had been housed. Gemach Hamerkazi is that idea, carried over to weddings.</p></div>
 </section>
 
@@ -1180,7 +1194,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li>Their oldest cousin, the <b>rotating savings circle</b>, is where taking turns with a shared pot begins.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Gemach Hakehiloh belongs to the ongoing mutual tradition. When building societies became permanent in the eighteen forties, they took in continuing savers and grew, instead of winding up. Credit unions carry that forward as regulated, member owned funds, and the gemach, the interest free loan society our own community already runs, is the same spirit made charitable. Gemach Hakehiloh is this idea: an ongoing, growing, member owned mutual. And the oldest cousin of both is the rotating savings circle, found the world over, where a community simply takes turns with a shared pot.</p></div>
 </section>
 
@@ -1234,8 +1248,8 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li class="a">The sharpest risk stays <b>thin capital</b>: interest-free lending has no margin, so <b>bad debt</b> is what the fundraising guards against.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
-    <p>Will Gemach Hakehiloh last? The claim is a generational one: the new households a family seeds outnumber the most it ever owes at once, and at any moment far more families pay in than draw out. It does lean on fresh intake, and can be thinned by withdrawals, but gently. Its growth is natural, carried by children who follow their parents' example, and the rate it needs is measured as a share of the current membership, so it scales with the fund rather than needing a fixed number each year. And a family that withdraws is not pure loss: it leaves its fees behind as capital and takes a future commitment off the books. The sharpest risk stays the thin capital, because interest free lending earns no margin, so bad debt is the thing to guard against, and that is what the fundraising is for.</p></div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
+    <p>Will Gemach Hakehiloh last? The claim is generational: the households a family seeds outnumber the most it ever owes, and at any moment far more pay in than draw out. It does lean on fresh intake, and can be thinned by withdrawals, but gently. Its growth is natural, carried by children who follow their parents, and the rate it needs is a share of the current membership, so it scales with the fund. A family that withdraws is not pure loss: it leaves its fees as capital and takes a future commitment off the books. The sharpest risk stays the thin capital, because interest free lending earns no margin, so bad debt is what the fundraising guards against.</p></div>
 </section>
 
 <!-- ============ PAGE 15 - WILL IT LAST? MODEL B ============ -->
@@ -1273,7 +1287,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li class="b">Its cost is <b>waiting</b>: about half served over fifty years, an average wait near <b>twenty-two years</b>.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Will Gemach Hamerkazi last? It is solvent by construction, lending only what it holds, and from around year eleven repayments carry most of the lending. While young it leans on a steady, constant intake of new units, not necessarily new families, since more children from one family count too. A gap in that intake breaks the cycle, so consistency matters more here. In its favour, it can plan a few years ahead, with time to recover from a slow patch. Its cost is paid in waiting. And it need not rule out a credit union either, holding the capital such a home wants, its liquidity simply untested.</p></div>
 </section>
 
@@ -1310,7 +1324,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
     </ul>
     <div class="tag-row"><span class="chip">Needs a professional's sign-off before the committee relies on it</span></div>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>This is the one part that needs a professional's sign-off, so take it as the direction of travel. Here is why a credit union is the right home. Gemach Hakehiloh holds members' savings, and holding people's money is not a light thing. Taking deposits needs permission, and those savings need protecting, and a credit union gives both, with prudential rules, a common bond, and a footing regulators have already examined. The one awkward fit is that the non returnable contributions and the interest free lending sit oddly against ordinary shares, and that is what a professional would work through. But the reason to reach for a regulated home is simple: it is looking after people's savings.</p></div>
 </section>
 
@@ -1338,7 +1352,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li><b>The thresholds are yours to set. They are the committee's numbers, not the model's.</b></li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Because Gemach Hakehiloh's growth can be measured, a pilot can be judged honestly. It can be tested against the community's own data, over the first three years and beyond, on a small set of numbers: units funded against units enrolled, the headroom above the capital and liquidity floors, the loan amount reached, the experience of bad debt, and the growth in units. The thresholds on each of these are for the committee to set. They are your numbers, not the model's.</p></div>
 </section>
 
@@ -1374,7 +1388,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li><b>berinoh.provaris.co.uk</b> - the comparison view</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>Two live tools have been built to go with this, in the same design you have been looking at, and they are on the community website now. One is the Gemach Hakehiloh simulator. One is the Gemach Hamerkazi simulator. And a comparison view sets the handful of shared assumptions once and shows both side by side. Every figure in this presentation can be reproduced, and challenged, in these tools.</p></div>
 </section>
 
@@ -1408,7 +1422,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li>Every figure follows from the rules you set. The committee's job is to judge whether <b>those rules are right</b>.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>The point of the tools is that nothing in them is fixed. In Gemach Hakehiloh, turn bad debt up, and watch the capital ratio fall below its floor and stay there for years. In Gemach Hamerkazi, lower the number of joiners a year, and watch the average wait stretch out. Every figure follows from the rules you set. The committee's job is not to accept the numbers. It is to judge whether the rules behind them are the right ones.</p></div>
 </section>
 
@@ -1443,7 +1457,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <a class="chip" href="https://berinoh.provaris.co.uk" target="_blank" rel="noopener">Compare the two</a>
     </div>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>So, where could this go. There is no verdict here, only choices: a hybrid of the two, a floor under how far the early loan can fall, stronger reserves so the full amount comes sooner, or a time boxed pilot judged on the metrics we just set. Every figure moves with the committee's assumptions, and those assumptions are the real decision. The two tools are linked below, and they are yours to press on.</p></div>
 </section>
 
@@ -1475,7 +1489,7 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
       <li>Sold clearly and honestly, this commits us to a <b>beginning</b>, not to every last rule, and <b>leaves room to improve</b>.</li>
     </ul>
   </div></div>
-  <div class="caption"><div class="lbl"><span class="dot"></span>Narration</div>
+  <div class="caption"><div class="lbl"><span class="dot"></span>In plain words</div>
     <p>So here is what I would suggest. Rather than settle every detail now, we begin with a pilot. We invite families to start saving a hundred and fifty pounds a month, with fifteen of it going toward the fund's costs and the rest into their own pot. Then we build the exact scheme on the strength of two things: how well the sign-up goes, and the real data it gives us. Sold clearly and honestly, this is the safest way forward, because it commits the community to a beginning, not to every last rule, and it leaves room to make the scheme better as we learn. Thank you.</p></div>
 </section>
 </div>
@@ -1487,7 +1501,8 @@ svg .big{font-family:var(--display);font-weight:700;fill:var(--ink)}
   <button class="btn" id="next" title="Skip (right arrow)" aria-label="Skip forward"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7V5z"/></svg></button>
   <div class="meta"><b id="mpg">1</b> <span id="mtot">/ 25</span> <span class="hideSm" id="mact"></span></div>
   <div class="grow"></div>
-  <button class="tbtn" id="capBtn" title="Show or hide the on-screen narration">Narration</button>
+  <a class="tbtn linkA" href="https://berinoh.provaris.co.uk/model-a/" target="_blank" rel="noopener">Gemach Hakehiloh &#8599;</a>
+  <a class="tbtn linkB" href="https://berinoh.provaris.co.uk/model-b/" target="_blank" rel="noopener">Gemach Hamerkazi &#8599;</a>
   <button class="tbtn" id="menuBtn">Pages</button>
 </div>
 
@@ -1615,7 +1630,6 @@ window.DECK_AUDIO = window.DECK_AUDIO || {};
   document.getElementById('prev').addEventListener('click',function(){ advance(-1); });
   document.getElementById('next').addEventListener('click',function(){ advance(1); });
   playBtn.addEventListener('click',function(){ setPlaying(!playing); });
-  document.getElementById('capBtn').addEventListener('click',function(){ capsUser = capsVisible()? false : true; applyCaps(); });
   document.getElementById('menuBtn').addEventListener('click',openMenu);
   document.getElementById('mclose').addEventListener('click',closeMenu);
   document.getElementById('menu').addEventListener('click',function(e){ if(e.target.id==='menu') closeMenu(); });
