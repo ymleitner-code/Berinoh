@@ -21,20 +21,18 @@ committee can change every rule and watch the consequence over fifty years or mo
 /                landing page and side-by-side comparison
 /model-a/        Gemach Hakehiloh simulator (English)
 /model-b/        Gemach Hamerkazi simulator (English)
-/model-b/he/     Gemach Hamerkazi simulator (Hebrew, right to left)
-/he.html         redirect stub -> /model-b/he/ (kept: an earlier reviewer holds this link)
+/he.html         redirect stub -> /model-b/ (kept: an earlier reviewer holds this link)
 ```
 
 ## Layout
 
 ```
 index.html            Landing and comparison page. Markup only.
-he.html               Redirect stub to /model-b/he/. Do not delete.
+he.html               Redirect stub to /model-b/. Do not delete.
 model-a/index.html    Model A page (English). Markup only.
 model-b/index.html    Gemach Hamerkazi page (English). Markup only.
-model-b/he/index.html Gemach Hamerkazi page (Hebrew, RTL). Markup only.
 
-css/app.css           One stylesheet for every page, both directions.
+css/app.css           One stylesheet for every page, left to right.
 
 js/engine-a.js        Model A simulation. No DOM, no language.
 js/engine-b.js        Model B simulation. No DOM, no language.
@@ -44,7 +42,6 @@ js/cycle.js           Gemach Hamerkazi money-cycle diagram.
 js/format.js          Number, currency and duration formatting.
 js/strings-a-en.js    Model A English runtime strings.
 js/strings-en.js      Model B English runtime strings.
-js/strings-he.js      Model B Hebrew runtime strings.
 js/app-a.js           Model A state, presets, wiring, rendering.
 js/app.js             Model B state, presets, wiring, rendering.
 js/compare.js         Landing page: runs both engines on shared inputs.
