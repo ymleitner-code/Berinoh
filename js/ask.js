@@ -9,7 +9,7 @@
 
   /* ---- SET THIS to your deployed Cloudflare Worker URL, e.g.
          "https://berinoh-assistant.<your-subdomain>.workers.dev" ---- */
-  var ENDPOINT = "";
+  var ENDPOINT = "https://berinoh.ymleitner.workers.dev/";
 
   var TEAL = '#0f7a6b', INK = '#16233a', LINE = '#dbe8e4', SOFT = '#eef7f4', MUTED = '#6b7a92';
   var history = [];
