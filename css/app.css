@@ -32,6 +32,7 @@ body{font-family:var(--body);background:var(--paper);color:var(--ink);font-size:
 .sitenav a.home{color:var(--recyc)}
 .sitenav a.a{color:var(--out)}
 .sitenav a.b{color:var(--queue)}
+.sitenav a.c{color:#b23a48}
 .sitenav a.current{color:#fff;cursor:default}
 .sitenav a.home.current{background:var(--recyc);border-color:var(--recyc)}
 .sitenav a.a.current{background:var(--out);border-color:var(--out)}
